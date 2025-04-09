@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1044</x>
+      <y>432</y>
+      <w>288</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Angular-Frontend</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>990</x>
+      <y>36</y>
+      <w>423</w>
+      <h>792</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;device&gt;&gt;
+Server</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1107</x>
+      <y>270</y>
+      <w>135</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;artifact&gt;&gt;
+application.jar</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1044</x>
+      <y>198</y>
+      <w>288</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Spring-Boot Backend</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>63</x>
+      <y>9</y>
+      <w>414</w>
+      <h>369</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;device&gt;&gt;
+Message-Server</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1134</x>
+      <y>504</y>
+      <w>99</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;artifact&gt;&gt;
+bundle.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>90</x>
+      <y>72</y>
+      <w>351</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Compose</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>99</x>
+      <y>117</y>
+      <w>324</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Container</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1026</x>
+      <y>90</y>
+      <w>351</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Compose</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1035</x>
+      <y>153</y>
+      <w>315</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Container</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1035</x>
+      <y>387</y>
+      <w>315</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Container</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>144</x>
+      <y>198</y>
+      <w>225</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;message broker&gt;&gt;
+RabbitMQ</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>279</y>
+      <w>270</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;protocol&gt;&gt; http</panel_attributes>
+    <additional_attributes>280.0;270.0;10.0;270.0;10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>243</x>
+      <y>261</y>
+      <w>909</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>lt=-
+ &lt;&lt;protocol&gt;&gt; http</panel_attributes>
+    <additional_attributes>990.0;300.0;10.0;300.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1035</x>
+      <y>639</y>
+      <w>315</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;execution environment&gt;&gt;
+Docker Container</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>1071</x>
+      <y>693</y>
+      <w>225</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Database&gt;&gt;
+PostgreSQL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1233</x>
+      <y>279</y>
+      <w>288</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;protocol&gt;&gt; postgres</panel_attributes>
+    <additional_attributes>70.0;500.0;140.0;500.0;140.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>0</x>
+      <y>765</y>
+      <w>504</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;device&gt;&gt;
+Schrottimmobilienerfassungsdatenbankmanagementserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>261</y>
+      <w>144</w>
+      <h>522</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;protocol&gt;&gt; http
+lt=-</panel_attributes>
+    <additional_attributes>10.0;560.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
