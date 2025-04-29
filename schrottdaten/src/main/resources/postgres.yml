@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: schrottdaten-db
+    ports:
+      - "3000:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: schrottdaten
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
