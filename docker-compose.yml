@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: schrottdaten-db
+    ports:
+      - "3000:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: schrottdaten
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+      - pg_data:/var/lib/postgresql/data
+
+  schrottdaten:
+    build: ./schrottdaten
+    container_name: schrottdaten-app
+    depends_on:
+      - postgres
+    ports:
+      - "8090:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/schrottdaten
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: always
+
+  schrottverwaltung:
+    build: ./schrottverwaltung
+    container_name: schrottverwaltung-app
+    ports:
+      - "8080:8080"
+    restart: always
+
+  broker:
+    image: rabbitmq
+
+  schrottportal:
+    build: ./schrottportal
+    container_name: schrottportal-frontend
+    ports:
+      - "4200:4200"
+    restart: always
+
+  postgres-schrottverwaltung:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432'
+
+volumes:
+  pg_data:
