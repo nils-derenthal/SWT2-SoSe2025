@@ -1,20 +1,10 @@
-# Template repository for the Software Engineering lecture
-
-> [!IMPORTANT]
-> Replace this README with a detailed description of your project, your team, and instructions on how to run it.
-
-> [!IMPORTANT]
-> If you choose to keep your repository private, make sure to invite all your team members and teaching staff. Ask for their usernames if needed.
-
-Provide a general introduction to your project. Describe the purpose, goals, and the technologies used. Explain the value your project offers.
+Management of Schrottimmobilien für the Stadt Herne
 
 ## Team
 List the team members involved in the project:
 
-Team Leader: [Name]
-
-Members: [Name1], [Name2], [Name3]
-(Expand this list as necessary)
+Team Leader: Noël Göbbeler
+Members: Luis Netzlaw, Max Beller, Nina Bergmann, Nils Derenthal, Katerina Eliakopoulos
 
 
 
