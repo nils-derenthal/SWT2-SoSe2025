@@ -1,6 +1,7 @@
 package de.fhdortmund.schrottverwaltung.immoblilie
 
 import de.fhdortmund.schrottverwaltung.bewertung.Bewertung
+import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer
 import jakarta.persistence.*
 
 @Entity
@@ -19,7 +20,11 @@ data class Immobilie(
     var gebaeudeTyp: Gebaeudetyp,
     var eigentumsForm: EigentumsForm,
     @OneToMany
-    var bewertungen: List<Bewertung>
+    var bewertungen: List<Bewertung>,
+    @ManyToOne
+    var eigentuemer: Eigentuemer?,
+    @ManyToOne
+    var status: ImmoStatus
 ) {
     @Id
     @GeneratedValue
