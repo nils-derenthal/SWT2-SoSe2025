@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e485f095-2c7c-481f-82e1-b19f5c50a71e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/schrottdaten/src/main/resources/dataset/init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schrottdaten/src/main/resources/postgres.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottdaten/compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schrottdaten/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/schrottdaten/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schrottdaten/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/schrottdaten/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottdaten/src/main/resources/dataset/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottdaten/src/main/resources/postgres.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +106,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\goebbeler\IdeaProjects\SWT2-SoSe2025\schrottdaten\src\main\resources" />
       <recent name="C:\Users\goebbeler\IdeaProjects\SWT2-SoSe2025" />
+      <recent name="C:\Users\goebbeler\IdeaProjects\SWT2-SoSe2025\schrottdaten\src\main\resources" />
       <recent name="C:\Users\goebbeler\IdeaProjects\SWT2-SoSe2025\schrottdaten" />
       <recent name="D:\SWT2-SoSe2025" />
     </key>
