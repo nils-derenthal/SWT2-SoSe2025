@@ -12,4 +12,14 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="schrottdaten" options="-parameters" />
+      <module name="schrottdaten.main" options="-parameters" />
+      <module name="schrottdaten.test" options="-parameters" />
+      <module name="schrottverwaltung" options="-parameters" />
+      <module name="schrottverwaltung.main" options="-parameters" />
+      <module name="schrottverwaltung.test" options="-parameters" />
+    </option>
+  </component>
 </project>

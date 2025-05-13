@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e485f095-2c7c-481f-82e1-b19f5c50a71e" name="Changes" comment="" />
+    <list default="true" id="e485f095-2c7c-481f-82e1-b19f5c50a71e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/HelloWorldController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthEntryPointJwt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthTokenFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/WebSecurityConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/User.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserDto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottverwaltung/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottverwaltung/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,12 +50,29 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/schrottdaten">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/schrottverwaltung">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="schrottdaten" type="f1a62948:ProjectNode" />
+                <item name="schrottverwaltung" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="schrottverwaltung" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="schrottverwaltung" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -44,9 +81,30 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Maximizer02&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:cbrt-x/SWT2-SoSe2025.git&quot;,
+    &quot;accountId&quot;: &quot;7f3be37c-4181-47c9-b395-60922ae5d520&quot;
+  }
+}</component>
   <component name="KotlinScriptingSettings">
     <option name="suppressDefinitionsCheck" value="true" />
   </component>
@@ -54,6 +112,9 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -62,34 +123,53 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build schrottimmobiliendatenhaltung.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.SchrottimmobiliendatenhaltungApplicationKt.executor": "Run",
-    "git-widget-placeholder": "SWTB-12-initial-setup",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SWT2-SoSe2025",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.3770115",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build schrottimmobiliendatenhaltung.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build schrottverwaltung.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.schrottdaten [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.schrottdaten [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.schrottverwaltung [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.schrottverwaltung [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SchrottimmobiliendatenhaltungApplicationKt.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SchrottverwaltungApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;STWB-1-anmelden-backend&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/beller/IdeaProjects/SWT2-SoSe2025&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3770115&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\SWT2-SoSe2025" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="de.fhdortmund.schrottverwaltung.user" />
+      <recent name="de.fhdortmund.schrottverwaltung" />
       <recent name="de.fhdortmund.schrottdaten" />
     </key>
   </component>
@@ -103,7 +183,95 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server (schrottportal)">
+  <component name="RunManager" selected="Gradle.schrottdaten [build]">
+    <configuration name="schrottdaten [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/schrottdaten" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="schrottdaten [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/schrottdaten" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="schrottverwaltung [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/schrottverwaltung" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="schrottverwaltung [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/schrottverwaltung" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="Angular Application (schrottportal)" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
@@ -124,6 +292,7 @@
     <configuration name="SchrottverwaltungApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="schrottverwaltung.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="de.fhdortmund.schrottverwaltung.SchrottverwaltungApplication" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/schrottverwaltung" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -138,12 +307,23 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Gradle.schrottdaten [build]" />
+      <item itemvalue="Gradle.schrottdaten [clean]" />
+      <item itemvalue="Gradle.schrottverwaltung [build]" />
+      <item itemvalue="Gradle.schrottverwaltung [clean]" />
+      <item itemvalue="JavaScript Debug.Angular Application (schrottportal)" />
+      <item itemvalue="npm.Angular CLI Server (schrottportal)" />
+      <item itemvalue="Spring Boot.ImmobilenverwaltungApplication" />
+      <item itemvalue="Spring Boot.SchrottdatenApplication" />
+      <item itemvalue="Spring Boot.SchrottverwaltungApplication" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
       </set>
     </attachedChunks>
   </component>
@@ -158,6 +338,11 @@
       <workItem from="1744701074511" duration="1817000" />
       <workItem from="1744702929652" duration="1002000" />
       <workItem from="1744703963897" duration="1650000" />
+      <workItem from="1744869597759" duration="17000" />
+      <workItem from="1745909987716" duration="10216000" />
+      <workItem from="1745920903184" duration="1057000" />
+      <workItem from="1746509884035" duration="8000" />
+      <workItem from="1747118071694" duration="10170000" />
     </task>
     <servers />
   </component>
