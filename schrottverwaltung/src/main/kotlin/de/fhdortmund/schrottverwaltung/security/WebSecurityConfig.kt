@@ -48,7 +48,7 @@ class WebSecurityConfig(
             }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/auth/signup", "/hello/world")
+                    .requestMatchers("/auth/**", "/hello/world")
                     .permitAll() // Use 'requestMatchers' instead of 'antMatchers'
                     .anyRequest().authenticated()
             }

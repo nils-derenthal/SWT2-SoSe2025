@@ -2,7 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-251.23774.435">
     <data-source name="bostgres" uuid="deef62a5-8cdb-44bf-952b-f2970f7c9da5">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES">
+      <database-info product="PostgreSQL" version="16.1 (Debian 16.1-1.pgdg120+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="16.1" exact-driver-version="42.7">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
