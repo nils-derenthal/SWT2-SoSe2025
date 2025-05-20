@@ -10,25 +10,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Übersicht</a>
+          <a class="nav-link active" aria-current="page" routerLink="/uebersicht" routerLinkActive="active" ariaCurrentWhenActive="page">Übersicht</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Suche</a>
+          <a class="nav-link" routerLink="/suche" routerLinkActive="active" ariaCurrentWhenActive="page">Suche</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Karte</a>
+          <a class="nav-link" routerLink="/karte" routerLinkActive="active" ariaCurrentWhenActive="page">Karte</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Kalender</a>
+          <a class="nav-link" routerLink="/kalender" routerLinkActive="active" ariaCurrentWhenActive="page">Kalender</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Archiv</a>
+          <a class="nav-link" routerLink="/archiv" routerLinkActive="active" ariaCurrentWhenActive="page">Archiv</a>
         </li>
       </ul>
-      <div class="navbar-nav mb-2 mb-lg-0">
-        <a class="nav-link link-light" href="#"><i class="bi bi-bell-fill"></i></a>
-        <a class="nav-link link-light" href="#"><i class="bi bi-gear-fill"></i></a>
-      </div>
+      <ol class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-bell-fill"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-gear-fill"></i></a>
+        </li>
+      </ol>
     </div>
   </div>
 </nav>

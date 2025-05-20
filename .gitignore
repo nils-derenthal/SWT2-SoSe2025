@@ -117,6 +117,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
 #Intellij
 .idea/
