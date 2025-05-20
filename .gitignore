@@ -117,5 +117,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 #Intellij
 .idea/
+=======
+.idea
+>>>>>>> df61f40 (gitignore angepasst)
