@@ -4,7 +4,9 @@ import jakarta.persistence.*
 
 @Entity
 data class Bewertung(
-    var gewichtung: Int
+    var gewichtung: Int,
+    @ManyToOne
+    var kriterium: Kriterium
 ){
     @Id
     @GeneratedValue
