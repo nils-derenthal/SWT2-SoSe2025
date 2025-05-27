@@ -1,7 +1,9 @@
 package de.fhdortmund.schrottverwaltung.eigentuemer.Repository
 
 import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-interface EigentuemerRepository : CrudRepository<Eigentuemer, Long> {
+@Repository
+interface EigentuemerRepository : JpaRepository<Eigentuemer, Long> {
 }
