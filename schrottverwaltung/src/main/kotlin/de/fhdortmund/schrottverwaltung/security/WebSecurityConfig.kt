@@ -1,10 +1,8 @@
 package de.fhdortmund.schrottverwaltung.security
 
-import de.fhdortmund.schrottverwaltung.user.UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -31,11 +29,12 @@ class WebSecurityConfig(
     }
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         // Updated configuration for Spring Security 6.x
         http
             .csrf { it.disable() } // Disable CSRF
             .cors { it.disable() } // Disable CORS (or configure if needed)
+            .httpBasic{ it.disable() }
             .exceptionHandling {
                 it.authenticationEntryPoint(
                     unauthorizedHandler
@@ -48,7 +47,7 @@ class WebSecurityConfig(
             }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/auth/**", "/hello/world")
+                    .requestMatchers("/auth/login", "/auth/signup", "/hello/world")
                     .permitAll() // Use 'requestMatchers' instead of 'antMatchers'
                     .anyRequest().authenticated()
             }

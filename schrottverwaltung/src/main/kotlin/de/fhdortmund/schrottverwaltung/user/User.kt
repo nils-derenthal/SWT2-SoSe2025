@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

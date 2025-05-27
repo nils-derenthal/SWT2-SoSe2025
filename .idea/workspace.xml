@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e485f095-2c7c-481f-82e1-b19f5c50a71e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/deef62a5-8cdb-44bf-952b-f2970f7c9da5/storage_v2/_src_/database/mydatabase.J7NGgg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/deef62a5-8cdb-44bf-952b-f2970f7c9da5/storage_v2/_src_/database/mydatabase.J7NGgg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthEntryPointJwt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthEntryPointJwt.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthTokenFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/AuthTokenFilter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/WebSecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/security/WebSecurityConfig.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/schrottverwaltung/src/main/kotlin/de/fhdortmund/schrottverwaltung/user/UserService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +100,9 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/schrottportal/package.json" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -112,47 +114,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build schrottimmobiliendatenhaltung.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build schrottverwaltung.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.schrottdaten [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.schrottdaten [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.schrottverwaltung [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.schrottverwaltung [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.SchrottimmobiliendatenhaltungApplicationKt.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.SchrottverwaltungApplication.executor&quot;: &quot;Run&quot;,
-    &quot;ToolWindow.Services.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;STWB-1-anmelden-backend&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/beller/IdeaProjects/SWT2-SoSe2025&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3770115&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build schrottimmobiliendatenhaltung.executor": "Run",
+    "Gradle.Build schrottverwaltung.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.schrottdaten [build].executor": "Run",
+    "Gradle.schrottdaten [clean].executor": "Run",
+    "Gradle.schrottverwaltung [build].executor": "Run",
+    "Gradle.schrottverwaltung [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.SchrottimmobiliendatenhaltungApplicationKt.executor": "Run",
+    "Spring Boot.SchrottverwaltungApplication.executor": "Run",
+    "ToolWindow.Services.ShowToolbar": "false",
+    "git-widget-placeholder": "STWB-1-anmelden-backend",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/beller/IdeaProjects/SWT2-SoSe2025",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3770115",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\SWT2-SoSe2025" />
@@ -297,17 +299,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Gradle.schrottdaten [build]" />
-      <item itemvalue="Gradle.schrottdaten [clean]" />
-      <item itemvalue="Gradle.schrottverwaltung [build]" />
-      <item itemvalue="Gradle.schrottverwaltung [clean]" />
-      <item itemvalue="JavaScript Debug.Angular Application (schrottportal)" />
-      <item itemvalue="npm.Angular CLI Server (schrottportal)" />
-      <item itemvalue="Spring Boot.ImmobilenverwaltungApplication" />
-      <item itemvalue="Spring Boot.SchrottdatenApplication" />
-      <item itemvalue="Spring Boot.SchrottverwaltungApplication" />
-    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -333,6 +324,8 @@
       <workItem from="1745920903184" duration="1057000" />
       <workItem from="1746509884035" duration="8000" />
       <workItem from="1747118071694" duration="10170000" />
+      <workItem from="1747734870387" duration="1667000" />
+      <workItem from="1748328302828" duration="10551000" />
     </task>
     <servers />
   </component>

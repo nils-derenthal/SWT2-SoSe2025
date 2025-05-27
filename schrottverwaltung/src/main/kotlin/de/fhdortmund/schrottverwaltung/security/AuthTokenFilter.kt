@@ -21,28 +21,21 @@ class AuthTokenFilter(
 
     @Autowired
     lateinit var userService: UserService
+
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        println("doFilterInternal")
         try {
+            println("extract jwt")
             val jwt = parseJwt(request)
-            if (jwt != null && jwtService.validateJwtToken(jwt)) {
-                val username: String = jwtService.getUsernameFromToken(jwt)
-                val userDetails: User? = userService.loadUserByUsername(username)
-                println("rofl")
-                val authentication =
-                    UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails?.authorities
-                    )
-                println("kekw")
-                authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
-                SecurityContextHolder.getContext().authentication = authentication
-            }
+            println("jwt: $jwt")
+            val valid = jwt != null && jwtService.validateJwtToken(jwt)
+            println(if (valid) "valid" else "invalid")
+            if (!valid)
+                throw Exception("du bist behindert")
+
         } catch (e: Exception) {
             println("Cannot set user authentication: $e")
         }

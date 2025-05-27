@@ -4,7 +4,6 @@ import de.fhdortmund.schrottverwaltung.security.JwtService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -18,14 +17,13 @@ class UserService(
 ) {
 
     fun authenticateUser(user: UserDto): String {
-        val authentication: Authentication = authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(
+        if (userRepository.existsByUsernameAndPassword(
                 user.username,
-                user.password
+                encoder.encode(user.password)
             )
         )
-        val userDetails = authentication.principal as UserDetails
-        return jwtService.generateToken(userDetails.username)
+            return ""
+        return jwtService.generateToken(user.username)
     }
 
     fun registerUser(user: UserDto): User? {
