@@ -1,0 +1,13 @@
+@import "../../styles.scss";
+.nav-item > .nav-link:hover {
+  color: $herne-yellow;
+}
+
+.nav-button {
+  color: $herne-text-white;
+  text-decoration: none;
+
+  :hover, :focus {
+    color: $herne-yellow;
+  }
+}

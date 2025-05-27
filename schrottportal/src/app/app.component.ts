@@ -7,7 +7,7 @@ import {DetailansichtComponent} from './detailansicht/detailansicht.component';
   selector: 'app-root',
   imports: [RouterOutlet, NavbarComponent, DetailansichtComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'schrottportal';
