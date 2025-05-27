@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Hauptdatenbank für Schrottdaten
+  postgres:
+    image: postgres:latest
+    container_name: schrottdaten-db
+    ports:
+      - "3000:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: schrottdaten
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+      - pg_data_schrottdaten:/var/lib/postgresql/data
+
+  # Spring Boot App für Schrottdaten
+  schrottdaten:
+    build: ./schrottdaten
+    container_name: schrottdaten-app
+    depends_on:
+      - postgres
+    ports:
+      - "8090:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/schrottdaten
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: always
+
+  # Verwaltungskomponente, ggf. zweite App
+  schrottverwaltung:
+    build: ./schrottverwaltung
+    container_name: schrottverwaltung-app
+    depends_on:
+      - postgres-schrottverwaltung
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-schrottverwaltung:5432/mydatabase
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: always
+
+  # RabbitMQ Broker
+  broker:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-broker
+    ports:
+      - "5672:5672"     # AMQP (für Services)
+      - "15672:15672"   # Management Web UI
+    restart: always
+
+  # Angular/Frontend App
+  schrottportal:
+    build: ./schrottportal
+    container_name: schrottportal-frontend
+    ports:
+      - "4200:4200"
+    restart: always
+
+  # Zweite PostgreSQL-DB für Schrottverwaltung
+  postgres-schrottverwaltung:
+    image: postgres:latest
+    container_name: schrottverwaltung-db
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data_schrottverwaltung:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pg_data_schrottdaten:
+  pg_data_schrottverwaltung:
