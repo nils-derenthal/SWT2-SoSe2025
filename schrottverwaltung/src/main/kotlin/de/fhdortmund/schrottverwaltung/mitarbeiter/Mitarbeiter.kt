@@ -3,6 +3,7 @@ package de.fhdortmund.schrottverwaltung.mitarbeiter
 import jakarta.persistence.*
 
 @Entity
+@Table(name = "mitarbeiter")
 data class Mitarbeiter(
     var vorname: String,
     var nachname: String,
@@ -10,6 +11,6 @@ data class Mitarbeiter(
     var fachbereichNr: Long,
 ){
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 }

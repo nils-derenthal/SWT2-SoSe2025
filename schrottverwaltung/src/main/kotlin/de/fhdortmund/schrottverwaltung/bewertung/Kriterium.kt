@@ -1,16 +1,16 @@
 package de.fhdortmund.schrottverwaltung.bewertung
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
+@Table(name = "kriterium")
 data class Kriterium(
+    @Column(name = "bezeichnung")
     var bezeichnung: String,
-    var maxGewichtung: Int
-)
-{
+    @Column(name = "max_gewichtung")
+    var maxGewichtung: Int,
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "kriterium_id")
     var id: Long? = null
-}
+)
