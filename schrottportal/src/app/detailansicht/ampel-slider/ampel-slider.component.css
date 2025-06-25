@@ -24,6 +24,9 @@ main {
 
 .blue {
   background-color: lightskyblue;
+}
 
-
+.abschnitte {
+  display: flex;
+  justify-content: space-between;
 }
