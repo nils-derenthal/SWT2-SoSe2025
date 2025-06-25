@@ -1,0 +1,33 @@
+<form class="m-3 d-flex row gap-3" [formGroup]="login">
+    <div class="d-flex row gap-1 w-100 p-0 m-0">
+        <mat-form-field>
+            <mat-label>E-Mail</mat-label>
+            <input type="text"
+                   placeholder="example@email.com"
+                   formControlName="email"
+                   matInput
+            >
+            @if (login.controls.email.invalid) {
+                <mat-error>Adresse nicht gültig</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Passwort</mat-label>
+            <input type="password"
+                   placeholder="passwort123"
+                   formControlName="password"
+                   matInput
+            >
+        </mat-form-field>
+    </div>
+
+    <button class="btn btn-primary"
+            [disabled]="login.invalid"
+            (click)="logIn()">
+        @switch (type()) {
+            @case ('login') { Einloggen }
+            @case ('register') { Registrieren }
+        }
+    </button>
+</form>
