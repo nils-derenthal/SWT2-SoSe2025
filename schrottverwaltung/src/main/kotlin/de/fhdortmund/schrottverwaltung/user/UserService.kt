@@ -1,44 +1,33 @@
 package de.fhdortmund.schrottverwaltung.user
 
-import de.fhdortmund.schrottverwaltung.security.JwtService
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 
 @Service
 class UserService(
-    val authenticationManager: AuthenticationManager,
-    var jwtService: JwtService,
     val userRepository: UserRepository,
-    val encoder: PasswordEncoder,
-) {
+    private val passwordEncoder: PasswordEncoder,
+) : UserDetailsService{
 
-    fun authenticateUser(user: UserDto): String {
-        if (userRepository.existsByUsernameAndPassword(
-                user.username,
-                encoder.encode(user.password)
-            )
-        )
-            return ""
-        return jwtService.generateToken(user.username)
+    fun registerUser(name:String, password:String): User {
+    val user = User(null, name, passwordEncoder.encode(password))
+    return userRepository.save(user)
+}
+
+    override fun loadUserByUsername(username: String): UserDetails? {
+        val user = userRepository.getUserByUsername(username)
+            ?: throw RuntimeException("User not found with username: $username")
+
+        println(user.username)
+
+        return  org.springframework.security.core.userdetails.User.builder()
+            .username(user.username)
+            .password(user.password)
+            .roles("ADMIN")
+            .build()
     }
-
-    fun registerUser(user: UserDto): User? {
-        if (userRepository.existsByUsername(user.username)) {
-            return null
-        }
-        // Create new user's account
-        val newUser = User(
-            null,
-            user.username,
-            encoder.encode(user.password)
-        )
-        return userRepository.save<User>(newUser)
-    }
-
-    fun loadUserByUsername(name: String): User = userRepository.getUserByUsername(name)
 }
 

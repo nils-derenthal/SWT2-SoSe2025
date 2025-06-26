@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import lombok.AllArgsConstructor
+import lombok.Data
 import lombok.NoArgsConstructor
 import org.hibernate.internal.util.collections.CollectionHelper.setOf
 import org.springframework.security.core.GrantedAuthority
@@ -14,19 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     val id:Long?,
-    @Column(unique = true)
-    private val username: String,
-    private val password: String,
-) : UserDetails {
-    override fun  getAuthorities(): MutableCollection<GrantedAuthority> = setOf()
-
-    override fun getPassword(): String = password
-
-    override fun getUsername(): String = username
-}
+    @Column(unique = true) val username: String,
+    val password: String,
+)

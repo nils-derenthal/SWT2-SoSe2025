@@ -3,16 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
+      <IntrospectionStateNumber>748</IntrospectionStateNumber>
       <ServerVersion>16.1</ServerVersion>
-      <StartupTime>1747724437</StartupTime>
+      <StartupTime>1750856254</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1406,6 +1399,7 @@ true posixrules
 13212||10|C|G
 13212||-9223372036854775808|U|G
 13212||10|U|G</Grants>
+      <IntrospectionStateNumber>748</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>myuser</OwnerName>
     </database>
@@ -4829,34 +4823,75 @@ true posixrules
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-20.06:57:43</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>748</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-06-25.14:33:22</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <table id="265" parent="264" name="users">
-      <ObjectId>16396</ObjectId>
-      <StateNumber>758</StateNumber>
+    <sequence id="265" parent="264" name="users_seq">
+      <ObjectId>16398</ObjectId>
+      <SequenceIdentity>1+50</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>747</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <OwnerName>myuser</OwnerName>
+    </sequence>
+    <table id="266" parent="264" name="users">
+      <ObjectId>16389</ObjectId>
+      <StateNumber>744</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>myuser</OwnerName>
     </table>
-    <column id="266" parent="265" name="username">
+    <column id="267" parent="266" name="id">
+      <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>758</StateNumber>
-      <StoredType>varchar(255)|0s</StoredType>
-      <TypeId>1043</TypeId>
+      <StateNumber>744</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <TypeId>20</TypeId>
     </column>
-    <column id="267" parent="265" name="password">
+    <column id="268" parent="266" name="password">
       <Position>2</Position>
-      <StateNumber>758</StateNumber>
+      <StateNumber>744</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="268" parent="265" name="id">
+    <column id="269" parent="266" name="username">
       <Position>3</Position>
-      <StateNumber>758</StateNumber>
-      <StoredType>integer|0s</StoredType>
-      <TypeId>23</TypeId>
+      <StateNumber>744</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
+      <TypeId>1043</TypeId>
     </column>
+    <index id="270" parent="266" name="users_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16394</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>744</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="271" parent="266" name="ukr43af9ap4edm43mmtq01oddj6">
+      <ColNames>username</ColNames>
+      <ObjectId>16396</ObjectId>
+      <StateNumber>746</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="272" parent="266" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16395</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>744</StateNumber>
+      <UnderlyingIndexId>16394</UnderlyingIndexId>
+    </key>
+    <key id="273" parent="266" name="ukr43af9ap4edm43mmtq01oddj6">
+      <ObjectId>16397</ObjectId>
+      <StateNumber>746</StateNumber>
+      <UnderlyingIndexId>16396</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
