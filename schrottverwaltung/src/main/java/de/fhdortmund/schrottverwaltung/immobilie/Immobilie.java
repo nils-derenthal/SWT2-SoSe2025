@@ -66,6 +66,6 @@ public class Immobilie {
     private Long id;
 
     @Column(name="bild")
-    private String bildeBase64;
+    private String bildBase64;
 
 }
