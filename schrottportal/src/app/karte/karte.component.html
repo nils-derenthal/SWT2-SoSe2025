@@ -1,5 +1,10 @@
 <div class="container">
   <h2>Kartenübersicht</h2>
-  <div class="map-size" leaflet [leafletLayersControl]="layersControl" [leafletOptions]="options"></div>
-  <p>{{ testtext() }}</p>
+  <div class="map-size" leaflet [leafletLayersControl]="layersControl" [leafletOptions]="options">
+    @for (marker of (markers$ | async); track marker) {
+      <div [leafletLayer]="marker"></div>
+    }
+  </div>
+  <button
+    (click)="immobilien$.next([testImmobilie])">{{ testtext() }}</button>
 </div>

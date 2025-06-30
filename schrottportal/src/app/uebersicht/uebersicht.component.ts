@@ -11,6 +11,7 @@ import { ImmoUebersichtskarteComponent } from './immo-uebersichtskarte/immo-uebe
   imports: [AsyncPipe, ImmoUebersichtskarteComponent],
   templateUrl: './uebersicht.component.html',
   styleUrl: './uebersicht.component.scss',
+  standalone: true,
 })
 export class UebersichtComponent implements OnInit {
   immobilien$!: Observable<ImmobilieDTO[]>;
