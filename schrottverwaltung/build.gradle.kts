@@ -44,10 +44,6 @@ dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 tasks {
     compileJava {
         options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
