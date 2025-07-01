@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        jdk: [24]
+        jdk: [21]
         project:
           - schrottverwaltung
           - schrottdaten
