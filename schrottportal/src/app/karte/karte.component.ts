@@ -1,16 +1,19 @@
-import {Component, input, OnInit, signal} from '@angular/core';
+import {Component, inject, input, OnInit, signal} from '@angular/core';
 import {LeafletModule} from '@bluehalo/ngx-leaflet';
 import {latLng, marker, tileLayer} from 'leaflet';
 import {BehaviorSubject, map} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {Router} from '@angular/router';
+
+type Koordinaten = {
+  xKoordinate: number,
+  yKoordinate: number,
+}
 
 type Immobilie = {
   id: number,
   bezeichnung: string,
-  koordinaten: {
-    xKoordinate: number,
-    yKoordinate: number,
-  }
+  koordinaten: Koordinaten
 }
 
 @Component({
@@ -24,16 +27,35 @@ type Immobilie = {
   standalone: true,
 })
 export class KarteComponent implements OnInit {
-  testImmobilie = {id: 1, bezeichnung: '', koordinaten: {xKoordinate: 51.541944, yKoordinate: 7.223889}} as Immobilie;
+  router = inject(Router);
+  herneZentrum: Koordinaten = {
+    xKoordinate: 51.541944444444,
+    yKoordinate: 7.223888888888965,
+  }
+  testKoordinaten: Koordinaten = {
+    xKoordinate: 51.54,
+    yKoordinate: 7.22,
+  }
+  testImmobilie = {id: 1, bezeichnung: 'testImmobilie', koordinaten: this.herneZentrum} as Immobilie;
+  testImmobilie2 = {id: 2, bezeichnung: 'testImmobilie2', koordinaten: this.testKoordinaten} as Immobilie;
   immobilien = input.required<Immobilie[]>()
   // immobilien$ = toObservable(this.immobilien);
-  immobilien$: BehaviorSubject<Immobilie[]> = new BehaviorSubject([{id: 1, bezeichnung: '', koordinaten: {xKoordinate: 51, yKoordinate: 7}}]);
+  immobilien$: BehaviorSubject<Immobilie[]> = new BehaviorSubject([
+    {id: 1, bezeichnung: '', koordinaten: {xKoordinate: 51, yKoordinate: 7}}
+  ]);
+  chosenImmobilie = signal<Immobilie | undefined>(undefined);
 
   markers$ = this.immobilien$.pipe(map(i =>
     i.map(i => {
-      let m = marker([i.koordinaten.xKoordinate, i.koordinaten.yKoordinate], {riseOnHover: true, title: i.bezeichnung});
+      let m = marker([i.koordinaten.xKoordinate, i.koordinaten.yKoordinate], {riseOnHover: true, title: i.bezeichnung, alt: i.bezeichnung});
       m.on('click', (event) => {
-        event.containerPoint.y;
+        console.log('mapped clickEvent');
+        console.log(event);
+        this.routeToImmobilie(i);
+      });//todo: hovereffect (tooltip?)
+      m.on('mouseover', (event) => {
+        console.log('mapped hoverEvent');
+        this.chosenImmobilie.set(i);
       });
       return m;
     })
@@ -44,11 +66,9 @@ export class KarteComponent implements OnInit {
 
   testtext = signal('ungeklickt');
 
-  testmarker = marker([51.541944, 7.223889], {riseOnHover: true, title: this.testtext()});
 
 
   // markers = [this.testmarker, marker([51.54, 7.224]), marker([51.542, 7.223])];
-  markers = [];
 
   layersControl = {
     baseLayers: {
@@ -61,13 +81,12 @@ export class KarteComponent implements OnInit {
   options = {
     layers: [this.osm],
     zoom: 13,
-    center: latLng(51.541944, 7.223889)
+    center: latLng(51.541944, 7.223889),
   };
 
-  ngOnInit(): void {
-    this.testmarker.on('click', (event) => {
-      console.log('ksdfl');
-      this.testtext.set('geklickt');
-    })
+  ngOnInit(): void {}
+
+  routeToImmobilie(i: Immobilie): void {
+    this.router.navigateByUrl('immobilie' + i.id);
   }
 }
