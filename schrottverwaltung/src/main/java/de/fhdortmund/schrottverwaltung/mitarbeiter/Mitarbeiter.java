@@ -14,7 +14,7 @@ public class Mitarbeiter {
 
     private String nachname;
 
-    private String password;
+    private String passwort;
 
     private String mail;
 
