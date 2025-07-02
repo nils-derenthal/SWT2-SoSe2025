@@ -1,10 +1,8 @@
-package de.fhdortmund.schrottverwaltung.bewertung;
+package de.fhdortmund.schrottverwaltung.bewertung.entity;
 
-import de.fhdortmund.schrottverwaltung.immobilie.Immobilie;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -12,6 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Bewertung {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bewertung_id")
+    private Long id;
 
     @Column(name = "gewichtung")
     private int gewichtung;
@@ -23,10 +25,5 @@ public class Bewertung {
     @ManyToOne
     @JoinColumn(name = "immobilie_id") // <- Referenz zur Immobilie
     private Immobilie immobilie;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bewertung_id")
-    private Long id;
 }
 

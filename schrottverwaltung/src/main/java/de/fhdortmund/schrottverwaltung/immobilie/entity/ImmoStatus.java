@@ -1,5 +1,6 @@
-package de.fhdortmund.schrottverwaltung.immobilie;
+package de.fhdortmund.schrottverwaltung.immobilie.entity;
 
+import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,15 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImmoStatus {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "immobilien_status_id")
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private ImmoStatusEnum status;
 
     @Column(name = "beschreibung")
     private String beschreibung;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "immobilien_status_id")
-    private Long id;
 }

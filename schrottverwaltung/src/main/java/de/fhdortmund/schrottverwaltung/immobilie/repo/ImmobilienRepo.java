@@ -1,9 +1,13 @@
 package de.fhdortmund.schrottverwaltung.immobilie.repo;
 
-import de.fhdortmund.schrottverwaltung.immobilie.Immobilie;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
+
+    List<Immobilie> getAllByBezeichnung(String search);
 }

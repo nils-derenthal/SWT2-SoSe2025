@@ -1,4 +1,4 @@
-package de.fhdortmund.schrottverwaltung.immobilie;
+package de.fhdortmund.schrottverwaltung.immobilie.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,12 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Koordinaten {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Double xKoordinate;
 
     private Double yKoordinate;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 }

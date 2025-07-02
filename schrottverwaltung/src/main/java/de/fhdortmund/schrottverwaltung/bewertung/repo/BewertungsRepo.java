@@ -1,6 +1,6 @@
 package de.fhdortmund.schrottverwaltung.bewertung.repo;
 
-import de.fhdortmund.schrottverwaltung.bewertung.Bewertung;
+import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
