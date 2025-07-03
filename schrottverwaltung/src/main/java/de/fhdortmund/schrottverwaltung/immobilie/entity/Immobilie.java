@@ -50,10 +50,10 @@ public class Immobilie {
     private Integer quadratMeter;
 
     @Enumerated(EnumType.STRING)
-    private Gebaeudetyp gebaeudeTyp;
+    private Gebaeudetyp gebaeudetyp;
 
     @Enumerated(EnumType.STRING)
-    private EigentumsForm eigentumsForm;
+    private EigentumsForm eigentumsform;
 
     @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bewertung> bewertungen;

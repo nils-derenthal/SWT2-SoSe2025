@@ -16,8 +16,8 @@ public record ImmobilieDTO(
         String flur,
         String flurstueck,
         int quadratMeter,
-        String gebaeudeTyp,
-        String eigentumsForm,
+        String gebaeudetyp,
+        String eigentumsform,
         List<BewertungDTO> bewertungen,
         EigentuemerDTO eigentuemer,
         ImmoStatusDTO immoStatus

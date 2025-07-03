@@ -13,8 +13,9 @@ export class ImmobilienService {
 
 
   getImmobilienBySearch(search: string): Observable<ImmobilieDTO[]> {
+    console.log('sending')
     let params = new HttpParams();
     params.set('search', search);
-    return this.http.get<ImmobilieDTO[]>('/immobilien', { params });
+    return this.http.get<ImmobilieDTO[]>('/api/immobilien', { params });
   }
 }

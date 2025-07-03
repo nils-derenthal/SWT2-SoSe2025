@@ -15,8 +15,8 @@ export type ImmobilieDTO = {
   flur: string;
   flurstueck: string;
   quadratMeter: number;
-  gebaeudeTyp: string;
-  eigentumsForm: string;
+  gebaeudetyp: string;
+  eigentumsform: string;
   bewertungen: Bewertung[];
   eigentuemer: Eigentuemer;
   immoStatus: ImmoStatus;
