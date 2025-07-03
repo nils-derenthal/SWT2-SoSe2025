@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Hauptdatenbank für Schrottdaten
   postgres:
@@ -22,7 +20,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8090:8080"
+      - "8090:8090"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/schrottdaten
       SPRING_DATASOURCE_USERNAME: user
@@ -67,7 +65,7 @@ services:
     image: postgres:latest
     container_name: schrottverwaltung-db
     environment:
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: schrottverwaltung
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: secret
     ports:
