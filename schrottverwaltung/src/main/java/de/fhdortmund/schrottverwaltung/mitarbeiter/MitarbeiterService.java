@@ -1,15 +1,12 @@
 package de.fhdortmund.schrottverwaltung.mitarbeiter;
 
 import de.fhdortmund.schrottverwaltung.mitarbeiter.repo.MitarbeiterRepo;
-import de.fhdortmund.schrottverwaltung.security.AuthDto;
-import de.fhdortmund.schrottverwaltung.security.CreateUserDto;
 import de.fhdortmund.schrottverwaltung.security.Encoder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
