@@ -1,6 +1,6 @@
 package de.fhdortmund.schrottverwaltung.immobilie.controller;
 
-import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilienDTO;
+import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.service.ImmobilienService;
 import jakarta.transaction.Transactional;
@@ -20,7 +20,7 @@ public class ImmobilienController {
     private final ImmobilienMapper immobilienMapper;
 
     @GetMapping
-    public List<ImmobilienDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
-        return immobilienMapper.toImmobilienDTO(immobilienService.getImmobilienBy(search));
+    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search));
     }
 }

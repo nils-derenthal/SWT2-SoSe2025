@@ -1,25 +1,25 @@
 package de.fhdortmund.schrottverwaltung.immobilie.dto;
 
-import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
+import de.fhdortmund.schrottverwaltung.bewertung.dto.BewertungDTO;
 import de.fhdortmund.schrottverwaltung.eigentuemer.dto.EigentuemerDTO;
 
 import java.util.List;
 
-public record ImmobilienDTO(
+public record ImmobilieDTO(
         long id,
         AdresseDTO adresse,
         String bezeichnung,
-        String archiviert,
+        boolean archiviert,
         String zustand,
         KoordinatenDTO koordinaten,
         String gemarkung,
         String flur,
         String flurstueck,
         int quadratMeter,
-        String gebaudeTyp,
+        String gebaeudeTyp,
         String eigentumsForm,
-        List<Bewertung> bewertungen,
+        List<BewertungDTO> bewertungen,
         EigentuemerDTO eigentuemer,
-        ImmoStatusDTO immoStatusDTO
+        ImmoStatusDTO immoStatus
 ) {
 }

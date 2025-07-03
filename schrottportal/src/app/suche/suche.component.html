@@ -1,4 +1,9 @@
 <form>
-    <label for="search" class="form-label">Suche</label>
-    <input type="email" class="form-control" id="search" aria-describedby="Suche" [(ngModel)]="search">
+  <label for="search" class="form-label">Suche</label>
+  <input type="text" class="form-control" id="search" name="search" aria-describedby="Suche" [(ngModel)]="search">
 </form>
+<div>
+  @for (immobilie of immobilien$ | async; track $index) {
+    <p>Bezeichnung: {{ immobilie.bezeichnung }}</p>
+  }
+</div>
