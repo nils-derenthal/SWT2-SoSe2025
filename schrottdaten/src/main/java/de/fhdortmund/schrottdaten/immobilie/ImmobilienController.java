@@ -1,7 +1,6 @@
 package de.fhdortmund.schrottdaten.immobilie;
 
 import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
-import de.fhdortmund.schrottdaten.mqtt.Action;
 import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,7 +28,7 @@ public class ImmobilienController {
                             new Eigentuemer(null, "Max", "Mustermann", new AdresseT("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null)),
                             null);
 
-         publisher.publishMessage(Action.CREATE, immo);
+         publisher.publishMessage(immo);
     }
 
 

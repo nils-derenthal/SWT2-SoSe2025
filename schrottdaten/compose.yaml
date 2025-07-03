@@ -1,13 +1,12 @@
 services:
-  postgres-schrottdaten:
+  postgres:
     image: postgres:latest
     container_name: schrottdaten-db
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: herne
+      POSTGRES_PASSWORD: herne
       POSTGRES_DB: schrottdaten
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
-    restart: always

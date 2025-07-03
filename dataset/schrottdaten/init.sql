@@ -14,39 +14,31 @@ CREATE TABLE koordinaten (
                              y DOUBLE PRECISION
 );
 
-CREATE TABLE eigentuemer(
-                            eigentuemer_id INT GENERATED ALWAYS AS IDENTITY,
-                            adress_id INT,
-                            name VARCHAR(64),
-                            nachname VARCHAR(64),
-                            anmerkung VARCHAR(256),
-                            PRIMARY KEY(eigentuemer_id),
-                            CONSTRAINT fk_eigentuemer_adresse
-                                FOREIGN KEY(adress_id)
-                                    REFERENCES adresse(adresse_id)
+CREATE TABLE eigentuemer (
+                             eigentuemer_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                             vorname VARCHAR(64),
+                             nachname VARCHAR(64),
+                             adresse_id BIGINT,
+                             CONSTRAINT fk_eigentuemer_adresse FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id)
 );
 
-CREATE TABLE immobilien (
-                            immobilien_id INT GENERATED ALWAYS AS IDENTITY,
-                            adress_id INT,
-                            bezeichnung VARCHAR(256),
-                            archiviert BOOLEAN,
-                            zustand VARCHAR(32),
-                            koordinaten_id INT,
-                            gemarkung VARCHAR(32),
-                            flur VARCHAR(32),
-                            flurstueck VARCHAR(32),
-                            quadratmeter INT,
-                            gebaeude_typ VARCHAR(32),
-                            eigentums_form VARCHAR(32),
-                            bild TEXT,
-                            PRIMARY KEY(immobilien_id),
-                            CONSTRAINT fk_immobilien_adresse
-                                FOREIGN KEY (adress_id)
-                                    REFERENCES adresse(adresse_id),
-                            CONSTRAINT fk_immobilien_koordinaten
-                                FOREIGN KEY (koordinaten_id)
-                                    REFERENCES koordinaten(koordinaten_id)
+CREATE TABLE immobilie (
+                           immobilie_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                           adresse_id BIGINT,
+                           bezeichnung VARCHAR(256),
+                           archiviert BOOLEAN,
+                           zustand VARCHAR(32),
+                           koordinaten_id BIGINT,
+                           gemarkung VARCHAR(32),
+                           flur VARCHAR(32),
+                           flurstueck VARCHAR(32),
+                           quadratmeter INT,
+                           gebaeude_typ VARCHAR(32),
+                           eigentums_form VARCHAR(32),
+                           eigentuemer_id BIGINT,
+                           CONSTRAINT fk_immobilie_adresse FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
+                           CONSTRAINT fk_immobilie_koordinaten FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
+                           CONSTRAINT fk_immobilie_eigentuemer FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id)
 );
 
 -- Beispiel-Daten einfügen
