@@ -30,7 +30,7 @@ public class MQTTPublisher {
         }
     }
 
-    public <T>void publishMessage(Action action, T data){
+    public <T>void publishMessage(T data){
         if(data == null) return;
         try{
             String topic = "";
@@ -42,10 +42,10 @@ public class MQTTPublisher {
             MqttMessage message = new MqttMessage();
             message.setPayload(dataString.getBytes());
             client.publish(topic, message);
-            log.info("Message was published");
+            log.info("Message was published with topic: {}", topic);
 
         }catch (MqttException e){
-            log.error("Error while trying to publish message with aciton: {}, data: {}", action, data);
+            log.error("Error while trying to publish message with data: {}", data);
             throw new RuntimeException(e);
         } catch (JsonProcessingException e) {
             log.error("Failed to convert Object to JSON string");
