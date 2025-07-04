@@ -28,4 +28,9 @@ public class ImmobilienController {
     public List<ImmobilieDTO> getAllImmobilien() {
         return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
     }
+
+    @GetMapping("/{id}")
+    public ImmobilieDTO getImmobilieById(@PathVariable Long id) {
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilieById(id));
+    }
 }
