@@ -11,9 +11,12 @@ import lombok.*;
 public class Koordinaten {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "koordinaten_id")
     private Long id;
 
+    @Column(name = "x_koordinate")
     private Double xKoordinate;
 
+    @Column(name = "y_koordinate")
     private Double yKoordinate;
 }

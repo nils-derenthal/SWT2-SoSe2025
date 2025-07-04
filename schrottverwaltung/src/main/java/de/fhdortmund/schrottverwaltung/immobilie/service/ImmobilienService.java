@@ -17,9 +17,6 @@ public class ImmobilienService {
     private final ImmobilienRepo immobilienRepo;
 
     public List<Immobilie> getImmobilienBy(String search) {
-        System.out.println("search: " + search);
-        var i = immobilienRepo.getAllByBezeichnung(search);
-        System.out.println(i);
-        return i;
+        return immobilienRepo.getAllByBezeichnung(search);
     }
 }
