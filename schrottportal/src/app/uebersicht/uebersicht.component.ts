@@ -14,6 +14,7 @@ import {ImmoUebersichtskarteComponent} from './immo-uebersichtskarte/immo-uebers
 
   ],
   templateUrl: './uebersicht.component.html',
+  standalone: true,
   styleUrl: './uebersicht.component.scss'
 })
 export class UebersichtComponent implements OnInit {
