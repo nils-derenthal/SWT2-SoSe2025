@@ -1,0 +1,11 @@
+
+<main  [ngClass]="color">
+  <label for="customRange2" class="form-label">Ampel Slider</label>
+  <input
+    type="range"
+    class="form-range"
+    min="0"
+    max="9"
+    id="customRange2"
+    (change)="onSlideChange($event)">
+</main>
