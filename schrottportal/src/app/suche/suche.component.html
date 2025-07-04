@@ -1,6 +1,13 @@
 <form>
   <label for="search" class="form-label">Suche</label>
-  <input type="text" class="form-control" id="search" name="search" aria-describedby="Suche" [(ngModel)]="search">
+  <input
+    type="text"
+    class="form-control"
+    id="search"
+    name="search"
+    aria-describedby="Suche"
+    [(ngModel)]="search"
+  />
 </form>
 <div>
   @for (immobilie of immobilien$ | async; track $index) {

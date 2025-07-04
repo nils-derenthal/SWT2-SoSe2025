@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-kalender',
   imports: [],
   templateUrl: './kalender.component.html',
-  styleUrl: './kalender.component.scss'
+  styleUrl: './kalender.component.scss',
 })
-export class KalenderComponent {
-
-}
+export class KalenderComponent {}
