@@ -1,31 +1,38 @@
 @if (immobilie$|async; as immobilie) {
-<div class="top-flex">
-    <div class="head-flex">
-      <button type="button" class="btn btn-primary bi-arrow-left back-button"></button>
-      <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
-           aria-valuemax="100" style="width: 100%">
-        <div class="progress-bar" style="width: 25%"></div>
-      </div>
+    <div class="top-flex">
+        <div class="head-flex"><a [routerLink]="['/uebersicht']" class="back-button">
+            <button type="button" class="btn btn-primary bi-arrow-left"></button>
+        </a>
+            <div class="ampel-container">
+                <app-ampel-slider></app-ampel-slider>
+            </div>
+        </div>
+        <div class="mid-flex">
+            <!--TODO Bild aus dem backend setzen (existiert noch nicht)-->
+            <img src="/Herne-Logo_negativ.png" alt="Stadtlogo Herne" class="img">
+            <div class="text-input-group-container"><input type="text" class="form-control text-input" [value]="immobilie.adresse.strasse + ' ' + immobilie.adresse.hausnummer">
+                <input type="text" class="form-control text-input description-text" [value]="immobilie.zustand">
+            </div>
+        </div>
+        <div class="map-container"><p>placeholder für map</p></div>
     </div>
-    <div class="mid-flex">
-      <img src="/Herne-Logo_negativ.png" alt="Stadtlogo Herne" class="img">
-      <div class="text-input-group-container">
-        <input type="text" class="form-control text-input" [value]="immobilie.bezeichnung">
-        <input type="text" class="form-control text-input description-text" [value]="immobilie.zustand">
-      </div>
-    </div>
-    <div class="map-container">
-      <p>placeholder für map</p>
-    </div>
-  </div>
-  <div class="bottom-flex">
-    <h6 class="header">Bearbeitungsvorgang</h6>
-    <hr>
-    @for (status of immobilie.immoStati; track status.id) {
-      <div class="input-group text-input">
-      <label class="input-label" [for]="status.id" [ngClass]="color">{{ status.status}}</label>
-      <input type="text" [id]="status.id" [value]="status.beschreibung" class="form-control">
-      </div>
-    }
-  </div>
+    <div class="bottom-flex">
+        <h6 class="header">Bearbeitungsvorgang</h6>
+        <hr>
+        <!--TODO Muss im Ticket zur Bearbeitung funktional gemacht werden (Status soll erst von uns gesetzt werden), nur zu Orientierung !-->
+        <div class="input-group">
+            <select class="form-select" id="inputGroupSelect01" style="max-width: 25%">
+                @for (status of possibleStatus; track status) {
+            <option selected>{{ status }}</option>
+        }      </select>
+            <input type="text" class="form-control" placeholder="Beschreibung">
+            <button type="button" class="btn btn-outline-primary">Status hinzufügen</button>
+        </div>
+        @for (status of immobilie.immoStati; track status.id) {
+            <div class="input-group text-input">
+                <label class="input-label" [for]="status.id" [ngClass]="color">{{ status.status }}</label>
+                <input type="text" [id]="status.id" [value]="status.beschreibung" class="form-control">
+            </div>
+        }  </div>
 }
+
