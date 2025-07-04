@@ -41,6 +41,7 @@ CREATE TABLE immobilien (
                             quadratmeter INT,
                             gebaeude_typ VARCHAR(32),
                             eigentums_form VARCHAR(32),
+                            bild TEXT,
                             PRIMARY KEY(immobilien_id),
                             CONSTRAINT fk_immobilien_adresse
                                 FOREIGN KEY (adress_id)
