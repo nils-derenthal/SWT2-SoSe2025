@@ -26,6 +26,11 @@ public class ImmobilienController {
         return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search, statusFilter));
     }
 
+    @PostMapping("/edit")
+    public void edit(@RequestBody ImmobilieDTO immobilienDTO) {
+
+    }
+
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
         return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
