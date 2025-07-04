@@ -1,25 +1,30 @@
-import {EMPTY, Observable} from "rxjs";
-import {HttpHandlerFn, HttpRequest, HttpEvent } from "@angular/common/http";
+import {catchError, EMPTY, Observable, tap, throwError} from "rxjs";
+import {HttpErrorResponse, HttpEvent, HttpEventType, HttpHandlerFn, HttpRequest} from "@angular/common/http";
 import {inject} from "@angular/core";
 import {Router} from "@angular/router";
 import {AUTH_TOKEN} from "./auth.service";
 
 export function auth(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   // ignore /signup
-  if (req.url.endsWith('/auth/register')) return next(req);
+  if (req.url.endsWith('/user/register')) return next(req);
+
+  const router = inject(Router);
+  const redirect = () => router.navigate(['/login']);
 
   const value = localStorage.getItem(AUTH_TOKEN);
-
   if (!value) {
-    inject(Router).navigate(['/login'])
-      .then();
+    redirect().then();
     return EMPTY;
   }
 
-  req.clone({
-    headers: req.headers.append('Authorization', `Basic ${value}`)
-  })
-
-  return next(req);
+  return next(
+    req.clone({ headers: req.headers.append('Authorization', `Basic ${value}`) })).pipe(
+    catchError(x => {
+      if (x instanceof HttpErrorResponse && x.status === 403) {
+       redirect().then()
+      }
+      return throwError(() => x);
+    })
+  );
 }
 

@@ -1,0 +1,27 @@
+
+
+.seperator {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.seperator:before, .seperator:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #555;
+  margin: auto;
+}
+
+.seperator:before {
+  margin-right: 1em;
+}
+
+.seperator:after {
+  margin-left: 1em;
+}
+
+.spinner-border {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
