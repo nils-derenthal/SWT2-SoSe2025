@@ -67,9 +67,10 @@ public class Immobilie {
     @JoinColumn(name = "eigentuemer_id")
     private Eigentuemer eigentuemer;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private ImmoStatus status;
+    @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImmoStatus> stati;
+
+    private Integer aktuellerStatusId;
 
     @Column(name="bild")
     private String bildBase64;

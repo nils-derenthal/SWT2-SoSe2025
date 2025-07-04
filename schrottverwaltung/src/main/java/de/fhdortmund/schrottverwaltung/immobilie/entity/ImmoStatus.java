@@ -21,4 +21,8 @@ public class ImmoStatus {
 
     @Column(name = "beschreibung")
     private String beschreibung;
+
+    @ManyToOne
+    @JoinColumn(name = "immobilie_id") // <- Referenz zur Immobilie
+    private Immobilie immobilie;
 }
