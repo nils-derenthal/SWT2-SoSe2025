@@ -22,12 +22,3 @@ main {
 .green {
   background-color: lightgreen;
 }
-
-.blue {
-  background-color: lightskyblue;
-}
-
-.abschnitte {
-  display: flex;
-  justify-content: space-between;
-}

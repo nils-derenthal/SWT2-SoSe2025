@@ -15,28 +15,26 @@ export class AmpelSliderComponent {
    value: string | undefined;
    color: string | undefined;
 
+
+
   onSlideChange(event: any) {
     this.value = event.target.value
 
-    switch (this.value) {
-      case '0':
+    switch (true) {
+      case this.value =='0' || this.value == '1' || this.value == '2':
         this.color = 'red';
         break;
 
-      case '1':
+      case this.value == '3'|| this.value == '4' || this.value == '5' :
         this.color = 'orange';
         break;
 
-      case '2':
+      case this.value == '6' || this.value == '7':
         this.color = 'yellow';
         break;
 
-      case '3':
+      case this.value == '8' || this.value == '9':
         this.color = 'green';
-        break;
-
-      case '4':
-        this.color = 'blue';
         break;
     }
   }
