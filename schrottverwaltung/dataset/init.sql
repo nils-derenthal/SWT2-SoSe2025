@@ -1,3 +1,13 @@
+DROP TABLE if exists mitarbeiter;
+DROP TABLE if exists fachbereich;
+DROP TABLE if exists bewertung;
+DROP TABLE if exists kriterium;
+DROP TABLE if exists immobilie CASCADE;
+DROP TABLE if exists immobilien_status;
+DROP TABLE if exists koordinaten;
+DROP TABLE if exists eigentuemer;
+DROP TABLE if exists adresse;
+
 CREATE TABLE adresse (
                          adresse_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                          strasse VARCHAR(256),
@@ -23,12 +33,6 @@ CREATE TABLE koordinaten (
                              y_koordinate DOUBLE PRECISION
 );
 
-CREATE TABLE immobilien_status (
-                                   immobilien_status_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                                   status VARCHAR(256),
-                                   beschreibung VARCHAR(256)
-);
-
 CREATE TABLE immobilie (
                            immobilie_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                            bezeichnung VARCHAR(256),
@@ -43,12 +47,19 @@ CREATE TABLE immobilie (
                            gebaeudetyp VARCHAR(256),
                            eigentumsform VARCHAR(256),
                            eigentuemer_id INT,
-                           status_id INT,
+                           aktueller_status_id INT,
                            bild TEXT,
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
-                           CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
-                           CONSTRAINT fk_immobilien_status_id FOREIGN KEY (status_id) REFERENCES immobilien_status(immobilien_status_id)
+                           CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id)
+);
+
+CREATE TABLE immobilien_status (
+                                   immobilien_status_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                                   status VARCHAR(256),
+                                   beschreibung VARCHAR(256),
+                                   immobilie_id INT,
+                                   CONSTRAINT fk_immobilie_id FOREIGN KEY (immobilie_id) REFERENCES immobilie(immobilie_id)
 );
 
 CREATE TABLE kriterium (
