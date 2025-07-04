@@ -94,7 +94,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
+                "input": "node_modules/leaflet/dist/images",
                 "output": "assets/"
               }
             ],
