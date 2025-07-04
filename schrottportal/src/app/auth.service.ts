@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   signup(dto: { email: string, firstname: string, lastname: string, password: string}) {
-    this.http.post('/api/auth/register', dto)
+    this.http.post('/api/user/register', dto)
       .subscribe(() => { /* TODO */ })
   }
 }
