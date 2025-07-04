@@ -20,5 +20,7 @@ $theme-colors: (
   light: $herne-background-white,
   dark: $herne-background-black,
 );
-
+//$primary: $herne-green;
+//$focus-ring-color: rgba($herne-green, $focus-ring-opacity);
+//todo-luis: focus-ring-color for bootstrap text input overwriten
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
