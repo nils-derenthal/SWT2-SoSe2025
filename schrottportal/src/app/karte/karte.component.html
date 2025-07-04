@@ -5,12 +5,9 @@
       @if (markers$ | async; as markers) {
         <div class="map-size" leaflet [leafletLayersControl]="layersControl" [leafletOptions]="options">
           @for (marker of markers; track marker) {
-            <div [leafletLayer]="marker"></div>
+              <div [leafletLayer]="marker"></div>
           }
         </div>
-        <button
-          (click)="immobilien$.next([testImmobilie, testImmobilie2])">{{ testtext() }}
-        </button>
       } @else {
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -18,11 +15,11 @@
       }
     </div>
     <div class="container">
-      @if (chosenImmobilie(); as chosen) {
-        <p>Aktuelle Immobilie</p>
-        <p>{{ chosen.bezeichnung }}</p>
-        <p>x: {{ chosen.koordinaten.xKoordinate }}, y: {{ chosen.koordinaten.yKoordinate }}</p>
+      @let akt = chosenImmobilie();
+      @if (akt) {
+        Bezeichnung: {{ akt.bezeichnung }}
       }
+      <app-suche (searchedImmobilien)="immobilien$.next($event)"></app-suche>
     </div>
   </div>
 </div>
