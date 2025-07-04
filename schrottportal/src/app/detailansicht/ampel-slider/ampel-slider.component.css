@@ -1,0 +1,33 @@
+
+main {
+  border: solid black 1px;
+  border-radius: 1rem;
+  padding: 2%;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.red {
+  background-color: lightcoral;
+}
+
+.orange {
+  background-color: lightsalmon;
+}
+
+.yellow {
+  background-color: rgb(255, 251, 104, 0.8);
+}
+
+.green {
+  background-color: lightgreen;
+}
+
+.blue {
+  background-color: lightskyblue;
+}
+
+.abschnitte {
+  display: flex;
+  justify-content: space-between;
+}

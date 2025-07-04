@@ -1,0 +1,24 @@
+.frame {
+  border: solid 2px green;
+  border-radius: 10px;
+  padding: 1vh;
+  background-color: #f8f8f8;
+
+}
+
+main {
+  display: flex;
+
+}
+
+footer{
+  display: flex;
+  justify-content: end;
+}
+
+.bild {
+  height: 100px;
+  width: 150px;
+  background-color: #0a7d36;
+  margin-right: 2vh;
+}

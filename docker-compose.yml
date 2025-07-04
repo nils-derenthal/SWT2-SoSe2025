@@ -53,12 +53,12 @@ services:
     restart: always
 
   # Angular/Frontend App
-  schrottportal:
-    build: ./schrottportal
-    container_name: schrottportal-frontend
-    ports:
-      - "4200:4200"
-    restart: always
+#  schrottportal:
+#    build: ./schrottportal
+#    container_name: schrottportal-frontend
+#    ports:
+#      - "4200:4200"
+#    restart: always
 
   # Zweite PostgreSQL-DB für Schrottverwaltung
   postgres-schrottverwaltung:

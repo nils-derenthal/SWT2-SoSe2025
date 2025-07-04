@@ -19,4 +19,8 @@ public class ImmobilienService {
     public List<Immobilie> getImmobilienBy(String search) {
         return immobilienRepo.getAllByBezeichnung(search);
     }
+
+    public List<Immobilie> getImmobilien() {
+        return immobilienRepo.findAll();
+    }
 }
