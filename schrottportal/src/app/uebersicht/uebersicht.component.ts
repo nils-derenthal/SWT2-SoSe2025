@@ -4,7 +4,7 @@ import {AmpelSliderComponent} from '../detailansicht/ampel-slider/ampel-slider.c
 @Component({
   selector: 'app-uebersicht',
   imports: [
-    AmpelSliderComponent
+
   ],
   templateUrl: './uebersicht.component.html',
   styleUrl: './uebersicht.component.scss'
