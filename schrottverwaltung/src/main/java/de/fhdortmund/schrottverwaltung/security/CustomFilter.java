@@ -25,11 +25,12 @@ import java.util.Base64;
 public class CustomFilter extends OncePerRequestFilter {
     private final MitarbeiterService mitarbeiterService;
     private final Encoder encoder;
+    public String allowedRoute = "/user/register";
 
     @Override
     public void doFilterInternal(@NonNull HttpServletRequest servletRequest, @NonNull HttpServletResponse servletResponse, @NonNull FilterChain filterChain) throws IOException, ServletException {
         // Filter out allowed route
-        if(String.valueOf(servletRequest.getRequestURL()).endsWith("/auth/register")){
+        if(String.valueOf(servletRequest.getRequestURL()).endsWith(allowedRoute)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

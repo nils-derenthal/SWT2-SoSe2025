@@ -73,10 +73,11 @@ CREATE TABLE fachbereich (
 );
 
 CREATE TABLE mitarbeiter (
-                             mitarbeiter_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                             id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                              vorname VARCHAR(256),
                              nachname VARCHAR(256),
+                             passwort VARCHAR(256),
                              mail VARCHAR(256),
-                             fachbereich_id INT,
-                             CONSTRAINT fk_fachbereich_id FOREIGN KEY (fachbereich_id) REFERENCES fachbereich(fachbereich_id)
+                             fachbereich_nr INT,
+                             CONSTRAINT fk_fachbereich_id FOREIGN KEY (fachbereich_nr) REFERENCES fachbereich(fachbereich_id)
 );
