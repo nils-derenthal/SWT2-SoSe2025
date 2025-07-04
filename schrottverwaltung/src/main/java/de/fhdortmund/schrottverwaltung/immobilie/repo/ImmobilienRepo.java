@@ -17,5 +17,5 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
             """)
     List<Immobilie> getAllByBezeichnung(String search);
 
-    List<Immobilie> getImmobilieById(Long id);
+    Immobilie getImmobilieById(Long id);
 }
