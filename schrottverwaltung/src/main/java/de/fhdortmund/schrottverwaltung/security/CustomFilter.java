@@ -1,7 +1,8 @@
 package de.fhdortmund.schrottverwaltung.security;
 
 import de.fhdortmund.schrottverwaltung.mitarbeiter.MitarbeiterService;
-import jakarta.servlet.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -10,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -25,11 +25,12 @@ import java.util.Base64;
 public class CustomFilter extends OncePerRequestFilter {
     private final MitarbeiterService mitarbeiterService;
     private final Encoder encoder;
+    public String allowedRoute = "/user/register";
 
     @Override
     public void doFilterInternal(@NonNull HttpServletRequest servletRequest, @NonNull HttpServletResponse servletResponse, @NonNull FilterChain filterChain) throws IOException, ServletException {
         // Filter out allowed route
-        if(String.valueOf(servletRequest.getRequestURL()).endsWith("/auth/register")){
+        if(String.valueOf(servletRequest.getRequestURL()).endsWith(allowedRoute)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
