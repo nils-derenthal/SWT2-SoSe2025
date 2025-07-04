@@ -1,6 +1,6 @@
 <div class="m-5">
     <div class="m-auto w-50 d-flex row gap-5" >
-        <form class="d-flex row gap-1 w-100 p-0 m-0" [formGroup]="login">
+        <form class="d-flex row gap-1 w-100 p-4 m-0" [formGroup]="login">
             <mat-form-field class="p-0">
                 <mat-label>E-Mail</mat-label>
                 <input type="text"
@@ -22,16 +22,29 @@
                 >
             </mat-form-field>
 
+            @if (loadingLogin()) {
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only invisible">Loading...</span>
+                    </div>
+                </div>
+            } @else {
             <button class="btn btn-primary"
                     [disabled]="login.invalid"
                     (click)="logIn()">
                 Einloggen
             </button>
+            }
+
+            @if (login.hasError(ERROR_RESPONSE)) {
+                <mat-error>Ungültige E-Mail oder Passwort</mat-error>
+            }
         </form>
 
         <p class="seperator">oder</p>
 
-        <form class="d-flex row gap-1 w-100 p-0 m-0" [formGroup]="signup">
+        <form class="d-flex row gap-1 w-100 p-4 m-0 position-relative" [formGroup]="signup">
+
             <mat-form-field class="p-0">
                 <mat-label>E-Mail</mat-label>
                 <input type="text"
@@ -71,11 +84,23 @@
                 >
             </mat-form-field>
 
-            <button class="btn btn-primary"
-                    [disabled]="signup.invalid"
-                    (click)="signUp()">
-                Registrieren
-            </button>
+            @if (loadingSignUp()) {
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only invisible">Loading...</span>
+                    </div>
+                </div>
+            } @else {
+                <button class="btn btn-primary"
+                        [disabled]="login.invalid"
+                        (click)="signUp()">
+                    Registrieren
+                </button>
+            }
+
+            @if (signup.hasError(ERROR_RESPONSE)) {
+                <mat-error>Diese E-Mail ist bereits vergeben</mat-error>
+            }
         </form>
     </div>
 </div>
