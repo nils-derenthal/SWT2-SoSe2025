@@ -38,7 +38,7 @@ public class CustomFilter extends OncePerRequestFilter {
         String header = servletRequest.getHeader("Authorization");
         if(header == null || !header.startsWith("Basic ")) {
             log.error("Authorization header is missing");
-            servletResponse.sendError(401, "Not Authenticated");
+            servletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
 
@@ -53,13 +53,13 @@ public class CustomFilter extends OncePerRequestFilter {
 
         if (user == null) {
             log.error("User not found");
-            servletResponse.sendError(401, "User does not exist");
+            servletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
 
         if(!user.getPassword().equals(encodedPassword)) {
             log.error("Password incorrect");
-            servletResponse.sendError(401, "Password incorrect");
+            servletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
 
