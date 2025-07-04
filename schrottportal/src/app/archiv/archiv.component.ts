@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-archiv',
   imports: [],
   templateUrl: './archiv.component.html',
-  styleUrl: './archiv.component.scss'
+  styleUrl: './archiv.component.scss',
 })
-export class ArchivComponent {
-
-}
+export class ArchivComponent {}

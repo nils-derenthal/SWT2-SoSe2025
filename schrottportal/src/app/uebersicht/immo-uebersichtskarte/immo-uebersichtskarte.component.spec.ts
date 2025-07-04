@@ -8,9 +8,8 @@ describe('ImmoUebersichtskarteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ImmoUebersichtskarteComponent]
-    })
-    .compileComponents();
+      imports: [ImmoUebersichtskarteComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ImmoUebersichtskarteComponent);
     component = fixture.componentInstance;

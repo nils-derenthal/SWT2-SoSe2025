@@ -18,7 +18,7 @@ $theme-colors: (
   warning: $herne-yellow,
   danger: red,
   light: $herne-background-white,
-  dark: $herne-background-black
+  dark: $herne-background-black,
 );
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";

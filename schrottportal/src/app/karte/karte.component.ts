@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-karte',
   imports: [],
   templateUrl: './karte.component.html',
-  styleUrl: './karte.component.scss'
+  styleUrl: './karte.component.scss',
 })
-export class KarteComponent {
-
-}
+export class KarteComponent {}

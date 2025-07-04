@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import {UebersichtComponent} from './uebersicht/uebersicht.component';
-import {SucheComponent} from './suche/suche.component';
-import {KarteComponent} from './karte/karte.component';
-import {KalenderComponent} from './kalender/kalender.component';
-import {ArchivComponent} from './archiv/archiv.component';
+import { UebersichtComponent } from './uebersicht/uebersicht.component';
+import { SucheComponent } from './suche/suche.component';
+import { KarteComponent } from './karte/karte.component';
+import { KalenderComponent } from './kalender/kalender.component';
+import { ArchivComponent } from './archiv/archiv.component';
 
 export const routes: Routes = [
   { path: 'uebersicht', component: UebersichtComponent },

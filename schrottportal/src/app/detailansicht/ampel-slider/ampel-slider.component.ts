@@ -1,22 +1,19 @@
 import { Component } from '@angular/core';
-import {NgClass} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ampel-slider',
-  imports: [
-    NgClass,
-    FormsModule
-  ],
+  imports: [NgClass, FormsModule],
   templateUrl: './ampel-slider.component.html',
-  styleUrl: './ampel-slider.component.css'
+  styleUrl: './ampel-slider.component.css',
 })
 export class AmpelSliderComponent {
-   value: string | undefined;
-   color: string | undefined;
+  value: string | undefined;
+  color: string | undefined;
 
   onSlideChange(event: any) {
-    this.value = event.target.value
+    this.value = event.target.value;
 
     switch (this.value) {
       case '0':
@@ -40,5 +37,4 @@ export class AmpelSliderComponent {
         break;
     }
   }
-
 }
