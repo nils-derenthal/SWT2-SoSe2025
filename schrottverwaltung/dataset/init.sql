@@ -44,6 +44,7 @@ CREATE TABLE immobilie (
                            eigentumsform VARCHAR(256),
                            eigentuemer_id INT,
                            status_id INT,
+                           bild TEXT,
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
@@ -72,10 +73,11 @@ CREATE TABLE fachbereich (
 );
 
 CREATE TABLE mitarbeiter (
-                             mitarbeiter_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                             id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                              vorname VARCHAR(256),
                              nachname VARCHAR(256),
+                             passwort VARCHAR(256),
                              mail VARCHAR(256),
-                             fachbereich_id INT,
-                             CONSTRAINT fk_fachbereich_id FOREIGN KEY (fachbereich_id) REFERENCES fachbereich(fachbereich_id)
+                             fachbereich_nr INT,
+                             CONSTRAINT fk_fachbereich_id FOREIGN KEY (fachbereich_nr) REFERENCES fachbereich(fachbereich_id)
 );

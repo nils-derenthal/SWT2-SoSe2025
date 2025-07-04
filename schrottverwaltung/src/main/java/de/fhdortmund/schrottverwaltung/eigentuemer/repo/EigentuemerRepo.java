@@ -1,6 +1,6 @@
-package de.fhdortmund.schrottverwaltung.eigentuemer.Repository;
+package de.fhdortmund.schrottverwaltung.eigentuemer.repo;
 
-import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
