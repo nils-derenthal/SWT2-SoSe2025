@@ -7,8 +7,6 @@ INSERT INTO koordinaten (x_koordinate, y_koordinate) VALUES (1, 1);
 
 INSERT INTO eigentuemer (vorname, nachname, adresse_id, anmerkung) VALUES ('x', 'x', 1, 'x');
 
-INSERT INTO immobilien_status (status, beschreibung) VALUES ('VERDACHT', 'x');
-
 INSERT INTO immobilie (bezeichnung,
                        adresse_id,
                        archiviert,
@@ -21,7 +19,7 @@ INSERT INTO immobilie (bezeichnung,
                        gebaeudetyp,
                        eigentumsform,
                        eigentuemer_id,
-                       status_id)
+                       aktueller_status_id)
 VALUES (
         'test',
         1,
@@ -37,3 +35,5 @@ VALUES (
         1,
         1
        );
+
+INSERT INTO immobilien_status (status, beschreibung, immobilie_id) VALUES ('VERDACHT', 'x', 1);
