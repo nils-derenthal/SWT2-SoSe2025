@@ -1,10 +1,13 @@
-<div>
+<div class="frame">
   <main>
-    <img>
-    <p>Gurkensteig 45</p>
+    <div class="bild"></div>
+    <div>
+      <p>{{immobilie.bezeichnung}}</p>
+      <p>{{immobilie.adresse.strasse}} {{immobilie.adresse.hausnummer}}</p>
+      <p>{{immobilie.quadratMeter}} m²</p>
+    </div>
   </main>
   <footer>
-    <!-- slider -->
-    <button>Details</button>
+    <button class="btn btn-primary">Details</button>
   </footer>
 </div>

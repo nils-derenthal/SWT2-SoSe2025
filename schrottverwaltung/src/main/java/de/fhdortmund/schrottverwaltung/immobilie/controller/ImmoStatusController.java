@@ -1,6 +1,6 @@
 package de.fhdortmund.schrottverwaltung.immobilie.controller;
 
-import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatus;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.ImmoStatus;
 import de.fhdortmund.schrottverwaltung.immobilie.service.ImmoStatusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

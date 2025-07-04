@@ -1,6 +1,11 @@
-<p>uebersicht works!</p>
-<button class="btn btn-primary">Test</button>
-<div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
+<div class="box">
+  @if (immobilien$|async) {
+    @for (immobilie of (immobilien$|async); track immobilien$) {
+      <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
+    }
+  } @else {
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  }
 </div>
-

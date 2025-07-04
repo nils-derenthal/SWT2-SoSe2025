@@ -23,4 +23,9 @@ public class ImmobilienController {
     public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
         return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search));
     }
+
+    @GetMapping("/all")
+    public List<ImmobilieDTO> getAllImmobilien() {
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
+    }
 }
