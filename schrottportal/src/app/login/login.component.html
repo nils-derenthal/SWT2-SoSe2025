@@ -1,33 +1,81 @@
-<form class="m-3 d-flex row gap-3" [formGroup]="login">
-    <div class="d-flex row gap-1 w-100 p-0 m-0">
-        <mat-form-field>
-            <mat-label>E-Mail</mat-label>
-            <input type="text"
-                   placeholder="example@email.com"
-                   formControlName="email"
-                   matInput
-            >
-            @if (login.controls.email.invalid) {
-                <mat-error>Adresse nicht gültig</mat-error>
-            }
-        </mat-form-field>
+<div class="m-5">
+    <div class="m-auto w-50 d-flex row gap-5" >
+        <form class="d-flex row gap-1 w-100 p-0 m-0" [formGroup]="login">
+            <mat-form-field class="p-0">
+                <mat-label>E-Mail</mat-label>
+                <input type="text"
+                       placeholder="example@email.com"
+                       formControlName="email"
+                       matInput
+                >
+                @if (login.controls.email.invalid) {
+                    <mat-error>Adresse nicht gültig</mat-error>
+                }
+            </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Passwort</mat-label>
-            <input type="password"
-                   placeholder="passwort123"
-                   formControlName="password"
-                   matInput
-            >
-        </mat-form-field>
+            <mat-form-field class="p-0">
+                <mat-label>Passwort</mat-label>
+                <input type="password"
+                       placeholder="passwort123"
+                       formControlName="password"
+                       matInput
+                >
+            </mat-form-field>
+
+            <button class="btn btn-primary"
+                    [disabled]="login.invalid"
+                    (click)="logIn()">
+                Einloggen
+            </button>
+        </form>
+
+        <p class="seperator">oder</p>
+
+        <form class="d-flex row gap-1 w-100 p-0 m-0" [formGroup]="signup">
+            <mat-form-field class="p-0">
+                <mat-label>E-Mail</mat-label>
+                <input type="text"
+                       placeholder="example@email.com"
+                       formControlName="email"
+                       matInput
+                >
+                @if (login.controls.email.invalid) {
+                    <mat-error>Adresse nicht gültig</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="p-0">
+                <mat-label>Vorname</mat-label>
+                <input type="text"
+                       placeholder="Hans"
+                       formControlName="firstname"
+                       matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field class="p-0">
+                <mat-label>Nachname</mat-label>
+                <input type="text"
+                       placeholder="Müller"
+                       formControlName="lastname"
+                       matInput
+                >
+            </mat-form-field>
+
+            <mat-form-field class="p-0">
+                <mat-label>Passwort</mat-label>
+                <input type="password"
+                       placeholder="passwort123"
+                       formControlName="password"
+                       matInput
+                >
+            </mat-form-field>
+
+            <button class="btn btn-primary"
+                    [disabled]="signup.invalid"
+                    (click)="signUp()">
+                Registrieren
+            </button>
+        </form>
     </div>
-
-    <button class="btn btn-primary"
-            [disabled]="login.invalid"
-            (click)="logIn()">
-        @switch (type()) {
-            @case ('login') { Einloggen }
-            @case ('register') { Registrieren }
-        }
-    </button>
-</form>
+</div>

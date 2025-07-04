@@ -13,5 +13,5 @@ export const routes: Routes = [
   { path: 'kalender', component: KalenderComponent },
   { path: 'archiv', component: ArchivComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: UebersichtComponent },
+  { path: '**', redirectTo: 'uebersicht' },
 ];
