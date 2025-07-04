@@ -1,7 +1,8 @@
-package de.fhdortmund.schrottverwaltung.immobilie;
+package de.fhdortmund.schrottverwaltung.immobilie.entity;
 
-import de.fhdortmund.schrottverwaltung.bewertung.Bewertung;
-import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
+import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.immobilie.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,9 +15,14 @@ import java.util.List;
 @Setter
 public class Immobilie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "immobilie_id")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "adresse_id")
-    private AdresseT adresse;
+    private Adresse adresse;
 
     @Column(name = "bezeichnung")
     private String bezeichnung;
@@ -44,10 +50,10 @@ public class Immobilie {
     private Integer quadratMeter;
 
     @Enumerated(EnumType.STRING)
-    private Gebaeudetyp gebaeudeTyp;
+    private Gebaeudetyp gebaeudetyp;
 
     @Enumerated(EnumType.STRING)
-    private EigentumsForm eigentumsForm;
+    private EigentumsForm eigentumsform;
 
     @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bewertung> bewertungen;
@@ -60,12 +66,6 @@ public class Immobilie {
     @JoinColumn(name = "status_id")
     private ImmoStatus status;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "immobilie_id")
-    private Long id;
-
     @Column(name="bild")
     private String bildBase64;
-
 }
