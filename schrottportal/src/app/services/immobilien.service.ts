@@ -22,4 +22,8 @@ export class ImmobilienService {
   getImmobilieById(id: number): Observable<ImmobilieDTO> {
     return this.http.get<ImmobilieDTO>(`/api/immobilien/${id}`);
   }
+
+  getImmobilieById(id: number): Observable<ImmobilieDTO> {
+    return this.http.get<ImmobilieDTO>(`/api/immobilien/${id}`);
+  }
 }
