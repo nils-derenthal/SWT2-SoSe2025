@@ -17,10 +17,10 @@ public class SyncService {
     private final ImmobilienRepo immobilienRepo;
 
     /**
-     * Wird nach dem Start der Anwendung automatisch ausgeführt.
+     * Automatically executed after the application starts.
      * <p>
-     * Lädt alle {@code Eigentuemer} und {@code Immobilie}-Einträge aus den Datenbanken
-     * und übergibt sie dem {@link MQTTPublisher} zur Veröffentlichung.
+     * Loads all {@code Eigentuemer} and {@code Immobilie} entries from the databases
+     * and passes them to the {@link MQTTPublisher} for publishing.
      */
     @PostConstruct
     private void syncData(){

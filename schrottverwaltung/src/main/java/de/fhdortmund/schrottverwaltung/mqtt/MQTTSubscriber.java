@@ -25,22 +25,18 @@ public class MQTTSubscriber {
     Map<String, MQTTMessageProcessor> dispatchMap;
 
     /**
-     * Initializes and connects the MQTT client to the local MQTT broker.
-     * <p>
-     * This method is automatically invoked after bean construction via the {@code @PostConstruct} annotation.
-     * It performs the following steps:
-     * <ul>
-     *     <li>Creates a new {@link MqttClient} instance with a generated client ID</li>
-     *     <li>Registers a {@link MQTTCallBack} that processes incoming messages for the topics</li>
-     *     <li>Connects to the MQTT broker at {@code tcp://localhost:1883}</li>
-     *     <li>Subscribes to the topics {@code "immobilie"} and {@code "eigentuemer"} with QoS level 2</li>
-     * </ul>
-     * <p>
-     * The use of QoS level 2 ensures exactly-once delivery for each message, which is critical for data consistency.
-     * <p>
-     * If the connection to the broker fails, a {@link RuntimeException} is thrown.
+     * Initializes and connects an MQTT client on application startup.
      *
-     * @throws RuntimeException if the MQTT client cannot connect or subscribe to the broker
+     * <p>This method is automatically invoked after dependency injection is done,
+     * thanks to the {@code @PostConstruct} annotation. It sets up the MQTT client,
+     * configures connection options, sets a callback for incoming messages, and subscribes
+     * to relevant topics.</p>
+     *
+     * <p>The client connects to the broker at {@code tcp://localhost:1883} and subscribes to
+     * topics "immobilie" and "eigentuemer" with QoS level 1. A message dispatching system is
+     * initialized using a map that associates topics with their respective message processors.</p>
+     *
+     * @throws RuntimeException if the client fails to connect or subscribe to topics
      */
     @PostConstruct
     public void connect() {
