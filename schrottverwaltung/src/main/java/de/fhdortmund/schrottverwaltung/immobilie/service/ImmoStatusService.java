@@ -1,5 +1,6 @@
 package de.fhdortmund.schrottverwaltung.immobilie.service;
 
+import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.ImmoStatus;
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienStatusRepo;
