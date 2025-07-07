@@ -19,10 +19,8 @@
     </ul>
   </div>
 </form>
-
-<div>
 <div class="d-flex flex-column gap-2">
   @for (immobilie of immobilien$ | async; track $index) {
-    <app-immo-uebersichtskarte [immobilie]="immobilie" (click)="doFilter($event)"></app-immo-uebersichtskarte>
+    <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
   }
 </div>

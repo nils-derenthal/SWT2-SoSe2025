@@ -1,4 +1,4 @@
-import {Component, inject, model} from '@angular/core';
+import {Component, inject, model, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ImmobilienService} from '../services/immobilien.service';
 import {toObservable} from '@angular/core/rxjs-interop';
@@ -21,11 +21,7 @@ import {ImmoStatusService} from '../services/immoStatus.service';
 export class SucheComponent {
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
-  stati$!: Observable<string[]>;
-
-  ngOnInit(): void {
-    this.getStati();
-  }
+  stati$! = this.statusService.getAllStati();
 
   search = model<string>('');
   immobilien$ = toObservable(this.search).pipe(
