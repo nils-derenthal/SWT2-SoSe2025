@@ -16,9 +16,11 @@ $theme-colors: (
   success: $herne-green,
   info: $herne-yellow,
   warning: $herne-yellow,
-  danger: red,
+  danger: $herne-red,
   light: $herne-background-white,
   dark: $herne-background-black,
 );
+
+$focus-ring-color: rgba($herne-green, .25);
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
