@@ -6,4 +6,4 @@ export type Adresse = {
   plz: number;
   ort: string;
   stadtbezirk: string;
-}
+};

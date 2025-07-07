@@ -1,8 +1,8 @@
-import {Adresse} from './adresse.model';
-import {Koordinaten} from './koordinaten.model';
-import {Bewertung} from './bewertung.model';
-import {Eigentuemer} from './eigentuemer.model';
-import {ImmoStatus} from './immoStatus.model';
+import { Adresse } from './adresse.model';
+import { Koordinaten } from './koordinaten.model';
+import { Bewertung } from './bewertung.model';
+import { Eigentuemer } from './eigentuemer.model';
+import { ImmoStatus } from './immoStatus.model';
 
 export type ImmobilieDTO = {
   id: number;
@@ -20,4 +20,4 @@ export type ImmobilieDTO = {
   bewertungen: Bewertung[];
   eigentuemer: Eigentuemer;
   immoStatus: ImmoStatus;
-}
+};

@@ -2,6 +2,7 @@ package de.fhdortmund.schrottverwaltung.mitarbeiter;
 
 import de.fhdortmund.schrottverwaltung.mitarbeiter.repo.MitarbeiterRepo;
 import de.fhdortmund.schrottverwaltung.security.Encoder;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +33,12 @@ public class MitarbeiterService implements UserDetailsService {
                 .build();
     }
 
-    public void register(CreateUserDto createUser) {
+    public void register(CreateUserDto createUser, HttpServletResponse response) {
+        if (repo.existsByMail(createUser.email()))
+        {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
         Mitarbeiter mitarbeiter = new Mitarbeiter(createUser.firstname(),
                 createUser.lastname(),
                 encoder.encrypt(createUser.password()),

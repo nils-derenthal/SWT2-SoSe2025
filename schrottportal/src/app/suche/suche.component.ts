@@ -4,26 +4,27 @@ import {ImmobilienService} from '../services/immobilien.service';
 import {toObservable} from '@angular/core/rxjs-interop';
 import {debounceTime, distinctUntilChanged, startWith, switchMap} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {ImmoUebersichtskarteComponent} from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-suche',
   imports: [
     FormsModule,
-    AsyncPipe
+    AsyncPipe,
+    ImmoUebersichtskarteComponent
   ],
   templateUrl: './suche.component.html',
   standalone: true,
-  styleUrl: './suche.component.scss'
+  styleUrl: './suche.component.scss',
 })
 export class SucheComponent {
   immobilienService = inject(ImmobilienService);
 
   search = model<string>('');
-  immobilien$ = toObservable(this.search)
-    .pipe(
-      startWith(''),
-      distinctUntilChanged(),
-      debounceTime(300),
-      switchMap(search => this.immobilienService.getImmobilienBySearch(search)),
-    );
+  immobilien$ = toObservable(this.search).pipe(
+    startWith(''),
+    distinctUntilChanged(),
+    debounceTime(300),
+    switchMap((search) => this.immobilienService.getImmobilienBySearch(search)),
+  );
 }

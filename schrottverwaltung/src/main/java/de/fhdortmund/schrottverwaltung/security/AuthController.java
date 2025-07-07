@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
     @GetMapping("/validate")
-    private boolean validate(){
-        // validate if the user is authenticated
-        return true;
+    private void validate(){
+        // used to validate if the user is authenticated
     }
 }

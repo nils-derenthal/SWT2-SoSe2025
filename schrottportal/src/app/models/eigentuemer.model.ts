@@ -1,4 +1,4 @@
-import {Adresse} from './adresse.model';
+import { Adresse } from './adresse.model';
 
 export type Eigentuemer = {
   id: number;
@@ -6,4 +6,4 @@ export type Eigentuemer = {
   nachname: string;
   anschrift: Adresse;
   anmerkung: string;
-}
+};
