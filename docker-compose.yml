@@ -62,6 +62,8 @@ services:
       POSTGRES_PASSWORD: secret
     ports:
       - "5433:5432"
+    volumes:
+      - ./dataset/schrottverwaltun:/docker-entrypoint-initdb.d
     restart: always
 
   # Hauptdatenbank für Schrottdaten

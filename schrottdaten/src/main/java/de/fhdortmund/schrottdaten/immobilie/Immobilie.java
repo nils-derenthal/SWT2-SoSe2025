@@ -57,4 +57,6 @@ public class Immobilie {
     @Column(name = "immobilie_id")
     private Long id;
 
+
+
 }

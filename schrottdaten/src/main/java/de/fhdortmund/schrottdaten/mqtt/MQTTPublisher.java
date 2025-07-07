@@ -17,6 +17,18 @@ import org.springframework.stereotype.Component;
 public class MQTTPublisher {
     MqttClient client;
 
+    /**
+     * Initializes the MQTT client connection after the Spring context is constructed.
+     * <p>
+     * This method is annotated with {@code @PostConstruct}, meaning it will be called
+     * automatically by the Spring framework after the bean's dependencies are injected.
+     * It connects to the MQTT broker running at {@code tcp://localhost:1883}.
+     * <p>
+     * A new client ID is generated for each connection using {@code MqttClient.generateClientId()}.
+     *
+     * @throws MqttException if the client cannot connect to the MQTT broker
+     * @throws RuntimeException if a connection failure occurs and needs to be escalated
+     */
     @PostConstruct
     public void connect() throws MqttException {
         try{
@@ -30,6 +42,25 @@ public class MQTTPublisher {
         }
     }
 
+    /**
+     * Publishes the given data object to a specific MQTT topic based on its type.
+     * <p>
+     * Supported types are:
+     * <ul>
+     *     <li>{@code Eigentuemer} → Topic: {@code "eigentuemer"}</li>
+     *     <li>{@code Immobilie} → Topic: {@code "immobilie"}</li>
+     * </ul>
+     * <p>
+     * The object is serialized to a JSON string using Jackson's {@code ObjectMapper}
+     * and published with MQTT Quality of Service (QoS) level 2, which guarantees
+     * that the message is delivered exactly once. This comes with a performance
+     * and network overhead.
+     *
+     * @param data the object to publish; must be of type {@code Eigentuemer} or {@code Immobilie}
+     * @param <T> the type of the object to publish
+     * @throws RuntimeException if the MQTT message cannot be published
+     *                          or if JSON serialization fails
+     */
     public <T>void publishMessage(T data){
         if(data == null) return;
         try{
@@ -41,6 +72,8 @@ public class MQTTPublisher {
             String dataString = mapper.writeValueAsString(data);
             MqttMessage message = new MqttMessage();
             message.setPayload(dataString.getBytes());
+            message.setQos(1);
+            client.setCallback(new MQTTCallback());
             client.publish(topic, message);
             log.info("Message was published with topic: {}", topic);
 
@@ -52,5 +85,4 @@ public class MQTTPublisher {
             throw new RuntimeException(e);
         }
     }
-    //TODO NOEL seperate init daten für beide Datenbanken
 }

@@ -4,7 +4,9 @@ import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 @Table(name = "immobilie")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Immobilie {
 
     @Id
@@ -50,10 +54,12 @@ public class Immobilie {
     private Integer quadratMeter;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "gebaeudetyp")
     private Gebaeudetyp gebaeudetyp;
 
     @Enumerated(EnumType.STRING)
-    private EigentumsForm eigentumsform;
+    @Column(name = "eigentumsform")
+    private EigentumsForm eigentumsForm;
 
     @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bewertung> bewertungen;
