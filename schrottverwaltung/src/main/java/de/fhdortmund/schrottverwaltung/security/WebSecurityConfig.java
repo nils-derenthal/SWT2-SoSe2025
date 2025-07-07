@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 @Slf4j
 public class WebSecurityConfig {
-//    private final CustomFilter customFilter;
+    private final CustomFilter customFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -27,18 +27,17 @@ public class WebSecurityConfig {
         http
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
-//                .headers(httpSecurityHeadersConfigurer ->
-//                        httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-//                .authorizeHttpRequests(authorizeRequests ->
-//                        authorizeRequests.requestMatchers(new AntPathRequestMatcher(customFilter.allowedRoute))
-//                                .permitAll()
-//                                .anyRequest()
-//                                .authenticated()
-//                )
-//                .sessionManagement(session ->
-//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .addFilterAfter(customFilter, BasicAuthenticationFilter.class)
-        ;
+                .headers(httpSecurityHeadersConfigurer ->
+                        httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests.requestMatchers(new AntPathRequestMatcher(customFilter.allowedRoute))
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterAfter(customFilter, BasicAuthenticationFilter.class);
         return http.build();
     }
 

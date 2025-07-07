@@ -11,7 +11,6 @@
 </form>
 <div>
   @for (immobilie of immobilien$ | async; track $index) {
-    <p>Bezeichnung: {{ immobilie.bezeichnung }}</p>
     <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
   }
 </div>
