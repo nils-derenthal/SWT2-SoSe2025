@@ -1,5 +1,5 @@
 CREATE TABLE adresse (
-                         adresse_id INT  PRIMARY KEY,
+                         adresse_id INT PRIMARY KEY,
                          strasse VARCHAR(256),
                          hausnummer INT,
                          hausnummer_zusatz VARCHAR(256),
@@ -9,7 +9,7 @@ CREATE TABLE adresse (
 );
 
 CREATE TABLE eigentuemer (
-                             eigentuemer_id INT  PRIMARY KEY,
+                             eigentuemer_id INT PRIMARY KEY,
                              vorname VARCHAR(256),
                              nachname VARCHAR(256),
                              adresse_id INT,
@@ -18,7 +18,7 @@ CREATE TABLE eigentuemer (
 );
 
 CREATE TABLE koordinaten (
-                             koordinaten_id INT  PRIMARY KEY,
+                             koordinaten_id INT PRIMARY KEY,
                              x_koordinate DOUBLE PRECISION,
                              y_koordinate DOUBLE PRECISION
 );
@@ -30,7 +30,7 @@ CREATE TABLE immobilien_status (
 );
 
 CREATE TABLE immobilie (
-                           immobilie_id INT  PRIMARY KEY,
+                           immobilie_id INT PRIMARY KEY,
                            bezeichnung VARCHAR(256),
                            adresse_id INT,
                            archiviert BOOLEAN,
@@ -44,10 +44,11 @@ CREATE TABLE immobilie (
                            eigentumsform VARCHAR(256),
                            eigentuemer_id INT,
                            status_id INT,
+                           bild TEXT,
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
-                           CONSTRAINT fk_immobilien_status_id FOREIGN KEY (status_id) REFERENCES immobilien_status(immobilien_status_id)
+                           CONSTRAINT fk_immobilie_status_id FOREIGN KEY (status_id) REFERENCES immobilien_status(immobilien_status_id)
 );
 
 CREATE TABLE kriterium (

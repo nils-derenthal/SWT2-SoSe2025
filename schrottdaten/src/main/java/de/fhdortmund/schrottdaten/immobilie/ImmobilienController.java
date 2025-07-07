@@ -26,7 +26,8 @@ public class ImmobilienController {
                             Gebaeudetyp.WOHNHAUS,
                             EigentumsForm.VOLLEIGENTUM,
                             new Eigentuemer(null, "Max", "Mustermann", new AdresseT("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null)),
-                            null);
+                 "",
+                 null);
 
          publisher.publishMessage(immo);
     }

@@ -1,20 +1,17 @@
 package de.fhdortmund.schrottverwaltung.immobilie.service;
-
-import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer;
-import de.fhdortmund.schrottverwaltung.immobilie.AdresseT;
-import de.fhdortmund.schrottverwaltung.immobilie.Immobilie;
-import de.fhdortmund.schrottverwaltung.immobilie.Koordinaten;
+import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.KoordinatenRepo;
-import de.fhdortmund.schrottverwaltung.eigentuemer.repo.EigentuemerRepo;
+import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,10 +42,7 @@ public class ImmobilienService {
             log.info("Immobilie with id:{}, has been saved", immobilie.id());
         }
     }
-
-    public List<Immobilie> getImmobilienBy(String search) {
-        return immobilienRepo.getAllByBezeichnung(search);
-    }
+    
     /**
      * Maps an {@link ImmobilieReceivedDTO} object to an {@link Immobilie} entity.
      *
@@ -61,64 +55,66 @@ public class ImmobilienService {
      * @throws IllegalArgumentException If a required field in the DTO is null or cannot be processed correctly.
      */
     public Immobilie mapDtoToEntity(ImmobilieReceivedDTO immobilie) {
-            if(!adressenRepo.existsById(immobilie.adresse().getId())) {
-                adressenRepo.save(new AdresseT(immobilie.adresse().getStrasse(),
-                        immobilie.adresse().getHausnummer(),
-                        immobilie.adresse().getHausnummerZusatz(),
-                        immobilie.adresse().getPlz(),
-                        immobilie.adresse().getOrt(),
-                        immobilie.adresse().getStadtbezirk(),
-                        immobilie.adresse().getId()
+        if (!adressenRepo.existsById(immobilie.adresse().getId())) {
+            adressenRepo.save(new Adresse(
+                    immobilie.adresse().getId(),
+                    immobilie.adresse().getStrasse(),
+                    immobilie.adresse().getHausnummer(),
+                    immobilie.adresse().getHausnummerZusatz(),
+                    immobilie.adresse().getPlz(),
+                    immobilie.adresse().getOrt(),
+                    immobilie.adresse().getStadtbezirk()
+            ));
+        }
+        if (!koordinatenRepo.existsById(immobilie.koordinaten().getId())) {
+            koordinatenRepo.save(new Koordinaten(
+                    immobilie.koordinaten().getId(),
+                    immobilie.koordinaten().getXKoordinate(),
+                    immobilie.koordinaten().getYKoordinate()
+            ));
+        }
+        if (!eigentuemerRepo.existsById(immobilie.eigentuemer().getId())) {
+            if (!adressenRepo.existsById(immobilie.adresse().getId())) {
+                adressenRepo.save(new Adresse(
+                        immobilie.eigentuemer().getAnschrift().getId(),
+                        immobilie.eigentuemer().getAnschrift().getStrasse(),
+                        immobilie.eigentuemer().getAnschrift().getHausnummer(),
+                        immobilie.eigentuemer().getAnschrift().getHausnummerZusatz(),
+                        immobilie.eigentuemer().getAnschrift().getPlz(),
+                        immobilie.eigentuemer().getAnschrift().getOrt(),
+                        immobilie.eigentuemer().getAnschrift().getStadtbezirk()
                 ));
             }
-            if(!koordinatenRepo.existsById(immobilie.koordinaten().getId())){
-                koordinatenRepo.save(new Koordinaten(
-                        immobilie.koordinaten().getXKoordinate(),
-                        immobilie.koordinaten().getYKoordinate(),
-                        immobilie.koordinaten().getId()
-                ));
-            }
-            if(!eigentuemerRepo.existsById(immobilie.eigentuemer().getId())) {
-                if (!adressenRepo.existsById(immobilie.adresse().getId())) {
-                    adressenRepo.save(new AdresseT(
-                            immobilie.eigentuemer().getAnschrift().getStrasse(),
-                            immobilie.eigentuemer().getAnschrift().getHausnummer(),
-                            immobilie.eigentuemer().getAnschrift().getHausnummerZusatz(),
-                            immobilie.eigentuemer().getAnschrift().getPlz(),
-                            immobilie.eigentuemer().getAnschrift().getOrt(),
-                            immobilie.eigentuemer().getAnschrift().getStadtbezirk(),
-                            immobilie.eigentuemer().getAnschrift().getId()
-                    ));
-                }
-                eigentuemerRepo.save(new Eigentuemer(
-                        immobilie.eigentuemer().getId(),
-                        immobilie.eigentuemer().getVorname(),
-                        immobilie.eigentuemer().getNachname(),
-                        adressenRepo.getReferenceById(immobilie.eigentuemer().getAnschrift().getId()),
-                        ""));
-            }
-            AdresseT adr = adressenRepo.getReferenceById(immobilie.adresse().getId());
-            Koordinaten kor = koordinatenRepo.getReferenceById(immobilie.koordinaten().getId());
-            Eigentuemer eig = eigentuemerRepo.getReferenceById(immobilie.eigentuemer().getId());
-            return new Immobilie(
-                    adr,
-                    immobilie.bezeichnung(),
-                    false,
-                    immobilie.zustand(),
-                    kor,
-                    immobilie.gemarkung(),
-                    immobilie.flur(),
-                    immobilie.flurstueck(),
-                    immobilie.quadratMeter(),
-                    immobilie.gebaeudeTyp(),
-                    immobilie.eigentumsForm(),
-                    List.of(),
-                    eig,
-                    null,
-<<<<<<< HEAD
-                    immobilie.id(),
-                    null);
-}
+            eigentuemerRepo.save(new Eigentuemer(
+                    immobilie.eigentuemer().getId(),
+                    immobilie.eigentuemer().getVorname(),
+                    immobilie.eigentuemer().getNachname(),
+                    adressenRepo.getReferenceById(immobilie.eigentuemer().getAnschrift().getId()),
+                    ""));
+        }
+        Adresse adr = adressenRepo.getReferenceById(immobilie.adresse().getId());
+        Koordinaten kor = koordinatenRepo.getReferenceById(immobilie.koordinaten().getId());
+        Eigentuemer eig = eigentuemerRepo.getReferenceById(immobilie.eigentuemer().getId());
+        return new Immobilie(
+                immobilie.id(),
+                adr,
+                immobilie.bezeichnung(),
+                false,
+                immobilie.zustand(),
+                kor,
+                immobilie.gemarkung(),
+                immobilie.flur(),
+                immobilie.flurstueck(),
+                immobilie.quadratMeter(),
+                immobilie.gebaeudeTyp(),
+                immobilie.eigentumsForm(),
+                List.of(),
+                eig,
+                null,
+                immobilie.bild()
+        );
+    }
+
 
     public List<Immobilie> getImmobilienBy(String search) {
         return immobilienRepo.getAllByBezeichnung(search);
@@ -128,12 +124,3 @@ public class ImmobilienService {
         return immobilienRepo.findAll();
     }
 }
-=======
-                    immobilie.id()
-            );
-
-
-    }
-}
-
->>>>>>> e66b484 (funktioniert alles)

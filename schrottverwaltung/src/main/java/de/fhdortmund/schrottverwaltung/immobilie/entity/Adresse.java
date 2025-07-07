@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 public class Adresse {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adresse_id")
     private Long id;
 
@@ -31,8 +30,4 @@ public class Adresse {
 
     @Column(name = "stadtbezirk")
     private String stadtbezirk;
-
-    @Id
-    @Column(name = "adresse_id")
-    private Long id;
 }

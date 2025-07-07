@@ -1,11 +1,12 @@
 package de.fhdortmund.schrottverwaltung.eigentuemer.dto;
 
-import de.fhdortmund.schrottverwaltung.immobilie.AdresseT;
+
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
 
 public record EigentuemerReceivedDTO(
         Long id,
         String vorname,
         String nachname,
-        AdresseT anschrift
+        Adresse anschrift
 ) {
 }

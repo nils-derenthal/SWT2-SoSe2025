@@ -43,14 +43,19 @@ public class Immobilie {
     private Integer quadratMeter;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "gebaeude_typ")
     private Gebaeudetyp gebaeudeTyp;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "eigentums_form")
     private EigentumsForm eigentumsForm;
 
     @ManyToOne
     @JoinColumn(name = "eigentuemer_id")
     private Eigentuemer eigentuemer;
+
+    @Column(name = "bild")
+    private String bild;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

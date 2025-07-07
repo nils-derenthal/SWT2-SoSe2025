@@ -28,6 +28,7 @@ public class MQTTCallBack implements MqttCallback {
     }
 
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
+        System.out.println(mqttMessage.getPayload());
         log.info("Message received:\t" + new String(mqttMessage.getPayload()));
         dispatchMap.get(s).processMessage(s, mqttMessage);
     }

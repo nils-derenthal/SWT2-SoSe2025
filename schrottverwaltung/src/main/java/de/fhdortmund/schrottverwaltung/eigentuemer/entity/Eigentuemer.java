@@ -29,6 +29,7 @@ public class Eigentuemer {
     @JoinColumn(name = "adresse_id")
     private Adresse anschrift;
 
+    @Column(name = "anmerkung")
     private String anmerkung;
 
 }

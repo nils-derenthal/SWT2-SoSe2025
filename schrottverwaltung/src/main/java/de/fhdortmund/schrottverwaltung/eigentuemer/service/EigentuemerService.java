@@ -1,10 +1,10 @@
 package de.fhdortmund.schrottverwaltung.eigentuemer.service;
 
-import de.fhdortmund.schrottverwaltung.eigentuemer.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.eigentuemer.dto.EigentuemerReceivedDTO;
-import de.fhdortmund.schrottverwaltung.eigentuemer.repo.EigentuemerRepo;
-import de.fhdortmund.schrottverwaltung.immobilie.AdresseT;
+import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
+import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,16 +37,17 @@ public class EigentuemerService {
             log.warn("Eigentuemer with Id:{} already exists and is not created again", eigentuemer.id());
         }else{
             if(!adressenRepo.existsById(eigentuemer.anschrift().getId())) {
-                adressenRepo.save(new AdresseT(eigentuemer.anschrift().getStrasse(),
+                adressenRepo.save(new Adresse(
+                        eigentuemer.anschrift().getId(),
+                        eigentuemer.anschrift().getStrasse(),
                         eigentuemer.anschrift().getHausnummer(),
                         eigentuemer.anschrift().getHausnummerZusatz(),
                         eigentuemer.anschrift().getPlz(),
                         eigentuemer.anschrift().getOrt(),
-                        eigentuemer.anschrift().getStadtbezirk(),
-                        eigentuemer.anschrift().getId()
+                        eigentuemer.anschrift().getStadtbezirk()
                 ));
             }
-            AdresseT adr = adressenRepo.getReferenceById(eigentuemer.anschrift().getId());
+            Adresse adr = adressenRepo.getReferenceById(eigentuemer.anschrift().getId());
             eigentuemerRepo.save(new Eigentuemer(
                     eigentuemer.id(),
                     eigentuemer.vorname(),
