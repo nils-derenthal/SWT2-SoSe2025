@@ -38,7 +38,7 @@ public class ImmobilienService {
      * @param immobilie the DTO object describing the property to be saved
      */
     public void saveImmobilie(ImmobilieReceivedDTO immobilie){
-        if(immobilienRepo.existsByHerneId(immobilie.id())){
+        if(immobilienRepo.existsById(immobilie.id())){
             log.warn("Immobilie with id:{} already exists and is not created again", immobilie.id());
         }else{
             immobilienRepo.save(mapDtoToEntity(immobilie));
@@ -61,26 +61,25 @@ public class ImmobilienService {
      * @throws IllegalArgumentException If a required field in the DTO is null or cannot be processed correctly.
      */
     public Immobilie mapDtoToEntity(ImmobilieReceivedDTO immobilie) {
-            if(!adressenRepo.existsByHerneId(immobilie.adresse().getId())) {
+            if(!adressenRepo.existsById(immobilie.adresse().getId())) {
                 adressenRepo.save(new AdresseT(immobilie.adresse().getStrasse(),
                         immobilie.adresse().getHausnummer(),
                         immobilie.adresse().getHausnummerZusatz(),
                         immobilie.adresse().getPlz(),
                         immobilie.adresse().getOrt(),
                         immobilie.adresse().getStadtbezirk(),
-                        immobilie.adresse().getId(),
-                        null));
+                        immobilie.adresse().getId()
+                ));
             }
-            if(!koordinatenRepo.existsByHerneId(immobilie.koordinaten().getId())){
+            if(!koordinatenRepo.existsById(immobilie.koordinaten().getId())){
                 koordinatenRepo.save(new Koordinaten(
                         immobilie.koordinaten().getXKoordinate(),
                         immobilie.koordinaten().getYKoordinate(),
-                        immobilie.koordinaten().getId(),
-                        null
+                        immobilie.koordinaten().getId()
                 ));
             }
-            if(!eigentuemerRepo.existsByHerneId(immobilie.eigentuemer().getId())){
-                if(!adressenRepo.existsByHerneId(immobilie.adresse().getId())){
+            if(!eigentuemerRepo.existsById(immobilie.eigentuemer().getId())) {
+                if (!adressenRepo.existsById(immobilie.adresse().getId())) {
                     adressenRepo.save(new AdresseT(
                             immobilie.eigentuemer().getAnschrift().getStrasse(),
                             immobilie.eigentuemer().getAnschrift().getHausnummer(),
@@ -88,23 +87,19 @@ public class ImmobilienService {
                             immobilie.eigentuemer().getAnschrift().getPlz(),
                             immobilie.eigentuemer().getAnschrift().getOrt(),
                             immobilie.eigentuemer().getAnschrift().getStadtbezirk(),
-                            immobilie.eigentuemer().getAnschrift().getId(),
-                            null));
+                            immobilie.eigentuemer().getAnschrift().getId()
+                    ));
                 }
                 eigentuemerRepo.save(new Eigentuemer(
-                        null,
-                        immobilie.eigentuemer().getHerneId(),
+                        immobilie.eigentuemer().getId(),
                         immobilie.eigentuemer().getVorname(),
                         immobilie.eigentuemer().getNachname(),
-                        adressenRepo.getByHerneId(immobilie.eigentuemer().getAnschrift().getId()),
+                        adressenRepo.getReferenceById(immobilie.eigentuemer().getAnschrift().getId()),
                         ""));
             }
-        System.out.println("meep");
-        System.out.println(immobilie.adresse().getId());
-        System.out.println(immobilie.adresse().getHerneId());
-            AdresseT adr = adressenRepo.getByHerneId(immobilie.adresse().getId());
-            Koordinaten kor = koordinatenRepo.getByHerneId(immobilie.koordinaten().getId());
-            Eigentuemer eig = eigentuemerRepo.getByHerneId(immobilie.eigentuemer().getId());
+            AdresseT adr = adressenRepo.getReferenceById(immobilie.adresse().getId());
+            Koordinaten kor = koordinatenRepo.getReferenceById(immobilie.koordinaten().getId());
+            Eigentuemer eig = eigentuemerRepo.getReferenceById(immobilie.eigentuemer().getId());
             return new Immobilie(
                     adr,
                     immobilie.bezeichnung(),
@@ -120,6 +115,7 @@ public class ImmobilienService {
                     List.of(),
                     eig,
                     null,
+<<<<<<< HEAD
                     immobilie.id(),
                     null);
 }
@@ -132,3 +128,12 @@ public class ImmobilienService {
         return immobilienRepo.findAll();
     }
 }
+=======
+                    immobilie.id()
+            );
+
+
+    }
+}
+
+>>>>>>> e66b484 (funktioniert alles)

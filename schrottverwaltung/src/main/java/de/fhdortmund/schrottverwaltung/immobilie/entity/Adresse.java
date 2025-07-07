@@ -33,7 +33,6 @@ public class Adresse {
     private String stadtbezirk;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adresse_id")
     private Long id;
 }

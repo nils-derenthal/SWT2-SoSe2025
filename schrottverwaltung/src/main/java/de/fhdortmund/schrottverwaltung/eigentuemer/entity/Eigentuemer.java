@@ -16,12 +16,8 @@ import lombok.Setter;
 public class Eigentuemer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eigentuemer_id")
     private Long id;
-
-    @Column(name = "herne_id")
-    private Long herneId;
 
     @Column(name = "vorname")
     private String vorname;

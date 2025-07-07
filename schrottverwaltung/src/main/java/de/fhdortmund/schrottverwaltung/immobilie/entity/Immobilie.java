@@ -20,7 +20,6 @@ import java.util.List;
 public class Immobilie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "immobilie_id")
     private Long id;
 

@@ -1,6 +1,5 @@
 CREATE TABLE adresse (
-                         adresse_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                         herne_id INT,
+                         adresse_id INT  PRIMARY KEY,
                          strasse VARCHAR(256),
                          hausnummer INT,
                          hausnummer_zusatz VARCHAR(256),
@@ -10,8 +9,7 @@ CREATE TABLE adresse (
 );
 
 CREATE TABLE eigentuemer (
-                             eigentuemer_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                             herne_id INT,
+                             eigentuemer_id INT  PRIMARY KEY,
                              vorname VARCHAR(256),
                              nachname VARCHAR(256),
                              adresse_id INT,
@@ -20,21 +18,19 @@ CREATE TABLE eigentuemer (
 );
 
 CREATE TABLE koordinaten (
-                             koordinaten_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                             herne_id INT,
+                             koordinaten_id INT  PRIMARY KEY,
                              x_koordinate DOUBLE PRECISION,
                              y_koordinate DOUBLE PRECISION
 );
 
 CREATE TABLE immobilien_status (
-                                   immobilien_status_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                                   immobilien_status_id INT  PRIMARY KEY,
                                    status VARCHAR(256),
                                    beschreibung VARCHAR(256)
 );
 
 CREATE TABLE immobilie (
-                           immobilie_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                           herne_id INT,
+                           immobilie_id INT  PRIMARY KEY,
                            bezeichnung VARCHAR(256),
                            adresse_id INT,
                            archiviert BOOLEAN,
@@ -48,7 +44,6 @@ CREATE TABLE immobilie (
                            eigentumsform VARCHAR(256),
                            eigentuemer_id INT,
                            status_id INT,
-                           bild TEXT,
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
@@ -56,13 +51,13 @@ CREATE TABLE immobilie (
 );
 
 CREATE TABLE kriterium (
-                           kriterium_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                           kriterium_id INT PRIMARY KEY,
                            max_gewichtung INT,
                            bezeichnung VARCHAR(256)
 );
 
 CREATE TABLE bewertung (
-                           bewertung_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                           bewertung_id INT PRIMARY KEY,
                            gewichtung INT,
                            kriterium_id INT,
                            immobilie_id INT,
@@ -71,7 +66,7 @@ CREATE TABLE bewertung (
 );
 
 CREATE TABLE fachbereich (
-                             fachbereich_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                             fachbereich_id INT  PRIMARY KEY,
                              fachbereich_nr INT,
                              bezeichnung VARCHAR(256)
 );

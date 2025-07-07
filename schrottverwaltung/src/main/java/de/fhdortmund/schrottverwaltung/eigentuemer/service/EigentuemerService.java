@@ -33,22 +33,21 @@ public class EigentuemerService {
      */
     @Transactional
     public void saveEigentuemer(EigentuemerReceivedDTO eigentuemer){
-        if(eigentuemerRepo.existsByHerneId(eigentuemer.id())){
-            log.warn("Eigentuemer with HerneId:{} already exists and is not created again", eigentuemer.id());
+        if(eigentuemerRepo.existsById(eigentuemer.id())){
+            log.warn("Eigentuemer with Id:{} already exists and is not created again", eigentuemer.id());
         }else{
-            if(!adressenRepo.existsByHerneId(eigentuemer.anschrift().getId())) {
+            if(!adressenRepo.existsById(eigentuemer.anschrift().getId())) {
                 adressenRepo.save(new AdresseT(eigentuemer.anschrift().getStrasse(),
                         eigentuemer.anschrift().getHausnummer(),
                         eigentuemer.anschrift().getHausnummerZusatz(),
                         eigentuemer.anschrift().getPlz(),
                         eigentuemer.anschrift().getOrt(),
                         eigentuemer.anschrift().getStadtbezirk(),
-                        eigentuemer.anschrift().getId(),
-                        null));
+                        eigentuemer.anschrift().getId()
+                ));
             }
-            AdresseT adr = adressenRepo.getByHerneId(eigentuemer.anschrift().getId());
+            AdresseT adr = adressenRepo.getReferenceById(eigentuemer.anschrift().getId());
             eigentuemerRepo.save(new Eigentuemer(
-                    null,
                     eigentuemer.id(),
                     eigentuemer.vorname(),
                     eigentuemer.nachname(),

@@ -7,13 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KoordinatenRepo extends JpaRepository<Koordinaten, Long> {
-
-    @Query("""
-        SELECT k
-        FROM Koordinaten k
-        WHERE k.herneId = :herneId
-        """)
-    Koordinaten getByHerneId(Long Dd);
-
-    boolean existsByHerneId(Long herneId);
 }
