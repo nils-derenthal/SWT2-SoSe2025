@@ -9,12 +9,14 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = KoordinatenMapper.class)
+@Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = {KoordinatenMapper.class, ImmoStatusMapper.class})
 public interface ImmobilienMapper {
     @Mapping(target = "bild", ignore = true)
-    List<ImmobilieDTO> toimmobilieDTO(List<Immobilie> immobilien);
 
-    ImmobilieDTO toimmobilieDTO(Immobilie immobilie);
+    @Mapping(target = "immoStatus", source = "status")
+    ImmobilieDTO toDto(Immobilie immobilie);
+
+    List<ImmobilieDTO> toimmobilieDTO(List<Immobilie> immobilien);
 
     @Mapping(target = "archiviert", constant = "false")
     @Mapping(target = "bewertungen", ignore = true)
