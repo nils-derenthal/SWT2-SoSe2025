@@ -5,12 +5,14 @@ import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienStatusRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ImmoStatusService {
     private ImmobilienStatusRepo statusRepo;
 
-    public ImmoStatus getImmoStatus(Long id) {
-        return statusRepo.findImmobilienStatusById(id);
+    public List<ImmoStatus> getAllImmoStatuses() {
+        return statusRepo.findAll();
     }
 }

@@ -21,12 +21,12 @@ public class ImmobilienController {
 
     @GetMapping
     public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
-        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search));
+        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilienBy(search));
     }
 
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
-        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
+        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilien());
     }
 
     @GetMapping("/{id}")
