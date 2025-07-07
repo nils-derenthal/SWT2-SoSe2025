@@ -8,7 +8,6 @@ import {ImmoUebersichtskarteComponent} from '../uebersicht/immo-uebersichtskarte
 
 @Component({
   selector: 'app-suche',
-  imports: [FormsModule, AsyncPipe],
   imports: [
     FormsModule,
     AsyncPipe,

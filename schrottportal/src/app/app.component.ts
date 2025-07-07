@@ -5,7 +5,7 @@ import { DetailansichtComponent } from './detailansicht/detailansicht.component'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, DetailansichtComponent],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.scss',
