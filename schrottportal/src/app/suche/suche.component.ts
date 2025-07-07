@@ -1,11 +1,12 @@
-import {Component, inject, model, OnInit, output} from '@angular/core';
+import {Component, inject, model} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ImmobilienService} from '../services/immobilien.service';
 import {toObservable} from '@angular/core/rxjs-interop';
-import {debounceTime, distinctUntilChanged, startWith, switchMap, tap} from 'rxjs';
+import {debounceTime, distinctUntilChanged, Observable, startWith, switchMap} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
-import {ImmobilieDTO} from '../models/immobilie.model';
 import {ImmoUebersichtskarteComponent} from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import {ImmoStatusService} from '../services/immoStatus.service';
+import {ImmoStatus} from '../models/immoStatus.model';
 
 @Component({
   selector: 'app-suche',
@@ -18,23 +19,20 @@ import {ImmoUebersichtskarteComponent} from '../uebersicht/immo-uebersichtskarte
   standalone: true,
   styleUrl: './suche.component.scss',
 })
-export class SucheComponent implements OnInit {
+export class SucheComponent {
   immobilienService = inject(ImmobilienService);
-
-  search = model<string>('');
-
-  searchedImmobilien = output<ImmobilieDTO[]>()
-
-  immobilien$ = toObservable(this.search)
-    .pipe(
-      startWith(''),
-      distinctUntilChanged(),
-      debounceTime(300),
-      switchMap(search => this.immobilienService.getImmobilienBySearch(search)),
-      tap(() => console.log('searched')),
-    );
+  statusService = inject(ImmoStatusService);
+  stati$!: Observable<ImmoStatus[]>;
 
   ngOnInit(): void {
-    this.immobilien$.subscribe(i => this.searchedImmobilien.emit(i));
+    this.getStati();
   }
+
+  search = model<string>('');
+  immobilien$ = toObservable(this.search).pipe(
+    startWith(''),
+    distinctUntilChanged(),
+    debounceTime(300),
+    switchMap((search) => this.immobilienService.getImmobilienBySearch(search)),
+  );
 }

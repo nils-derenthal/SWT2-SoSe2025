@@ -1,15 +1,26 @@
+<form>
+  <label for="search" class="form-label">Suche</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search"
+    name="search"
+    aria-describedby="Suche"
+    [(ngModel)]="search"
+  />
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      @for (status of (stati$ | async); track status.id) {
+        <a class="dropdown-item" href="#">{{status.status}}</a>
+      }
+    </div>
+  </div>
+</form>
+<div>
 <div class="d-flex flex-column gap-2">
-  <form>
-    <label for="search" class="form-label">Suche</label>
-    <input
-      type="text"
-      class="form-control"
-      id="search"
-      name="search"
-      aria-describedby="Suche"
-      [(ngModel)]="search"
-    />
-  </form>
   @for (immobilie of immobilien$ | async; track $index) {
     <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
   }
