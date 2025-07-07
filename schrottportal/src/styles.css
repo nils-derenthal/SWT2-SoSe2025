@@ -1,0 +1,24 @@
+
+input {
+    border-radius: 0.25em;
+    /*border: 1px solid var(--primary-dark-gray);
+    background: var(--primary-background);
+
+     */
+}
+
+label {
+    /* color: var(--primary-dark-gray); */
+}
+
+button {
+    border-radius: 5px;
+    padding: 0.25em;
+}
+
+input {
+  border-style: solid;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
