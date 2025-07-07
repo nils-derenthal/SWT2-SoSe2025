@@ -4,6 +4,7 @@ import {MatFormField, MatInput, MatInputModule, MatLabel} from "@angular/materia
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth.service";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {catchError, finalize, tap} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -41,18 +42,18 @@ export class LoginComponent {
   logIn() {
     this.loadingLogin.set(true);
     this.auth.login(this.login.getRawValue())
+      .pipe(finalize(() => this.loadingLogin.set(false)))
       .subscribe({
         error: () => this.onError(this.login),
-        complete: () => this.loadingLogin.set(false),
       });
   }
 
   signUp() {
     this.loadingSignUp.set(true);
     this.auth.signup(this.signup.getRawValue())
+      .pipe(finalize(() => this.loadingSignUp.set(false)))
       .subscribe({
         error: () => this.onError(this.signup),
-        complete: () => this.loadingSignUp.set(false),
       });
   }
 }
