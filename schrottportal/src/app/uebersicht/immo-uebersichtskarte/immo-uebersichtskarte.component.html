@@ -8,6 +8,8 @@
     </div>
   </main>
   <footer>
-    <button class="btn btn-primary">Details</button>
+    <a [routerLink]="['/detail-ansicht', immobilie.id]">
+      <button class="btn btn-primary">Details</button>
+    </a>
   </footer>
 </div>
