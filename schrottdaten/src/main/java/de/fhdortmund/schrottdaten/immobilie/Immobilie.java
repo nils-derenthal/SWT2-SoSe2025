@@ -18,7 +18,7 @@ public class Immobilie {
 
     @ManyToOne
     @JoinColumn(name = "adresse_id")
-    private AdresseT adresse;
+    private Adresse adresse;
 
     @Column(name = "bezeichnung")
     private String bezeichnung;

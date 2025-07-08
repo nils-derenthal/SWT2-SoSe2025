@@ -15,7 +15,7 @@ public class ImmobilienController {
 
     @PutMapping()
     public void testMqttMitarbeiterHinzufuegen(){
-         Immobilie immo = new Immobilie(new AdresseT("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null),
+         Immobilie immo = new Immobilie(new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null),
                             "Musterimmobilie",
                             "MusterZustand",
                             new Koordinaten(100.0, 100.0, null),
@@ -25,7 +25,7 @@ public class ImmobilienController {
                             5,
                             Gebaeudetyp.WOHNHAUS,
                             EigentumsForm.VOLLEIGENTUM,
-                            new Eigentuemer(null, "Max", "Mustermann", new AdresseT("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null)),
+                            new Eigentuemer(null, "Max", "Mustermann", new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null)),
                  "",
                  null);
 

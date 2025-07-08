@@ -8,7 +8,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdresseT {
+public class Adresse {
 
     @Column(name = "strasse")
     private String strasse;
