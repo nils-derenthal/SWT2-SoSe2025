@@ -2,6 +2,7 @@ package de.fhdortmund.schrottverwaltung.eigentuemer.service;
 
 import de.fhdortmund.schrottverwaltung.eigentuemer.dto.EigentuemerReceivedDTO;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.eigentuemer.mapper.EigentuemerMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 public class EigentuemerService {
+    private final EigentuemerMapper eigentuemerMapper;
     private final EigentuemerRepo eigentuemerRepo;
     private final AdressenRepo adressenRepo;
 
@@ -28,33 +30,20 @@ public class EigentuemerService {
      *
      * <p>Diese Methode ist transaktional und führt alle Datenbankoperationen innerhalb einer Transaktion aus.
      *
-     * @param eigentuemer das empfangene DTO-Objekt, das alle nötigen Informationen zum Eigentümer und seiner Adresse enthält;
+     * @param eigentuemerReceivedDTO das empfangene DTO-Objekt, das alle nötigen Informationen zum Eigentümer und seiner Adresse enthält;
      *                    darf nicht {@code null} sein.
      */
     @Transactional
-    public void saveEigentuemer(EigentuemerReceivedDTO eigentuemer){
-        if(eigentuemerRepo.existsById(eigentuemer.id())){
-            log.warn("Eigentuemer with Id:{} already exists and is not created again", eigentuemer.id());
+    public void saveEigentuemer(EigentuemerReceivedDTO eigentuemerReceivedDTO){
+        Eigentuemer eigentuemer = eigentuemerMapper.toEntity(eigentuemerReceivedDTO);
+        if(eigentuemerRepo.existsById(eigentuemerReceivedDTO.id())){
+            log.warn("Eigentuemer with Id:{} already exists and is not created again", eigentuemerReceivedDTO.id());
         }else{
-            if(!adressenRepo.existsById(eigentuemer.anschrift().getId())) {
-                adressenRepo.save(new Adresse(
-                        eigentuemer.anschrift().getId(),
-                        eigentuemer.anschrift().getStrasse(),
-                        eigentuemer.anschrift().getHausnummer(),
-                        eigentuemer.anschrift().getHausnummerZusatz(),
-                        eigentuemer.anschrift().getPlz(),
-                        eigentuemer.anschrift().getOrt(),
-                        eigentuemer.anschrift().getStadtbezirk()
-                ));
+            if(!adressenRepo.existsById(eigentuemerReceivedDTO.anschrift().getId())) {
+                adressenRepo.save(eigentuemer.getAnschrift());
             }
-            Adresse adr = adressenRepo.getReferenceById(eigentuemer.anschrift().getId());
-            eigentuemerRepo.save(new Eigentuemer(
-                    eigentuemer.id(),
-                    eigentuemer.vorname(),
-                    eigentuemer.nachname(),
-                    adr,
-                    ""));
-            log.info("Eigentuemer with id:{}, has been saved", eigentuemer.id());
+            eigentuemerRepo.save(eigentuemer);
+            log.info("Eigentuemer with id:{}, has been saved", eigentuemerReceivedDTO.id());
         }
     }
 

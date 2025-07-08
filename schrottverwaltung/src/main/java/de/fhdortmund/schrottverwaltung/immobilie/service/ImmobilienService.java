@@ -3,6 +3,7 @@ import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
+import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class ImmobilienService {
+    private final ImmobilienMapper immobilienMapper;
     private final ImmobilienRepo immobilienRepo;
     private final AdressenRepo adressenRepo;
     private final KoordinatenRepo koordinatenRepo;
@@ -42,77 +44,40 @@ public class ImmobilienService {
             log.info("Immobilie with id:{}, has been saved", immobilie.id());
         }
     }
-    
+
     /**
-     * Maps an {@link ImmobilieReceivedDTO} object to an {@link Immobilie} entity.
+     * Maps an {@link ImmobilieReceivedDTO} to an {@link Immobilie} entity using the {@code immobilienMapper}.
      *
-     * This method checks whether the associated addresses, coordinates, and owners already exist in their respective repositories.
-     * If they do not exist, they are created and saved. Finally, a new {@link Immobilie} entity is created and returned.
+     * <p>This method ensures that referenced nested entities such as {@link Adresse}, {@link Koordinaten},
+     * and {@link Eigentuemer} are persisted if they do not already exist in the database.</p>
      *
-     * @param immobilie The {@link ImmobilieReceivedDTO} object containing the property data.
-     * @return A new {@link Immobilie} entity created from the data in the DTO.
+     * <p>Specifically:
+     * <ul>
+     *   <li>If the address referenced in the DTO does not exist in the {@code adressenRepo}, it is saved.</li>
+     *   <li>If the coordinates do not exist in the {@code koordinatenRepo}, they are saved.</li>
+     *   <li>If the owner does not exist in the {@code eigentuemerRepo}, the owner and their address are saved
+     *       (if the address is also not already present).</li>
+     * </ul>
+     * </p>
      *
-     * @throws IllegalArgumentException If a required field in the DTO is null or cannot be processed correctly.
+     * @param immobilieReceivedDTO the DTO containing the data to be mapped to an entity
+     * @return a mapped {@link Immobilie} entity, ready for further processing or persistence
      */
-    public Immobilie mapDtoToEntity(ImmobilieReceivedDTO immobilie) {
-        if (!adressenRepo.existsById(immobilie.adresse().getId())) {
-            adressenRepo.save(new Adresse(
-                    immobilie.adresse().getId(),
-                    immobilie.adresse().getStrasse(),
-                    immobilie.adresse().getHausnummer(),
-                    immobilie.adresse().getHausnummerZusatz(),
-                    immobilie.adresse().getPlz(),
-                    immobilie.adresse().getOrt(),
-                    immobilie.adresse().getStadtbezirk()
-            ));
+    public Immobilie mapDtoToEntity(ImmobilieReceivedDTO immobilieReceivedDTO) {
+        Immobilie immobilie = immobilienMapper.toEntity(immobilieReceivedDTO);
+        if (!adressenRepo.existsById(immobilieReceivedDTO.adresse().getId())) {
+            adressenRepo.save(immobilie.getAdresse());
         }
-        if (!koordinatenRepo.existsById(immobilie.koordinaten().getId())) {
-            koordinatenRepo.save(new Koordinaten(
-                    immobilie.koordinaten().getId(),
-                    immobilie.koordinaten().getXKoordinate(),
-                    immobilie.koordinaten().getYKoordinate()
-            ));
+        if (!koordinatenRepo.existsById(immobilieReceivedDTO.koordinaten().getId())) {
+            koordinatenRepo.save(immobilie.getKoordinaten());
         }
-        if (!eigentuemerRepo.existsById(immobilie.eigentuemer().getId())) {
-            if (!adressenRepo.existsById(immobilie.adresse().getId())) {
-                adressenRepo.save(new Adresse(
-                        immobilie.eigentuemer().getAnschrift().getId(),
-                        immobilie.eigentuemer().getAnschrift().getStrasse(),
-                        immobilie.eigentuemer().getAnschrift().getHausnummer(),
-                        immobilie.eigentuemer().getAnschrift().getHausnummerZusatz(),
-                        immobilie.eigentuemer().getAnschrift().getPlz(),
-                        immobilie.eigentuemer().getAnschrift().getOrt(),
-                        immobilie.eigentuemer().getAnschrift().getStadtbezirk()
-                ));
+        if (!eigentuemerRepo.existsById(immobilieReceivedDTO.eigentuemer().getId())) {
+            if (!adressenRepo.existsById(immobilieReceivedDTO.adresse().getId())) {
+                adressenRepo.save(immobilie.getEigentuemer().getAnschrift());
             }
-            eigentuemerRepo.save(new Eigentuemer(
-                    immobilie.eigentuemer().getId(),
-                    immobilie.eigentuemer().getVorname(),
-                    immobilie.eigentuemer().getNachname(),
-                    adressenRepo.getReferenceById(immobilie.eigentuemer().getAnschrift().getId()),
-                    ""));
+            eigentuemerRepo.save(immobilie.getEigentuemer());
         }
-        Adresse adr = adressenRepo.getReferenceById(immobilie.adresse().getId());
-        Koordinaten kor = koordinatenRepo.getReferenceById(immobilie.koordinaten().getId());
-        Eigentuemer eig = eigentuemerRepo.getReferenceById(immobilie.eigentuemer().getId());
-        return new Immobilie(
-                immobilie.id(),
-                adr,
-                immobilie.bezeichnung(),
-                false,
-                immobilie.zustand(),
-                kor,
-                immobilie.gemarkung(),
-                immobilie.flur(),
-                immobilie.flurstueck(),
-                immobilie.quadratMeter(),
-                immobilie.gebaeudeTyp(),
-                immobilie.eigentumsForm(),
-                List.of(),
-                eig,
-                null,
-                immobilie.bild()
-        );
+        return immobilie;
     }
 
 
