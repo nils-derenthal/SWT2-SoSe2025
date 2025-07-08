@@ -42,7 +42,7 @@ public class MQTTSubscriber {
     public void connect() {
         try{
             log.info("Trying to connect to MqttClient");
-            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), null);
 
             dispatchMap = new HashMap<>();
             dispatchMap.put("eigentuemer", new EigentuemerMessageProcessor(eigentuemerService));

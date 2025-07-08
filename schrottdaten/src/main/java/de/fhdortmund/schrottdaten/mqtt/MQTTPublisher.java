@@ -33,7 +33,7 @@ public class MQTTPublisher {
     public void connect() throws MqttException {
         try{
             log.info("Trying to connect to MqttClient");
-            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), null);
             client.connect();
             log.info("Connected to MqttClient at tcp://localhost:1883");
         }catch (MqttException e){

@@ -26,8 +26,8 @@ public class MQTTCallBack implements MqttCallback {
         log.info("Delivery with tokenMessageId:{} complete", token.getMessageId());
     }
 
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        log.info("Message received:\t" + new String(mqttMessage.getPayload()));
-        dispatchMap.get(s).processMessage(s, mqttMessage);
+    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+        log.info("Message received with topic: " + topic);
+        dispatchMap.get(topic).processMessage(topic, mqttMessage);
     }
 }
