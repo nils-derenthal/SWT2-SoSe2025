@@ -5,12 +5,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "koordinaten")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Koordinaten {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "koordinaten_id")
     private Long id;
 

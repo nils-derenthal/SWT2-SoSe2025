@@ -1,4 +1,4 @@
-package de.fhdortmund.schrottverwaltung.immobilie.entity;
+package de.fhdortmund.schrottdaten.immobilie;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,9 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Adresse {
-    @Id
-    @Column(name = "adresse_id")
-    private Long id;
 
     @Column(name = "strasse")
     private String strasse;
@@ -30,4 +27,9 @@ public class Adresse {
 
     @Column(name = "stadtbezirk")
     private String stadtbezirk;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "adresse_id")
+    private Long id;
 }

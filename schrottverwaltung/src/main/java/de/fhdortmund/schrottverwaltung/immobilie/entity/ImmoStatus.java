@@ -15,6 +15,7 @@ public class ImmoStatus {
     @Column(name = "immobilien_status_id")
     private Long id;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ImmoStatusEnum status;
 
