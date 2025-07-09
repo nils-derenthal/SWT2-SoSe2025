@@ -6,14 +6,13 @@ import {debounceTime, distinctUntilChanged, Observable, startWith, switchMap} fr
 import {AsyncPipe} from '@angular/common';
 import {ImmoUebersichtskarteComponent} from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
 import {ImmoStatusService} from '../services/immoStatus.service';
-import {ImmoStatus} from '../models/immoStatus.model';
 
 @Component({
   selector: 'app-suche',
   imports: [
     FormsModule,
     AsyncPipe,
-    ImmoUebersichtskarteComponent
+    ImmoUebersichtskarteComponent,
   ],
   templateUrl: './suche.component.html',
   standalone: true,
@@ -22,7 +21,7 @@ import {ImmoStatus} from '../models/immoStatus.model';
 export class SucheComponent {
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
-  stati$!: Observable<ImmoStatus[]>;
+  stati$!: Observable<string[]>;
 
   ngOnInit(): void {
     this.getStati();

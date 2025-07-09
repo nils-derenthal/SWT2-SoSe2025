@@ -9,19 +9,20 @@
     [(ngModel)]="search"
   />
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Dropdown button
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      @for (status of (stati$ | async); track status.id) {
-        <a class="dropdown-item" href="#">{{status.status}}</a>
+    <ul class="dropdown-menu">
+      @for (status of stati$|async; track $index) {
+        <li><a class="dropdown-item" href="#">{{ status }}</a></li>
       }
-    </div>
+    </ul>
   </div>
 </form>
+
 <div>
 <div class="d-flex flex-column gap-2">
   @for (immobilie of immobilien$ | async; track $index) {
-    <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
+    <app-immo-uebersichtskarte [immobilie]="immobilie" (click)="doFilter($event)"></app-immo-uebersichtskarte>
   }
 </div>
