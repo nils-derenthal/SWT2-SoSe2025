@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.fh-dortmund"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
     toolchain {
@@ -42,10 +42,6 @@ dependencies {
     // mapStruct
     compileOnly("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 tasks {

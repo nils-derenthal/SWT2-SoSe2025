@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.fh-dortmund"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
     toolchain {
@@ -37,8 +37,4 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     implementation("org.springframework.boot:spring-boot-starter")
 
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
