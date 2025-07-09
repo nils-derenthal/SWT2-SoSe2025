@@ -59,5 +59,5 @@ public class Immobilie {
     private Eigentuemer eigentuemer;
 
     @Column(name = "bild", columnDefinition = "TEXT")
-    private String bild;
+    private byte[] bild;
 }
