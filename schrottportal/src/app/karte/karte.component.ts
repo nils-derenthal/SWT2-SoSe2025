@@ -1,21 +1,17 @@
-import {Component, inject, signal} from '@angular/core';
-import {LeafletModule} from '@bluehalo/ngx-leaflet';
-import {DivIcon, latLng, marker, tileLayer} from 'leaflet';
-import {BehaviorSubject, map} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
-import {Router} from '@angular/router';
-import "leaflet/dist/images/marker-shadow.png";
-import {SucheComponent} from '../suche/suche.component';
-import {KoordinatenDTO} from '../models/koordinaten.model';
-import {ImmobilieDTO} from '../models/immobilie.model';
+import { Component, inject, signal } from '@angular/core';
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { DivIcon, latLng, marker, tileLayer } from 'leaflet';
+import { BehaviorSubject, map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import 'leaflet/dist/images/marker-shadow.png';
+import { SucheComponent } from '../suche/suche.component';
+import { KoordinatenDTO } from '../models/koordinaten.model';
+import { ImmobilieDTO } from '../models/immobilie.model';
 
 @Component({
   selector: 'app-karte',
-  imports: [
-    LeafletModule,
-    AsyncPipe,
-    SucheComponent
-  ],
+  imports: [LeafletModule, AsyncPipe, SucheComponent],
   templateUrl: './karte.component.html',
   styleUrl: './karte.component.scss',
   standalone: true,
@@ -25,10 +21,10 @@ export class KarteComponent {
   herneZentrum: KoordinatenDTO = {
     xKoordinate: 51.541944444444,
     yKoordinate: 7.223888888888965,
-  }
+  };
   bootstrapMarkerIcon: DivIcon = new DivIcon({
     className: 'bi bi-geo-alt-fill text-danger h3',
-    iconAnchor: [14,30]
+    iconAnchor: [14, 30],
   });
 
   immobilien$ = new BehaviorSubject<ImmobilieDTO[] | undefined>(undefined);
@@ -36,40 +32,51 @@ export class KarteComponent {
 
   markers$ = this.immobilien$.pipe(
     map(i => {
-      if(!i) return undefined;
+      if (!i) return undefined;
       return i.map(i => {
-        let m = marker([i.koordinaten.xKoordinate, i.koordinaten.yKoordinate], {
-          // icon: this.bootstrapMarkerIcon,
-          riseOnHover: true,
-          title: i.bezeichnung,
-          alt: i.bezeichnung
-        });
-        m.on('click', (event) => {
+        const m = marker(
+          [i.koordinaten.xKoordinate, i.koordinaten.yKoordinate],
+          {
+            // icon: this.bootstrapMarkerIcon,
+            riseOnHover: true,
+            title: i.bezeichnung,
+            alt: i.bezeichnung,
+          },
+        );
+        m.on('click', () => {
           this.routeToImmobilie(i);
         });
-        m.on('mouseover', (event) => {
+        m.on('mouseover', () => {
           this.chosenImmobilie.set(i);
         });
         return m;
-      })
-    }
-  ));
+      });
+    }),
+  );
 
-  osm = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'});
-  wikiM = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {maxZoom: 18});
+  osm = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '...',
+  });
+  wikiM = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+  });
 
   layersControl = {
     baseLayers: {
       'Open Street Maps': this.osm,
-      'Wikimaps': this.wikiM,
+      Wikimaps: this.wikiM,
     },
-    overlays: {}
+    overlays: {},
   };
 
   options = {
     layers: [this.osm],
     zoom: 13,
-    center: latLng(this.herneZentrum.xKoordinate, this.herneZentrum.yKoordinate),
+    center: latLng(
+      this.herneZentrum.xKoordinate,
+      this.herneZentrum.yKoordinate,
+    ),
   };
 
   routeToImmobilie(i: ImmobilieDTO): void {
