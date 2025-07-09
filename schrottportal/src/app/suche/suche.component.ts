@@ -13,7 +13,7 @@ import {
 } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ImmobilieDTO } from '../models/immobilie.model';
-import { ImmoUebersichtskarteComponent } from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-suche',

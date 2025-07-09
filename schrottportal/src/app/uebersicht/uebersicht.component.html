@@ -1,10 +1,12 @@
 <div class="box">
   @if (immobilien$ | async) {
-    @for (immobilie of immobilien$ | async; track immobilien$) {
-      <app-immo-uebersichtskarte
-        [immobilie]="immobilie"
-      ></app-immo-uebersichtskarte>
-    }
+      <div class="d-flex flex-column gap-3">
+          @for (immobilie of immobilien$ | async; track immobilien$) {
+              <app-immo-uebersichtskarte
+                      [immobilie]="immobilie"
+              ></app-immo-uebersichtskarte>
+          }
+      </div>
   } @else {
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>

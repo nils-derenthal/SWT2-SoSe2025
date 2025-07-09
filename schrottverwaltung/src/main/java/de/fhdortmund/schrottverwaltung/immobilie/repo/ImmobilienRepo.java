@@ -18,4 +18,11 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
     List<Immobilie> getAllByBezeichnung(String search);
 
     Immobilie getImmobilieById(Long id);
+
+    @Query("""
+            SELECT i
+            FROM Immobilie i
+            WHERE i.archiviert = :archiviert
+            """)
+    List<Immobilie> findAllByArchiviert(Boolean archiviert);
 }

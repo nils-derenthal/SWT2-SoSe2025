@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ImmobilieDTO } from '../models/immobilie.model';
 import { ImmobilienService } from '../services/immobilien.service';
 import { AsyncPipe } from '@angular/common';
-import { ImmoUebersichtskarteComponent } from './immo-uebersichtskarte/immo-uebersichtskarte.component';
+import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-uebersicht',
