@@ -4,7 +4,7 @@ services:
 
   # Spring Boot App für Schrottdaten
   schrottdaten:
-    build: ./schrottdaten
+    build: schrottdaten
     container_name: schrottdaten-app
     depends_on:
       - postgres
@@ -19,7 +19,7 @@ services:
 
   # Verwaltungskomponente, ggf. zweite App
   schrottverwaltung:
-    build: ./schrottverwaltung
+    build: schrottverwaltung
     container_name: schrottverwaltung-app
     depends_on:
       - postgres-schrottverwaltung
@@ -44,13 +44,13 @@ services:
       - ./mosquitto/log:/mosquitto/log
     restart: unless-stopped
 
-  # Angular/Frontend App
-  #  schrottportal:
-  #    build: ./schrottportal
-  #    container_name: schrottportal-frontend
-  #    ports:
-  #      - "4200:4200"
-  #    restart: always
+
+  schrottportal:
+      build: ./schrottportal
+      container_name: schrottportal-frontend
+      ports:
+        - "4200:4200"
+      restart: always
 
   # Zweite PostgreSQL-DB für Schrottverwaltung
   postgres-schrottverwaltung:
