@@ -23,18 +23,18 @@ export class SucheComponent implements OnInit {
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
   stati$!: Observable<string[]>;
-  aktiverFilter: string = '';
+  aktiverFilter = signal<string>('')
   search = signal<string>('');
 
 
   ngOnInit(): void {
     this.getStati();
   }
-  immobilien$ = toObservable(this.search).pipe(
+  immobilien$ = toObservable((this.search)).pipe(
     startWith(''),
     distinctUntilChanged(),
     debounceTime(300),
-    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter)),
+    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter())),
   );
 
   getStati(): void {
@@ -42,7 +42,12 @@ export class SucheComponent implements OnInit {
   }
 
   doFilter(status: string):void {
-    this.aktiverFilter = status;
-    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter);
+    this.aktiverFilter.set(status);
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
+  }
+
+  resetFilter(): void {
+    this.aktiverFilter.set('');
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
   }
 }

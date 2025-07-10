@@ -10,8 +10,8 @@
   />
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      @if (aktiverFilter !== '') {
-        {{ aktiverFilter }}
+      @if (aktiverFilter() !== '') {
+        {{ aktiverFilter() }}
       } @else {
         Status-Filter
       }
@@ -20,6 +20,7 @@
       @for (status of stati$|async; track $index) {
         <li><a class="dropdown-item" (click)="doFilter(status)">{{ status }}</a></li>
       }
+      <li><button class="dropdown-item" (click)="resetFilter()">Filter zurücksetzen</button></li>
     </ul>
   </div>
 </form>

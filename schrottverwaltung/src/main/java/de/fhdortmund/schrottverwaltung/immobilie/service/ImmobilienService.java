@@ -1,6 +1,7 @@
 package de.fhdortmund.schrottverwaltung.immobilie.service;
 
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
@@ -82,11 +83,11 @@ public class ImmobilienService {
     }
 
 
-    public List<Immobilie> getImmobilienBy(String search, String statusFilter) {
-        if (!search.isEmpty() && !statusFilter.isEmpty()) {
+    public List<Immobilie> getImmobilienBy(String search, ImmoStatusEnum statusFilter) {
+        if (statusFilter != null && !search.isEmpty() && !statusFilter.toString().isEmpty()) {
             return immobilienRepo.getAllByBezeichnungAndStatus(search, statusFilter);
         }
-        if (!statusFilter.isEmpty()) {
+        if (statusFilter != null && !statusFilter.toString().isEmpty()) {
             return immobilienRepo.getAllByStatus(statusFilter);
         }
         if (!search.isEmpty()) {
