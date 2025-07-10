@@ -2,16 +2,12 @@ services:
   postgres-schrottverwaltung:
     image: postgres:latest
     container_name: schrottverwaltung-db
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_DB: mydatabase
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: secret
-    ports:
-      - "5433:5432"
     volumes:
       - ./dataset:/docker-entrypoint-initdb.d
-      - pg_data_schrottverwaltung:/var/lib/postgresql/data
     restart: always
-
-volumes:
-  pg_data_schrottverwaltung:

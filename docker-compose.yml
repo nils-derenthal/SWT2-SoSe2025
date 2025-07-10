@@ -1,21 +1,10 @@
+name: swt2-sose2025
 services:
-  # Hauptdatenbank für Schrottdaten
-  postgres:
-    image: postgres:latest
-    container_name: schrottdaten-db
-    ports:
-      - "3000:5432"
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: schrottdaten
-    volumes:
-      - ./dataset:/docker-entrypoint-initdb.d
-      - pg_data_schrottdaten:/var/lib/postgresql/data
+
 
   # Spring Boot App für Schrottdaten
   schrottdaten:
-    build: ./schrottdaten
+    build: schrottdaten
     container_name: schrottdaten-app
     depends_on:
       - postgres
@@ -30,7 +19,7 @@ services:
 
   # Verwaltungskomponente, ggf. zweite App
   schrottverwaltung:
-    build: ./schrottverwaltung
+    build: schrottverwaltung
     container_name: schrottverwaltung-app
     depends_on:
       - postgres-schrottverwaltung
@@ -43,22 +32,25 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     restart: always
 
-  # RabbitMQ Broker
+  # Eclipse Mosquitto
   broker:
-    image: rabbitmq:3-management
-    container_name: rabbitmq-broker
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto-broker
     ports:
-      - "5672:5672" # AMQP (für Services)
-      - "15672:15672" # Management Web UI
-    restart: always
+      - "1883:1883" #MQTT Standart Port
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    restart: unless-stopped
 
-  # Angular/Frontend App
-  #  schrottportal:
-  #    build: ./schrottportal
-  #    container_name: schrottportal-frontend
-  #    ports:
-  #      - "4200:4200"
-  #    restart: always
+
+  schrottportal:
+      build: ./schrottportal
+      container_name: schrottportal-frontend
+      ports:
+        - "4200:4200"
+      restart: always
 
   # Zweite PostgreSQL-DB für Schrottverwaltung
   postgres-schrottverwaltung:
@@ -71,9 +63,18 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - pg_data_schrottverwaltung:/var/lib/postgresql/data
+      - ./dataset/schrottverwaltun:/docker-entrypoint-initdb.d
     restart: always
 
-volumes:
-  pg_data_schrottdaten:
-  pg_data_schrottverwaltung:
+  # Hauptdatenbank für Schrottdaten
+  postgres:
+    image: postgres:latest
+    container_name: schrottdaten-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: herne
+      POSTGRES_PASSWORD: herne
+      POSTGRES_DB: schrottdaten
+    volumes:
+      - ./dataset/schrottdaten:/docker-entrypoint-initdb.d

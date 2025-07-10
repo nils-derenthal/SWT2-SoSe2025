@@ -1,0 +1,36 @@
+package de.fhdortmund.schrottdaten;
+
+import de.fhdortmund.schrottdaten.eigentuemer.repo.EigentuemerRepo;
+import de.fhdortmund.schrottdaten.immobilie.repo.ImmobilienRepo;
+import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class SyncService {
+    private final MQTTPublisher publisher;
+    private final EigentuemerRepo eigentuemerRepo;
+    private final ImmobilienRepo immobilienRepo;
+
+    /**
+     * Automatically executed after the application starts.
+     * <p>
+     * Loads all {@code Eigentuemer} and {@code Immobilie} entries from the databases
+     * and passes them to the {@link MQTTPublisher} for publishing.
+     */
+    @PostConstruct
+    private void syncData(){
+        log.info("Starting Data sync...");
+        var eigentuemer = eigentuemerRepo.findAll();
+        var immobilien = immobilienRepo.findAll();
+
+        eigentuemer.forEach(publisher::publishMessage);
+        immobilien.forEach(publisher::publishMessage);
+
+        log.info("Sync finished");
+    }
+}

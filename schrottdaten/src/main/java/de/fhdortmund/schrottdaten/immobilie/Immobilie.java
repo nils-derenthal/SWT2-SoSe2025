@@ -1,15 +1,12 @@
-package de.fhdortmund.schrottverwaltung.immobilie.entity;
+package de.fhdortmund.schrottdaten.immobilie;
 
-import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
-import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
-import de.fhdortmund.schrottverwaltung.immobilie.*;
+import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Table(name = "immobilie")
@@ -19,19 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 public class Immobilie {
 
-    @Id
-    @Column(name = "immobilie_id")
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "adresse_id")
     private Adresse adresse;
 
     @Column(name = "bezeichnung")
     private String bezeichnung;
-
-    @Column(name = "archiviert")
-    private Boolean archiviert;
 
     @Column(name = "zustand")
     private String zustand;
@@ -53,24 +43,25 @@ public class Immobilie {
     private Integer quadratMeter;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gebaeudetyp")
-    private Gebaeudetyp gebaeudetyp;
+    @Column(name = "gebaeude_typ")
+    private Gebaeudetyp gebaeudeTyp;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "eigentumsform")
+    @Column(name = "eigentums_form")
     private EigentumsForm eigentumsForm;
-
-    @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Bewertung> bewertungen;
 
     @ManyToOne
     @JoinColumn(name = "eigentuemer_id")
     private Eigentuemer eigentuemer;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private ImmoStatus status;
+    @Column(name = "bild")
+    private String bild;
 
-    @Column(name="bild")
-    private String bildBase64;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "immobilie_id")
+    private Long id;
+
+
+
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.fh-dortmund"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
     toolchain {
@@ -35,15 +35,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     // used, so lombok always generates code before mapstruct
     annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
     // mapStruct
     compileOnly("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 tasks {
