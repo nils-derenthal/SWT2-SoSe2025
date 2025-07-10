@@ -20,17 +20,17 @@ public class ImmobilienController {
     private final ImmobilienMapper immobilienMapper;
 
     @GetMapping
-    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
-        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilienBy(search));
+    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "") String statusFilter) {
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search, statusFilter));
     }
 
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
-        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilien());
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
     }
 
     @GetMapping("/{id}")
     public ImmobilieDTO getImmobilieById(@PathVariable Long id) {
-        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilieById(id));
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilieById(id));
     }
 }
