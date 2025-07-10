@@ -68,7 +68,7 @@ public class Immobilie {
     private Eigentuemer eigentuemer;
 
     @OneToMany(mappedBy = "immobilie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ImmoStatus> stati;
+    private List<ImmoStatus> immoStati;
 
     private Integer aktuellerStatusId;
 

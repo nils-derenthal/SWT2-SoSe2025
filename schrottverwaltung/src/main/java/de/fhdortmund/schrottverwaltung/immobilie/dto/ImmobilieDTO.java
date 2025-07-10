@@ -20,7 +20,7 @@ public record ImmobilieDTO(
         String eigentumsform,
         List<BewertungDTO> bewertungen,
         EigentuemerDTO eigentuemer,
-        List<ImmoStatusDTO> ImmoStati,
+        List<ImmoStatusDTO> immoStati,
         long aktuellerStatusId
 ) {
 }

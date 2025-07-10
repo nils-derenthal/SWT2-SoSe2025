@@ -17,7 +17,7 @@ public interface ImmobilienMapper {
 
     @Mapping(target = "archiviert", constant = "false")
     @Mapping(target = "bewertungen", ignore = true)
-    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "immoStati", ignore = true)
     @Mapping(source = "gebaeudeTyp", target = "gebaeudetyp")
     @Mapping(source = "bild", target = "bildBase64")
     Immobilie toEntity(ImmobilieReceivedDTO dto);
