@@ -57,6 +57,9 @@ CREATE TABLE immobilie (
                            bild TEXT,
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
+
+                           CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
+
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
                            CONSTRAINT fk_immobilie_status_id FOREIGN KEY (aktueller_status_id) REFERENCES immobilien_status(immobilien_status_id)
 );
