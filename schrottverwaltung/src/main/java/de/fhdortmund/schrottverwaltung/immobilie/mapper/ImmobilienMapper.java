@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ImmobilienMapper {
     List<ImmobilieDTO> toimmobilieDTO(List<Immobilie> immobilien);
+
     ImmobilieDTO toimmobilieDTO(Immobilie immobilie);
 
     @Mapping(target = "archiviert", constant = "false")
