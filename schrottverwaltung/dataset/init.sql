@@ -36,7 +36,8 @@ CREATE TABLE koordinaten (
 CREATE TABLE immobilien_status (
                                    immobilien_status_id INT  PRIMARY KEY,
                                    status VARCHAR(256),
-                                   beschreibung VARCHAR(256)
+                                   beschreibung VARCHAR(256),
+                                   immobilie_id INT
 );
 
 CREATE TABLE immobilie (
