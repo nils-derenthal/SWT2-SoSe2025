@@ -31,6 +31,6 @@ public class ImmobilienController {
 
     @GetMapping("/{id}")
     public ImmobilieDTO getImmobilieById(@PathVariable Long id) {
-        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilieById(id));
+        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilieById(id));
     }
 }
