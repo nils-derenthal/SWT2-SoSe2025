@@ -33,6 +33,13 @@ CREATE TABLE koordinaten (
                              y_koordinate DOUBLE PRECISION
 );
 
+CREATE TABLE immobilien_status (
+                                   immobilien_status_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                                   status VARCHAR(256),
+                                   beschreibung VARCHAR(256),
+                                   immobilie_id INT
+);
+
 CREATE TABLE immobilie (
                            immobilie_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                            bezeichnung VARCHAR(256),
@@ -52,14 +59,6 @@ CREATE TABLE immobilie (
                            CONSTRAINT fk_adresse_id FOREIGN KEY (adresse_id) REFERENCES adresse(adresse_id),
                            CONSTRAINT fk_koordinaten_id FOREIGN KEY (koordinaten_id) REFERENCES koordinaten(koordinaten_id),
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id)
-);
-
-CREATE TABLE immobilien_status (
-                                   immobilien_status_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-                                   status VARCHAR(256),
-                                   beschreibung VARCHAR(256),
-                                   immobilie_id INT,
-                                   CONSTRAINT fk_immobilie_id FOREIGN KEY (immobilie_id) REFERENCES immobilie(immobilie_id)
 );
 
 CREATE TABLE kriterium (
