@@ -9,12 +9,10 @@ import { ImmobilieDTO } from '../models/immobilie.model';
 export class ImmobilienService {
   http = inject(HttpClient);
 
-  getImmobilienBySearch(search: string): Observable<ImmobilieDTO[]> {
-    return this.http
-      .get<ImmobilieDTO[]>('/api/immobilien', {
-        params: { search: search },
-      })
-      .pipe(tap(i => console.log(i)));
+  getImmobilienBySearchAndFilter(search: string, statusFilter: string): Observable<ImmobilieDTO[]> {
+    return this.http.get<ImmobilieDTO[]>('/api/immobilien', {
+      params: { search: search, statusFilter: statusFilter },
+    }).pipe(tap(i => console.log(i)));
   }
 
   getAllImmobilien(): Observable<ImmobilieDTO[]> {

@@ -20,9 +20,9 @@ public class ImmobilienController {
     private final ImmobilienMapper immobilienMapper;
 
     @GetMapping
-    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
+    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "") String statusFilter) {
         System.out.println("IN ENDPOINT");
-        var a = immobilienService.getImmobilienBy(search);
+        var a = immobilienService.getImmobilienBy(search, statusFilter);
         var aDTO = immobilienMapper.toimmobilieDTO(a);
         System.out.println(a.getFirst().getKoordinaten().getXKoordinate());
         System.out.println(aDTO.getFirst().koordinaten().xKoordinate());

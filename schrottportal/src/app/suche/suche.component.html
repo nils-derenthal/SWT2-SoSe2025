@@ -10,11 +10,15 @@
   />
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
+      @if (aktiverFilter !== '') {
+        {{ aktiverFilter }}
+      } @else {
+        Status-Filter
+      }
     </button>
     <ul class="dropdown-menu">
       @for (status of stati$|async; track $index) {
-        <li><a class="dropdown-item" href="#">{{ status }}</a></li>
+        <li><a class="dropdown-item" (click)="doFilter(status)">{{ status }}</a></li>
       }
     </ul>
   </div>

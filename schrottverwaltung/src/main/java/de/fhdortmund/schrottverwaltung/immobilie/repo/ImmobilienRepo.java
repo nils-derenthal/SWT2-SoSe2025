@@ -17,5 +17,22 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
             """)
     List<Immobilie> getAllByBezeichnung(String search);
 
+    @Query("""
+            SELECT i
+            FROM Immobilie i
+            JOIN ImmoStatus s ON i.aktuellerStatusId = s.id
+            WHERE s.status = (:statusFilter)
+            """)
+    List<Immobilie> getAllByStatus(String statusFilter);
+
+    @Query("""
+           SELECT i
+            FROM Immobilie i
+            JOIN ImmoStatus s ON i.aktuellerStatusId = s.id
+            WHERE upper(i.bezeichnung) LIKE concat('%', UPPER(:search), '%')
+            AND s.status = (:statusFilter)
+           """)
+    List<Immobilie> getAllByBezeichnungAndStatus(String search, String statusFilter);
+
     Immobilie getImmobilieById(Long id);
 }

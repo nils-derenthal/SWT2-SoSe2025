@@ -1,4 +1,4 @@
-import {Component, inject, model, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ImmobilienService} from '../services/immobilien.service';
 import {toObservable} from '@angular/core/rxjs-interop';
@@ -22,12 +22,18 @@ export class SucheComponent {
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
   stati$! = this.statusService.getAllStati();
+  aktiverFilter: string = '';
+  search = signal<string>('');
 
-  search = model<string>('');
   immobilien$ = toObservable(this.search).pipe(
     startWith(''),
     distinctUntilChanged(),
     debounceTime(300),
-    switchMap((search) => this.immobilienService.getImmobilienBySearch(search)),
+    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter)),
   );
+
+  doFilter(status: string):void {
+    this.aktiverFilter = status;
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter);
+  }
 }
