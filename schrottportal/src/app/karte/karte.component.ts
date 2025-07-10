@@ -8,10 +8,16 @@ import 'leaflet/dist/images/marker-shadow.png';
 import { SucheComponent } from '../suche/suche.component';
 import { KoordinatenDTO } from '../models/koordinaten.model';
 import { ImmobilieDTO } from '../models/immobilie.model';
+import { ImmoUebersichtskarteComponent } from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-karte',
-  imports: [LeafletModule, AsyncPipe, SucheComponent],
+  imports: [
+    LeafletModule,
+    AsyncPipe,
+    SucheComponent,
+    ImmoUebersichtskarteComponent,
+  ],
   templateUrl: './karte.component.html',
   styleUrl: './karte.component.scss',
   standalone: true,
@@ -43,6 +49,7 @@ export class KarteComponent {
             alt: i.bezeichnung,
           },
         );
+        console.log(i);
         m.on('click', () => {
           this.routeToImmobilie(i);
         });

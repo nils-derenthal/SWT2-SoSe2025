@@ -1,5 +1,10 @@
-<div class="mx-5 my-2">
-  <h2>Kartenübersicht</h2>
+<div class="d-flex flex-column gap-2 mx-5 my-2">
+  @let akt = chosenImmobilie();
+  @if (akt) {
+    <div class="container">
+      <app-immo-uebersichtskarte [immobilie]="akt"></app-immo-uebersichtskarte>
+    </div>
+  }
   <div class="d-flex flex-row">
     <div class="container">
       @if (markers$ | async; as markers) {
@@ -15,10 +20,6 @@
       }
     </div>
     <div class="container">
-      @let akt = chosenImmobilie();
-      @if (akt) {
-        Bezeichnung: {{ akt.bezeichnung }}
-      }
       <app-suche (searchedImmobilien)="immobilien$.next($event)"></app-suche>
     </div>
   </div>

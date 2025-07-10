@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ImmobilieDTO } from '../models/immobilie.model';
 
 @Injectable({
@@ -10,9 +10,11 @@ export class ImmobilienService {
   http = inject(HttpClient);
 
   getImmobilienBySearch(search: string): Observable<ImmobilieDTO[]> {
-    return this.http.get<ImmobilieDTO[]>('/api/immobilien', {
-      params: { search: search },
-    });
+    return this.http
+      .get<ImmobilieDTO[]>('/api/immobilien', {
+        params: { search: search },
+      })
+      .pipe(tap(i => console.log(i)));
   }
 
   getAllImmobilien(): Observable<ImmobilieDTO[]> {
