@@ -22,18 +22,23 @@ export class SucheComponent {
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
   stati$! = this.statusService.getAllStati();
-  aktiverFilter: string = '';
   search = signal<string>('');
+  aktiverFilter = signal<string>('')
 
   immobilien$ = toObservable(this.search).pipe(
     startWith(''),
     distinctUntilChanged(),
     debounceTime(300),
-    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter)),
+    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter())),
   );
 
   doFilter(status: string):void {
-    this.aktiverFilter = status;
-    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter);
+    this.aktiverFilter.set(status);
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
+  }
+
+  resetFilter(): void {
+    this.aktiverFilter.set('');
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
   }
 }

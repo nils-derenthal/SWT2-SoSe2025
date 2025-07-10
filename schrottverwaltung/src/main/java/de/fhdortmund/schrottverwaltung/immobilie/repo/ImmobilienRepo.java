@@ -1,5 +1,6 @@
 package de.fhdortmund.schrottverwaltung.immobilie.repo;
 
+import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +24,7 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
             JOIN ImmoStatus s ON i.aktuellerStatusId = s.id
             WHERE s.status = (:statusFilter)
             """)
-    List<Immobilie> getAllByStatus(String statusFilter);
+    List<Immobilie> getAllByStatus(ImmoStatusEnum statusFilter);
 
     @Query("""
            SELECT i
@@ -32,7 +33,7 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
             WHERE upper(i.bezeichnung) LIKE concat('%', UPPER(:search), '%')
             AND s.status = (:statusFilter)
            """)
-    List<Immobilie> getAllByBezeichnungAndStatus(String search, String statusFilter);
+    List<Immobilie> getAllByBezeichnungAndStatus(String search, ImmoStatusEnum statusFilter);
 
     Immobilie getImmobilieById(Long id);
 }
