@@ -63,7 +63,7 @@ public class ImmobilienController {
 
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
-        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
+        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilien());
     }
 
     @GetMapping("/{id}")
