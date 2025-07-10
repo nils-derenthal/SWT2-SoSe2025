@@ -13,14 +13,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        jdk: [24]
+        jdk: [21]
         project:
-          -
-            # This is a list of all projects that should be built and pushed.
-            # YOU NEED TO UPDATE THIS LIST WHEN YOU ADD A NEW PROJECT AND WITH
-            # THE CORRECT NAME OF THE PROJECT FOLDER.
-            # - project_one
-          # - project_two
+          - schrottverwaltung
+          - schrottdaten
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -30,8 +26,11 @@ jobs:
         with:
           java-version: ${{ matrix.jdk }}
           distribution: "temurin"
-          cache: maven
-      - name: Build with Maven of ${{ matrix.project }}
+          cache: gradle
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+        working-directory: ${{ matrix.project }}
+      - name: Build with gradle of ${{ matrix.project }}
         if: ${{ matrix.project != '' }}
         working-directory: ${{ matrix.project }}
-        # run: mvn --batch-mode --update-snapshots verify
+        run: ./gradlew check

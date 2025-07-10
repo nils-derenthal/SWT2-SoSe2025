@@ -1,8 +1,7 @@
-package de.fhdortmund.schrottverwaltung.immobilie.repo;
+package de.fhdortmund.schrottdaten.immobilie.repo;
 
-import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
+import de.fhdortmund.schrottdaten.immobilie.Koordinaten;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,6 +1,6 @@
-package de.fhdortmund.schrottverwaltung.eigentuemer.entity;
+package de.fhdortmund.schrottdaten.eigentuemer;
 
-import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
+import de.fhdortmund.schrottdaten.immobilie.Adresse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +16,7 @@ import lombok.Setter;
 public class Eigentuemer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eigentuemer_id")
     private Long id;
 
@@ -28,8 +29,5 @@ public class Eigentuemer {
     @ManyToOne
     @JoinColumn(name = "adresse_id")
     private Adresse anschrift;
-
-    @Column(name = "anmerkung")
-    private String anmerkung;
 
 }
