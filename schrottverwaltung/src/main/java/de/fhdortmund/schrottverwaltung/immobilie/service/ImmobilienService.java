@@ -88,4 +88,6 @@ public class ImmobilienService {
     public List<Immobilie> getImmobilien() {
         return immobilienRepo.findAll();
     }
+
+    public Immobilie getImmobilieById(Long id) { return immobilienRepo.getImmobilieById(id); }
 }

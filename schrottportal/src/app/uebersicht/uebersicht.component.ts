@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmpelSliderComponent } from '../detailansicht/ampel-slider/ampel-slider.component';
+import { AmpelSliderComponent } from '../detail-ansicht/ampel-slider/ampel-slider.component';
 import { Observable } from 'rxjs';
 import { ImmobilieDTO } from '../models/immobilie.model';
 import { ImmobilienService } from '../services/immobilien.service';

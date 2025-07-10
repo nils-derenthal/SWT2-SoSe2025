@@ -19,5 +19,6 @@ export type ImmobilieDTO = {
   eigentumsform: string;
   bewertungen: Bewertung[];
   eigentuemer: Eigentuemer;
-  immoStatus: ImmoStatus;
-};
+  immoStati: ImmoStatus[];
+  aktuellerStatusId: number
+}
