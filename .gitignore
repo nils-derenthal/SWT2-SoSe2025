@@ -119,3 +119,5 @@ $RECYCLE.BIN/
 
 #Intellij
 .idea/
+
+node_modules/

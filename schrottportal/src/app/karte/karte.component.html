@@ -1,1 +1,26 @@
-<p>karte works!</p>
+<div class="d-flex flex-column gap-2 mx-5 my-2">
+  @let akt = chosenImmobilie();
+  @if (akt) {
+    <div class="container">
+      <app-immo-uebersichtskarte [immobilie]="akt"></app-immo-uebersichtskarte>
+    </div>
+  }
+  <div class="d-flex flex-row">
+    <div class="container">
+      @if (markers$ | async; as markers) {
+        <div class="map-size" leaflet [leafletLayersControl]="layersControl" [leafletOptions]="options">
+          @for (marker of markers; track marker) {
+              <div [leafletLayer]="marker"></div>
+          }
+        </div>
+      } @else {
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      }
+    </div>
+    <div class="container">
+      <app-suche (searchedImmobilien)="immobilien$.next($event)"></app-suche>
+    </div>
+  </div>
+</div>

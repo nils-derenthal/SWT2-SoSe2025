@@ -3,3 +3,8 @@ export type Koordinaten = {
   xKoordinate: number;
   yKoordinate: number;
 };
+
+export type KoordinatenDTO = {
+  xKoordinate: number;
+  yKoordinate: number;
+}

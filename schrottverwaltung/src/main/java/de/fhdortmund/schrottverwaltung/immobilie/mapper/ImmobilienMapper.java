@@ -9,8 +9,9 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = KoordinatenMapper.class)
 public interface ImmobilienMapper {
+
     List<ImmobilieDTO> toimmobilieDTO(List<Immobilie> immobilien);
 
     ImmobilieDTO toimmobilieDTO(Immobilie immobilie);
