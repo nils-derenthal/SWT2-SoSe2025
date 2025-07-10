@@ -16,4 +16,6 @@ public interface ImmobilienRepo extends JpaRepository<Immobilie, Long> {
             WHERE upper(i.bezeichnung) LIKE concat('%', UPPER(:search), '%')
             """)
     List<Immobilie> getAllByBezeichnung(String search);
+
+    Immobilie getImmobilieById(Long id);
 }
