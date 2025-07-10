@@ -36,8 +36,7 @@ CREATE TABLE koordinaten (
 CREATE TABLE immobilien_status (
                                    immobilien_status_id INT  PRIMARY KEY,
                                    status VARCHAR(256),
-                                   beschreibung VARCHAR(256),
-                                   immobilie_id INT
+                                   beschreibung VARCHAR(256)
 );
 
 CREATE TABLE immobilie (
@@ -61,7 +60,6 @@ CREATE TABLE immobilie (
 
                            CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
 
-                           CONSTRAINT fk_eigentuemer_id FOREIGN KEY (eigentuemer_id) REFERENCES eigentuemer(eigentuemer_id),
                            CONSTRAINT fk_immobilie_status_id FOREIGN KEY (aktueller_status_id) REFERENCES immobilien_status(immobilien_status_id)
 );
 

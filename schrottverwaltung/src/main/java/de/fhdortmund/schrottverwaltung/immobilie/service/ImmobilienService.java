@@ -1,4 +1,5 @@
 package de.fhdortmund.schrottverwaltung.immobilie.service;
+
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
@@ -36,10 +37,10 @@ public class ImmobilienService {
      *
      * @param immobilie the DTO object describing the property to be saved
      */
-    public void saveImmobilie(ImmobilieReceivedDTO immobilie){
-        if(immobilienRepo.existsById(immobilie.id())){
+    public void saveImmobilie(ImmobilieReceivedDTO immobilie) {
+        if (immobilienRepo.existsById(immobilie.id())) {
             log.warn("Immobilie with id:{} already exists and is not created again", immobilie.id());
-        }else{
+        } else {
             immobilienRepo.save(mapDtoToEntity(immobilie));
             log.info("Immobilie with id:{}, has been saved", immobilie.id());
         }
@@ -81,13 +82,24 @@ public class ImmobilienService {
     }
 
 
-    public List<Immobilie> getImmobilienBy(String search) {
-        return immobilienRepo.getAllByBezeichnung(search);
+    public List<Immobilie> getImmobilienBy(String search, String statusFilter) {
+        if (!search.isEmpty() && !statusFilter.isEmpty()) {
+            return immobilienRepo.getAllByBezeichnungAndStatus(search, statusFilter);
+        }
+        if (!statusFilter.isEmpty()) {
+            return immobilienRepo.getAllByStatus(statusFilter);
+        }
+        if (!search.isEmpty()) {
+            return immobilienRepo.getAllByBezeichnung(search);
+        }
+        return immobilienRepo.findAll();
     }
 
     public List<Immobilie> getImmobilien() {
         return immobilienRepo.findAll();
     }
 
-    public Immobilie getImmobilieById(Long id) { return immobilienRepo.getImmobilieById(id); }
+    public Immobilie getImmobilieById(Long id) {
+        return immobilienRepo.getImmobilieById(id);
+    }
 }
