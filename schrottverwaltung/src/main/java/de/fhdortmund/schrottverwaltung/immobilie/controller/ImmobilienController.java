@@ -74,7 +74,7 @@ public class ImmobilienController {
 
     @GetMapping("/{id}")
     public ImmobilieDTO getImmobilieById(@PathVariable Long id) {
-        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilieById(id));
+        return immobilienMapper.toDto(immobilienService.getImmobilieById(id));
     }
 
     @GetMapping("/archived")
