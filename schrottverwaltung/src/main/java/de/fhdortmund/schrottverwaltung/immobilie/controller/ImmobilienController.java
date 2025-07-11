@@ -22,12 +22,7 @@ public class ImmobilienController {
 
     @GetMapping
     public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "") ImmoStatusEnum statusFilter) {
-        System.out.println("IN ENDPOINT");
-        var a = immobilienService.getImmobilienBy(search, statusFilter);
-        var aDTO = immobilienMapper.toimmobilieDTO(a);
-        System.out.println(a.getFirst().getKoordinaten().getXKoordinate());
-        System.out.println(aDTO.getFirst().koordinaten().xKoordinate());
-        return aDTO;
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search, statusFilter));
     }
 
     @GetMapping("/all")
