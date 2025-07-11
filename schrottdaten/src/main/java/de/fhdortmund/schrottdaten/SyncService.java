@@ -3,6 +3,9 @@ package de.fhdortmund.schrottdaten;
 import de.fhdortmund.schrottdaten.eigentuemer.repo.EigentuemerRepo;
 import de.fhdortmund.schrottdaten.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
+import de.fhdortmund.schrottdaten.mqtt.messages.Action;
+import de.fhdortmund.schrottdaten.mqtt.messages.EigentuemerMessage;
+import de.fhdortmund.schrottdaten.mqtt.messages.ImmobilienMessage;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +38,8 @@ public class SyncService {
         var eigentuemer = eigentuemerRepo.findAll();
         var immobilien = immobilienRepo.findAll();
 
-        eigentuemer.forEach(publisher::publishMessage);
-        immobilien.forEach(publisher::publishMessage);
+        eigentuemer.forEach(e -> publisher.publishMessage(new EigentuemerMessage(Action.ADD, e)));
+        immobilien.forEach(i -> publisher.publishMessage(new ImmobilienMessage(Action.ADD, i)));
 
         log.info("Sync finished");
     }

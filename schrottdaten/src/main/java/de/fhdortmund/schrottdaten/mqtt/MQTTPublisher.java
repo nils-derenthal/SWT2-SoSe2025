@@ -1,9 +1,8 @@
 package de.fhdortmund.schrottdaten.mqtt;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
-import de.fhdortmund.schrottdaten.immobilie.Immobilie;
+import de.fhdortmund.schrottdaten.mqtt.messages.EigentuemerMessage;
+import de.fhdortmund.schrottdaten.mqtt.messages.ImmobilienMessage;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
@@ -66,8 +65,8 @@ public class MQTTPublisher {
         if (data == null) return;
         try {
             String topic = "";
-            if (data.getClass().equals(Eigentuemer.class)) topic = "eigentuemer";
-            if (data.getClass().equals(Immobilie.class)) topic = "immobilie";
+            if(data.getClass().equals(EigentuemerMessage.class)) topic = "eigentuemer";
+            if(data.getClass().equals(ImmobilienMessage.class)) topic = "immobilie";
 
             ObjectMapper mapper = new ObjectMapper();
             String dataString = mapper.writeValueAsString(data);
