@@ -30,8 +30,8 @@
             ],
             "styles": [
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": []
@@ -91,6 +91,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "assets/"
               }
             ],
             "styles": ["src/styles.scss"],
