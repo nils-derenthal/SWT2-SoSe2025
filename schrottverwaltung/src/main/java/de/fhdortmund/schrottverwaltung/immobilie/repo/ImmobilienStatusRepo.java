@@ -5,4 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ImmobilienStatusRepo extends JpaRepository<ImmoStatus, Long> {}
+public interface ImmobilienStatusRepo extends JpaRepository<ImmoStatus, Long> {
+
+    ImmoStatus findImmobilienStatusById(Long id);
+}
