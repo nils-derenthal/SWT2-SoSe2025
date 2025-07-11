@@ -22,9 +22,10 @@ export class SucheComponent {
 
   immobilienService = inject(ImmobilienService);
   statusService = inject(ImmoStatusService);
-  stati$! = this.statusService.getAllStati();
+  stati$ = this.statusService.getAllStati();
   search = signal<string>('');
   aktiverFilter = signal<string>('')
+
 
   immobilien$ = toObservable(this.search).pipe(
     startWith(''),
