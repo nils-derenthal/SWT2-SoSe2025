@@ -1,4 +1,17 @@
-.map-size {
-  height: 50vh;
+.map {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 1em;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3em;
+
+  max-height: 75vh;
+}
+
+.search {
+  max-height: 75vh;
 }

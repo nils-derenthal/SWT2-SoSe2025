@@ -1,4 +1,4 @@
-<form>
+<form class="h-100">
   <label for="search" class="form-label">Suche</label>
   <input
     type="text"
@@ -25,7 +25,7 @@
   </div>
 </form>
 
-<div class="d-flex flex-column gap-2">
+<div class="list h-100 overflow-y-auto p-2">
   @let immobilien = immobilien$ | async;
   @if (immobilien) {
     @for (immobilie of immobilien$ | async; track $index) {
