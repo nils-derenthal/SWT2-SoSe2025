@@ -1,16 +1,16 @@
-@import "variables";
+@use "variables";
 
 $theme-colors: (
-  primary: $herne-green,
-  secondary: $herne-blue,
-  success: $herne-green,
-  info: $herne-yellow,
-  warning: $herne-yellow,
-  danger: $herne-red,
-  light: $herne-background-white,
-  dark: $herne-background-black,
+  primary: variables.$herne-green,
+  secondary: variables.$herne-blue,
+  success: variables.$herne-green,
+  info: variables.$herne-yellow,
+  warning: variables.$herne-yellow,
+  danger: variables.$herne-red,
+  light: variables.$herne-background-white,
+  dark: variables.$herne-background-black,
 );
 
-$focus-ring-color: rgba($herne-green, .25);
+$focus-ring-color: rgba(variables.$herne-green, .25);
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
