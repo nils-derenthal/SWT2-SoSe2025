@@ -4,7 +4,6 @@ import { DivIcon, latLng, marker, tileLayer } from 'leaflet';
 import { BehaviorSubject, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import 'leaflet/dist/images/marker-shadow.png';
 import { SucheComponent } from '../suche/suche.component';
 import { KoordinatenDTO } from '../models/koordinaten.model';
 import { ImmobilieDTO } from '../models/immobilie.model';
