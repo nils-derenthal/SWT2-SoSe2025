@@ -1,6 +1,8 @@
-package de.fhdortmund.schrottdaten.immobilie;
+package de.fhdortmund.schrottdaten.immobilie.entity;
 
-import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
+import de.fhdortmund.schrottdaten.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottdaten.immobilie.EigentumsForm;
+import de.fhdortmund.schrottdaten.immobilie.Gebaeudetyp;
 import jakarta.persistence.*;
 import lombok.*;
 

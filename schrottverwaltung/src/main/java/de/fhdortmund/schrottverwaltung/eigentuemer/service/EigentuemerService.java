@@ -20,18 +20,18 @@ public class EigentuemerService {
     private final AdressenRepo adressenRepo;
 
     /**
-     * Speichert einen neuen {@link Eigentuemer} in der Datenbank, wenn dieser noch nicht existiert.
+     * Saves a new {@link Eigentuemer} in the database if it does not already exist.
      *
-     * <p>Die Methode prüft anhand der Herne-ID, ob der Eigentümer bereits in der Datenbank existiert.
-     * Ist dies der Fall, wird eine Warnung geloggt und kein neuer Eintrag erzeugt.
-     * Falls nicht, wird ebenfalls geprüft, ob die zugehörige Adresse bereits vorhanden ist (ebenfalls über Herne-ID).
-     * Falls die Adresse nicht existiert, wird sie zuerst gespeichert.
-     * Anschließend wird der Eigentümer mit einem Verweis auf die gespeicherte Adresse angelegt und gespeichert.
+     * <p>The method checks whether the owner already exists in the database based on the Herne ID.
+     * If this is the case, a warning is logged and no new entry is created.
+     * If not, it also checks whether the associated address already exists (also based on the Herne ID).
+     * If the address does not exist, it is saved first.
+     * The owner is then created with a reference to the saved address and persisted.
      *
-     * <p>Diese Methode ist transaktional und führt alle Datenbankoperationen innerhalb einer Transaktion aus.
+     * <p>This method is transactional and performs all database operations within a single transaction.
      *
-     * @param eigentuemerReceivedDTO das empfangene DTO-Objekt, das alle nötigen Informationen zum Eigentümer und seiner Adresse enthält;
-     *                    darf nicht {@code null} sein.
+     * @param eigentuemerReceivedDTO the received DTO object containing all necessary information
+     *                               about the owner and their address; must not be {@code null}.
      */
     @Transactional
     public void saveEigentuemer(EigentuemerReceivedDTO eigentuemerReceivedDTO){
@@ -44,6 +44,43 @@ public class EigentuemerService {
             }
             eigentuemerRepo.save(eigentuemer);
             log.info("Eigentuemer with id:{}, has been saved", eigentuemerReceivedDTO.id());
+        }
+    }
+
+    /**
+     * Updates an existing {@link Eigentuemer} based on the data provided in the given {@link EigentuemerReceivedDTO}.
+     * <p>
+     * If the owner with the given ID exists, it will be updated with the new data.
+     * If the owner does not exist, a warning will be logged and no update will be performed.
+     *
+     * @param eigentuemerReceivedDTO the DTO object containing the updated owner data
+     */
+    @Transactional
+    public void updateEigentuemer(EigentuemerReceivedDTO eigentuemerReceivedDTO){
+        if(eigentuemerRepo.existsById(eigentuemerReceivedDTO.id())){
+            Eigentuemer eigentuemer = eigentuemerMapper.toEntity(eigentuemerReceivedDTO);
+            eigentuemerRepo.save(eigentuemer);
+            log.info("Eigentuemer with id:{} has been updated", eigentuemerReceivedDTO.id());
+        }else{
+            log.warn("Eigentuemer with Id:{} does not exist and cannot be updated", eigentuemerReceivedDTO.id());
+        }
+    }
+
+    /**
+     * Deletes an existing {@link Eigentuemer} by its ID.
+     * <p>
+     * If the owner with the given ID exists, it will be deleted from the database.
+     * If the owner does not exist, a warning will be logged and no deletion will be performed.
+     *
+     * @param id the ID of the owner to be deleted
+     */
+    @Transactional
+    public void deleteEigentuemer(Long id){
+        if(eigentuemerRepo.existsById(id)){
+            eigentuemerRepo.deleteById(id);
+            log.info("Eigentuemer with id:{} has been deleted", id);
+        }else{
+            log.warn("Eigentuemer with Id:{} does not exist and cannot be deleted", id);
         }
     }
 

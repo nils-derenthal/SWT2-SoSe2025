@@ -72,7 +72,7 @@ public class ImmobilienService {
             koordinatenRepo.save(immobilie.getKoordinaten());
         }
         if (!eigentuemerRepo.existsById(immobilieReceivedDTO.eigentuemer().getId())) {
-            if (!adressenRepo.existsById(immobilieReceivedDTO.adresse().getId())) {
+            if (!adressenRepo.existsById(immobilieReceivedDTO.eigentuemer().getAnschrift().getId())) {
                 adressenRepo.save(immobilie.getEigentuemer().getAnschrift());
             }
             eigentuemerRepo.save(immobilie.getEigentuemer());
@@ -92,4 +92,40 @@ public class ImmobilienService {
     public List<Immobilie> getArchivedImmobilien(){ return immobilienRepo.findAllByArchiviert(true);}
 
     public Immobilie getImmobilieById(Long id) { return immobilienRepo.getImmobilieById(id); }
+
+    /**
+     * Updates an existing {@link Immobilie} based on the data provided in the given {@link ImmobilieReceivedDTO}.
+     * <p>
+     * If the property with the given ID exists, it will be updated with the new data.
+     * If the property does not exist, a warning will be logged and no update will be performed.
+     *
+     * @param immobilieReceivedDTO the DTO object containing the updated property data
+     */
+    @Transactional
+    public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){
+        if(immobilienRepo.existsById(immobilieReceivedDTO.id())){
+            immobilienRepo.save(mapDtoToEntity(immobilieReceivedDTO));
+            log.info("Immobilie with id:{} has been updated", immobilieReceivedDTO.id());
+        }else{
+            log.warn("Immobilie with Id:{} does not exist and cannot be updated", immobilieReceivedDTO.id());
+        }
+    }
+
+    /**
+     * Deletes an existing {@link Immobilie} by its ID.
+     * <p>
+     * If the property with the given ID exists, it will be deleted from the database.
+     * If the property does not exist, a warning will be logged and no deletion will be performed.
+     *
+     * @param id the ID of the property to be deleted
+     */
+    @Transactional
+    public void deleteImmobilie(Long id){
+        if(immobilienRepo.existsById(id)){
+            immobilienRepo.deleteById(id);
+            log.info("Immobilie with id:{} has been deleted", id);
+        }else{
+            log.warn("Immobilie with Id:{} does not exist and cannot be deleted", id);
+        }
+    }
 }

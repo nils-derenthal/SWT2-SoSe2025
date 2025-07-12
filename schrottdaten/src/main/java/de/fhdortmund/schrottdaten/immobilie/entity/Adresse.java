@@ -1,4 +1,4 @@
-package de.fhdortmund.schrottdaten.immobilie;
+package de.fhdortmund.schrottdaten.immobilie.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

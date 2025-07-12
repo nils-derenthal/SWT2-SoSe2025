@@ -1,6 +1,6 @@
-package de.fhdortmund.schrottdaten.eigentuemer;
+package de.fhdortmund.schrottdaten.eigentuemer.entity;
 
-import de.fhdortmund.schrottdaten.immobilie.Adresse;
+import de.fhdortmund.schrottdaten.immobilie.entity.Adresse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
