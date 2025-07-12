@@ -34,20 +34,22 @@ public class ImmobilienController {
          Adresse eigentuemerAdresse = adressenRepo.save(new Adresse("Einbahnstraße", 5, "", 44555, "München", "Musterbezirk", null));
          Eigentuemer eigentuemer = eigentuemerRepo.save(new Eigentuemer(null, "Max", "Mustermann", eigentuemerAdresse));
          Koordinaten koordinaten = koordinatenRepo.save(new Koordinaten(7.2366656450864895, 51.541236685163334, null));
-         
-         Immobilie immo = new Immobilie(immobilienAdresse,
-                            "Pizzeria pinocchio",
-                            "lecker",
-                            koordinaten,
-                            "Mustergemarkung",
-                            "Musterflur",
-                            "Musterflurstueck",
-                            5,
-                            Gebaeudetyp.GEWERBE,
-                            EigentumsForm.VOLLEIGENTUM,
-                            eigentuemer,
-                 "",
-                 null);
+
+         Immobilie immo = Immobilie.builder()
+                 .id(null)
+                 .adresse(immobilienAdresse)
+                 .bezeichnung("Musterimmobilie")
+                 .zustand("MusterZustand")
+                 .koordinaten(koordinaten)
+                 .gemarkung("Mustergemarkung")
+                 .flur("Musterflur")
+                 .flurstueck("Musterflurstueck")
+                 .quadratMeter(5)
+                 .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
+                 .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
+                 .eigentuemer(eigentuemer)
+                 .bild("")
+                 .build();
          var immobilie =  immobilienRepo.save(immo);
          publisher.publishMessage(new ImmobilienMessage(Action.ADD, immobilie));
     }
