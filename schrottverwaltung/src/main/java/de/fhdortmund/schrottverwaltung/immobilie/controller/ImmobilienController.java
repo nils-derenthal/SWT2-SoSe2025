@@ -3,6 +3,7 @@ package de.fhdortmund.schrottverwaltung.immobilie.controller;
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.bewertung.dto.BewertungDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoInfoDTO;
+import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoStatusDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.service.ImmobilienService;
@@ -80,5 +81,15 @@ public class ImmobilienController {
     @GetMapping("/archived")
     public List<ImmobilieDTO> getArchivedImmobilien(){
         return immobilienMapper.toimmobilieDTO(immobilienService.getArchivedImmobilien());
+    }
+
+    @PostMapping("/{id}/addStatus")
+    public void addStatus(@PathVariable long id,@RequestBody ImmoStatusDTO status) {
+        immobilienService.addStatus(id, status);
+    }
+
+    @PostMapping("/{id}/status/aktiv/{status}")
+    public void activeStatus(@PathVariable long status, @PathVariable long id) {
+        immobilienService.setActiveStatus(id, status);
     }
 }

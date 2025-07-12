@@ -3,19 +3,18 @@ package de.fhdortmund.schrottverwaltung.immobilie.service;
 import de.fhdortmund.schrottverwaltung.bewertung.dto.BewertungDTO;
 import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
 import de.fhdortmund.schrottverwaltung.bewertung.mapper.BewertungMapper;
-import de.fhdortmund.schrottverwaltung.bewertung.repo.BewertungsRepo;
-import de.fhdortmund.schrottverwaltung.bewertung.repo.KriteriumsRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoInfoDTO;
+import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoStatusDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
+import de.fhdortmund.schrottverwaltung.immobilie.entity.ImmoStatus;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
-import de.fhdortmund.schrottverwaltung.immobilie.mapper.AdressenMapper;
+import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmoStatusMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
-import de.fhdortmund.schrottverwaltung.immobilie.mapper.KoordinatenMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
@@ -43,8 +42,6 @@ import java.util.Optional;
 public class ImmobilienService {
     private final ImmobilienRepo immobilienRepo;
     private final ImmobilienStatusRepo immobilienStatusRepo;
-    private final AdressenMapper adressenMapper;
-    private final KoordinatenMapper koordinatenMapper;
     private final EigentuemerRepo eigentuemerRepo;
     private final BewertungMapper bewertungMapper;
     private final BewertungsRepo bewertungsRepo;
@@ -53,6 +50,7 @@ public class ImmobilienService {
     private final AdressenRepo adressenRepo;
     private final KoordinatenRepo koordinatenRepo;
     private final ImmobilienMapper immobilienMapper;
+    private final ImmoStatusMapper immoStatusMapper;
     private final EigentuemerRepo eigentuemerRepo;
     private final ProxyService proxyService;
     private final ImmobilienRepo immobilienRepo;
@@ -204,6 +202,30 @@ public class ImmobilienService {
         Bewertung neueBewertung  = bewertungMapper.toBewertung(bewertung);
         bewertungen.add(neueBewertung);
         immobilie.setBewertungen(bewertungen);
+        immobilienRepo.save(immobilie);
+    }
+
+    @Transactional
+    public void addStatus(long id, ImmoStatusDTO statusDto) {
+        ImmoStatus status = immoStatusMapper.toEntity(statusDto);
+        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
+        if(maybeImmobilie.isEmpty())
+            return;
+        Immobilie immobilie = maybeImmobilie.get();
+        status = immobilienStatusRepo.save(status);
+        List<ImmoStatus> stati = immobilie.getImmoStati();
+        stati.add(status);
+        immobilie.setImmoStati(stati);
+        immobilienRepo.save(immobilie);
+    }
+
+    public void setActiveStatus(Long luis, Long noel) {
+        log.info("id {}   status{}", luis, noel);
+        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(noel);
+        if(maybeImmobilie.isEmpty())
+            return;
+        Immobilie immobilie = maybeImmobilie.get();
+        immobilie.setAktuellerStatusId(luis.intValue());
         immobilienRepo.save(immobilie);
     }
 

@@ -25,19 +25,20 @@
     <h6 class="header">Bearbeitungsvorgang</h6>
     <hr>
     <!--TODO Muss im Ticket zur Bearbeitung funktional gemacht werden (Status soll erst von uns gesetzt werden), nur zu Orientierung !-->
-    <div class="input-group">
-      <select class="form-select" id="inputGroupSelect01" style="max-width: 25%">
+    <form class="input-group pb-3" [formGroup]="form">
+      <select class="form-select" id="inputGroupSelect01" style="max-width: 25%" formControlName="status">
         @for (status of possibleStatus; track status) {
           <option selected>{{ status }}</option>
         }
       </select>
-      <input type="text" class="form-control" placeholder="Beschreibung">
-      <button type="button" class="btn btn-outline-primary">Status hinzufügen</button>
-    </div>
+      <input type="text" class="form-control" formControlName="description">
+      <button type="button" class="btn btn-outline-primary" (click)="addStatus()">Status hinzufügen</button>
+    </form>
     @for (status of immobilie.immoStati; track status.id) {
-      <div class="input-group text-input">
-        <label class="input-label" [for]="status.id" [ngClass]="color">{{ status.status }}</label>
+      <div class="input-group text-input pt-1">
+        <label class="input-label" style="min-width: 10%" [for]="status.id" [ngClass]="color">{{ status.status }}</label>
         <input type="text" [id]="status.id" [value]="status.beschreibung" class="form-control">
+        <button class="btn btn-primary" (click)="setStatusActive(status.id!)">Aktiv setzen</button>
       </div>
     }
   </div>
