@@ -1,12 +1,10 @@
-import { Component, inject, model, OnInit, output } from '@angular/core';
+import { Component, inject, model, OnInit, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ImmobilienService } from '../services/immobilien.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import {
   debounceTime,
   distinctUntilChanged,
-  filter,
-  shareReplay,
   startWith,
   switchMap,
   tap,
@@ -14,6 +12,7 @@ import {
 import { AsyncPipe } from '@angular/common';
 import { ImmobilieDTO } from '../models/immobilie.model';
 import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import { ImmoStatusService } from '../services/immoStatus.service';
 
 @Component({
   selector: 'app-suche',
@@ -24,22 +23,32 @@ import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/i
 })
 export class SucheComponent implements OnInit {
   immobilienService = inject(ImmobilienService);
-
+  statusService = inject(ImmoStatusService);
+  stati$ = this.statusService.getAllStati();
   search = model<string>('');
+  aktiverFilter = signal<string>('');
 
   searchedImmobilien = output<ImmobilieDTO[]>();
 
   immobilien$ = toObservable(this.search).pipe(
-    filter(s => s !== undefined),
+    startWith(''),
     distinctUntilChanged(),
     debounceTime(300),
-    startWith(''),
-    switchMap(search => this.immobilienService.getImmobilienBySearch(search)),
+    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter())),
     tap(() => console.log('searched')),
-    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
   ngOnInit(): void {
     this.immobilien$.subscribe(i => this.searchedImmobilien.emit(i));
+  }
+
+  doFilter(status: string):void {
+    this.aktiverFilter.set(status);
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
+  }
+
+  resetFilter(): void {
+    this.aktiverFilter.set('');
+    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
   }
 }

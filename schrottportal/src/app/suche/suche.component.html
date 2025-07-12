@@ -1,15 +1,31 @@
+<form>
+  <label for="search" class="form-label">Suche</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search"
+    name="search"
+    aria-describedby="Suche"
+    [(ngModel)]="search"
+  />
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      @if (aktiverFilter() !== '') {
+        {{ aktiverFilter() }}
+      } @else {
+        Status-Filter
+      }
+    </button>
+    <ul class="dropdown-menu">
+      @for (status of stati$|async; track $index) {
+        <li><a class="dropdown-item" (click)="doFilter(status)">{{ status }}</a></li>
+      }
+      <li><button class="dropdown-item" (click)="resetFilter()">Filter zurücksetzen</button></li>
+    </ul>
+  </div>
+</form>
+
 <div class="d-flex flex-column gap-2">
-  <form>
-    <label for="search" class="form-label">Suche</label>
-    <input
-      type="text"
-      class="form-control"
-      id="search"
-      name="search"
-      aria-describedby="Suche"
-      [(ngModel)]="search"
-    />
-  </form>
   @for (immobilie of immobilien$ | async; track $index) {
     <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
   }
