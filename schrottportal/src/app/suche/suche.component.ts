@@ -1,13 +1,22 @@
-import { Component, inject, model, OnInit, output, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  model,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ImmobilienService } from '../services/immobilien.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import {
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
+  filter,
+  shareReplay,
   startWith,
   switchMap,
-  tap,
 } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ImmobilieDTO } from '../models/immobilie.model';
@@ -30,25 +39,29 @@ export class SucheComponent implements OnInit {
 
   searchedImmobilien = output<ImmobilieDTO[]>();
 
-  immobilien$ = toObservable(this.search).pipe(
-    startWith(''),
+  immobilien$ = combineLatest([
+    toObservable(this.search),
+    toObservable(this.aktiverFilter),
+  ]).pipe(
+    filter(([search]) => search !== undefined),
     distinctUntilChanged(),
     debounceTime(300),
-    switchMap((search) => this.immobilienService.getImmobilienBySearchAndFilter(search, this.aktiverFilter())),
-    tap(() => console.log('searched')),
+    startWith<[string, string]>(['', '']),
+    switchMap(([search, filter]) =>
+      this.immobilienService.getImmobilienBySearchAndFilter(search, filter),
+    ),
+    shareReplay({ refCount: true, bufferSize: 1 }),
   );
 
   ngOnInit(): void {
     this.immobilien$.subscribe(i => this.searchedImmobilien.emit(i));
   }
 
-  doFilter(status: string):void {
+  doFilter(status: string): void {
     this.aktiverFilter.set(status);
-    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
   }
 
   resetFilter(): void {
     this.aktiverFilter.set('');
-    this.immobilien$ = this.immobilienService.getImmobilienBySearchAndFilter(this.search(), this.aktiverFilter());
   }
 }
