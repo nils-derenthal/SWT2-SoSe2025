@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { SucheComponent } from '../suche/suche.component';
 import { KoordinatenDTO } from '../models/koordinaten.model';
 import { ImmobilieDTO } from '../models/immobilie.model';
-import { ImmoUebersichtskarteComponent } from '../uebersicht/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-karte',
