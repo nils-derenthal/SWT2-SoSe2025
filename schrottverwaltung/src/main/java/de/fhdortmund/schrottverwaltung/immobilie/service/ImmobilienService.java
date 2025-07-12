@@ -23,28 +23,12 @@ import java.util.List;
 @Transactional
 public class ImmobilienService {
     private final ImmobilienMapper immobilienMapper;
-    private final ImmobilienRepo immobilienRepo;
     private final AdressenRepo adressenRepo;
     private final KoordinatenRepo koordinatenRepo;
     private final EigentuemerRepo eigentuemerRepo;
+    private final ProxyService proxyService;
 
-    /**
-     * Saves a new {@link Immobilie} based on the data provided in the given {@link ImmobilieReceivedDTO},
-     * if it does not already exist in the database.
-     * <p>
-     * If a property with the given ID already exists, it will not be saved,
-     * and a corresponding warning will be logged.
-     *
-     * @param immobilie the DTO object describing the property to be saved
-     */
-    public void saveImmobilie(ImmobilieReceivedDTO immobilie){
-        if(immobilienRepo.existsById(immobilie.id())){
-            log.warn("Immobilie with id:{} already exists and is not created again", immobilie.id());
-        }else{
-            immobilienRepo.save(mapDtoToEntity(immobilie));
-            log.info("Immobilie with id:{}, has been saved", immobilie.id());
-        }
-    }
+    public void saveImmobilie(ImmobilieReceivedDTO immobilie){ proxyService.saveImmobilie(mapDtoToEntity(immobilie)); }
 
     /**
      * Maps an {@link ImmobilieReceivedDTO} to an {@link Immobilie} entity using the {@code immobilienMapper}.
@@ -82,60 +66,42 @@ public class ImmobilienService {
     }
 
 
+     /**
+      * Retrieves a list of Immobilien based on search criteria and status filter.
+      *
+      * <p>This method filters Immobilien based on the following combinations:
+      * <ul>
+      *   <li>If both search term and status filter are provided, returns Immobilien matching both criteria</li>
+      *   <li>If only status filter is provided, returns all Immobilien with that status</li>
+      *   <li>If only search term is provided, returns Immobilien matching the search term</li>
+      *   <li>If no criteria are provided, returns all Immobilien</li>
+      * </ul>
+      * </p>
+      *
+      * @param search       the search term to filter Immobilien by description
+      * @param statusFilter the status enum to filter Immobilien
+      * @return a list of {@link Immobilie} objects matching the search criteria
+      */
     public List<Immobilie> getImmobilienBy(String search, ImmoStatusEnum statusFilter) {
-        if (statusFilter != null && !search.isEmpty() && !statusFilter.toString().isEmpty()) {
-            return immobilienRepo.getAllByBezeichnungAndStatus(search, statusFilter);
-        }
-        if (statusFilter != null && !statusFilter.toString().isEmpty()) {
-            return immobilienRepo.getAllByStatus(statusFilter);
-        }
-        if (!search.isEmpty()) {
-            return immobilienRepo.getAllByBezeichnung(search);
-        }
-        return immobilienRepo.findAll();
+            if (statusFilter != null && !search.isEmpty() && !statusFilter.toString().isEmpty()) {
+                return proxyService.getAllByBezeichnungAndStatus(search, statusFilter);
+            }
+            if (statusFilter != null && !statusFilter.toString().isEmpty()) {
+                return proxyService.getAllByStatus(statusFilter);
+            }
+            if (!search.isEmpty()) {
+                return proxyService.getAllByBezeichnung(search);
+            }
+            return proxyService.findAll();
     }
 
-    public List<Immobilie> getImmobilien() {
-        return immobilienRepo.findAll();
-    }
+    public List<Immobilie> getImmobilien() { return proxyService.findAll(); }
 
-    public List<Immobilie> getArchivedImmobilien(){ return immobilienRepo.findAllByArchiviert(true);}
+    public List<Immobilie> getArchivedImmobilien(){ return proxyService.findAllByArchiviert();}
 
-    public Immobilie getImmobilieById(Long id) { return immobilienRepo.getImmobilieById(id); }
+    public Immobilie getImmobilieById(Long id) { return proxyService.getImmobilieById(id); }
 
-    /**
-     * Updates an existing {@link Immobilie} based on the data provided in the given {@link ImmobilieReceivedDTO}.
-     * <p>
-     * If the property with the given ID exists, it will be updated with the new data.
-     * If the property does not exist, a warning will be logged and no update will be performed.
-     *
-     * @param immobilieReceivedDTO the DTO object containing the updated property data
-     */
-    @Transactional
-    public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){
-        if(immobilienRepo.existsById(immobilieReceivedDTO.id())){
-            immobilienRepo.save(mapDtoToEntity(immobilieReceivedDTO));
-            log.info("Immobilie with id:{} has been updated", immobilieReceivedDTO.id());
-        }else{
-            log.warn("Immobilie with Id:{} does not exist and cannot be updated", immobilieReceivedDTO.id());
-        }
-    }
+    public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){ proxyService.updateImmobilie(mapDtoToEntity(immobilieReceivedDTO));}
 
-    /**
-     * Deletes an existing {@link Immobilie} by its ID.
-     * <p>
-     * If the property with the given ID exists, it will be deleted from the database.
-     * If the property does not exist, a warning will be logged and no deletion will be performed.
-     *
-     * @param id the ID of the property to be deleted
-     */
-    @Transactional
-    public void deleteImmobilie(Long id){
-        if(immobilienRepo.existsById(id)){
-            immobilienRepo.deleteById(id);
-            log.info("Immobilie with id:{} has been deleted", id);
-        }else{
-            log.warn("Immobilie with Id:{} does not exist and cannot be deleted", id);
-        }
-    }
+    public void deleteImmobilie(Long id){ proxyService.deleteImmobilie(id); }
 }
