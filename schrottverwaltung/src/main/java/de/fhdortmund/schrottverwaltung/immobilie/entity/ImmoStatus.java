@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ImmoStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "immobilien_status_id")
     private Long id;
 

@@ -1,5 +1,5 @@
 export type ImmoStatus = {
-  id: number;
+  id: number|null;
   status: string;
   beschreibung: string;
   immobilieId: number;
