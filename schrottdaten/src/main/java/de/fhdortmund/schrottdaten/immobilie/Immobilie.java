@@ -56,6 +56,6 @@ public class Immobilie {
     @JoinColumn(name = "eigentuemer_id")
     private Eigentuemer eigentuemer;
 
-    @Column(name = "bild")
+    @Column(name = "bild", columnDefinition = "TEXT")
     private String bild;
 }

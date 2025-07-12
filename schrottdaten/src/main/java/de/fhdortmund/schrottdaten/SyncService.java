@@ -23,7 +23,14 @@ public class SyncService {
      * and passes them to the {@link MQTTPublisher} for publishing.
      */
     @PostConstruct
-    private void syncData(){
+    private void syncData() {
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            log.error("Error while waiting before publishing");
+            throw new RuntimeException(e);
+        }
+
         log.info("Starting Data sync...");
         var eigentuemer = eigentuemerRepo.findAll();
         var immobilien = immobilienRepo.findAll();

@@ -51,6 +51,7 @@ public class MQTTSubscriber {
             options.setKeepAliveInterval(60);
             options.setAutomaticReconnect(true);
             options.setConnectionTimeout(10);
+            options.setCleanSession(false);
 
             client.setCallback(new MQTTCallBack(dispatchMap));
 
