@@ -76,9 +76,9 @@ VALUES
 INSERT INTO immobilie (
     adresse_id, bezeichnung, archiviert, zustand, koordinaten_id,
     gemarkung, flur, flurstueck, quadratmeter,
-    gebaeude_typ, eigentums_form,eigentuemer_id, bild
+    gebaeude_typ, eigentums_form,eigentuemer_id
 )
 VALUES
-    (1, 'Wohnhaus Invalidenstraße', false, 'gut', 1, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1,pg_read_binary_file('D:\SWT2-SoSe2025\dataset\schrottdaten\haus.png')),
-    (2, 'Bürogebäude Marienplatz', false, 'renovierungsbedürftig', 2, 'München Zentrum', '8', '1234', 300, 'GEWERBE', 'TEILEIGENTUM', 2,pg_read_binary_file('./nochn_haus.png')),
-    (3, 'Ladenlokal Hohe Straße', true, 'abgerissen', 3, 'Köln Innenstadt', '3', '876', 85, 'WOHNHAUS', 'VOLLEIGENTUM', 3,pg_read_binary_file('./weiteres_haus.png'));
+    (1, 'Wohnhaus Invalidenstraße', false, 'gut', 1, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1),
+    (2, 'Bürogebäude Marienplatz', false, 'renovierungsbedürftig', 2, 'München Zentrum', '8', '1234', 300, 'GEWERBE', 'TEILEIGENTUM', 2),
+    (3, 'Ladenlokal Hohe Straße', true, 'abgerissen', 3, 'Köln Innenstadt', '3', '876', 85, 'WOHNHAUS', 'VOLLEIGENTUM', 3);

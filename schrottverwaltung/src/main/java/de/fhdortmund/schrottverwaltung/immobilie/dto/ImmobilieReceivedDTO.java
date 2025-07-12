@@ -19,6 +19,6 @@ public record ImmobilieReceivedDTO(
         Gebaeudetyp gebaeudeTyp,
         EigentumsForm eigentumsForm,
         Eigentuemer eigentuemer,
-        String bild
+        byte[] bild
 ) {
 }

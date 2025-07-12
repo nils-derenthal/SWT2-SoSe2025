@@ -26,7 +26,7 @@ public class ImmobilienMessageProcessor implements MQTTMessageProcessor {
     @Override
     public void processMessage(String topic, MqttMessage message) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        ImmobilieReceivedDTO immobilie = objectMapper.readValue(new String(message.getPayload()), ImmobilieReceivedDTO.class);
+        ImmobilieReceivedDTO immobilie = objectMapper.readValue(message.getPayload(), ImmobilieReceivedDTO.class);
         immobilienService.saveImmobilie(immobilie);
     }
 }

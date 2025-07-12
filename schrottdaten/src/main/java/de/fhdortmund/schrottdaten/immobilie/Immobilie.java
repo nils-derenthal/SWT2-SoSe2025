@@ -3,6 +3,7 @@ package de.fhdortmund.schrottdaten.immobilie;
 import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 
 @Entity
