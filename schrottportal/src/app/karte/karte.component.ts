@@ -42,7 +42,7 @@ export class KarteComponent {
         const m = marker(
           [i.koordinaten.xKoordinate, i.koordinaten.yKoordinate],
           {
-            // icon: this.bootstrapMarkerIcon,
+            icon: this.bootstrapMarkerIcon,
             riseOnHover: true,
             title: i.bezeichnung,
             alt: i.bezeichnung,
