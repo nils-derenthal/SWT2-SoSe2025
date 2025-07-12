@@ -64,7 +64,7 @@ public class ImmobilienController {
 
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
-        return immobilienMapper.toImmobilieDTO(immobilienService.getImmobilien());
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
     }
 
     @GetMapping(value = "/bild/{id}", produces = MediaType.IMAGE_PNG_VALUE)
