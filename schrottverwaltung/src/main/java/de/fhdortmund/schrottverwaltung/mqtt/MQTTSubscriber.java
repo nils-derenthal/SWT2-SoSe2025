@@ -32,7 +32,7 @@ public class MQTTSubscriber {
      * configures connection options, sets a callback for incoming messages, and subscribes
      * to relevant topics.</p>
      *
-     * <p>The client connects to the broker at {@code tcp://localhost:1883} and subscribes to
+     * <p>The client connects to the broker at {@code tcp://mosquitto-broker:1883} and subscribes to
      * topics "immobilie" and "eigentuemer" with QoS level 1. A message dispatching system is
      * initialized using a map that associates topics with their respective message processors.</p>
      *
@@ -42,7 +42,7 @@ public class MQTTSubscriber {
     public void connect() {
         try{
             log.info("Trying to connect to MqttClient");
-            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), null);
+            client = new MqttClient("tcp://mosquitto-broker:1883", MqttClient.generateClientId(), null);
 
             dispatchMap = new HashMap<>();
             dispatchMap.put("eigentuemer", new EigentuemerMessageProcessor(eigentuemerService));
@@ -57,7 +57,7 @@ public class MQTTSubscriber {
             client.connect();
             client.subscribe("immobilie", 1);
             client.subscribe("eigentuemer",1);
-            log.info("Connected to MqttClient at tcp://localhost:1883");
+            log.info("Connected to MqttClient at tcp://mosquitto-broker:1883");
 
         }catch (MqttException e){
             log.error("Could not connect to MqttClient");

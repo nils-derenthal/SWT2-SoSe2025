@@ -4,10 +4,7 @@ import de.fhdortmund.schrottverwaltung.bewertung.entity.Bewertung;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Immobilie {
 
     @Id
@@ -72,6 +70,6 @@ public class Immobilie {
 
     private Integer aktuellerStatusId;
 
-    @Column(name="bild")
+    @Column(name="bild", columnDefinition = "TEXT")
     private String bildBase64;
 }

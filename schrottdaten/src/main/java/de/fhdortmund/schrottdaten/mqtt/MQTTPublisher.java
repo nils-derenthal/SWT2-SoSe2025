@@ -22,7 +22,7 @@ public class MQTTPublisher {
      * <p>
      * This method is annotated with {@code @PostConstruct}, meaning it will be called
      * automatically by the Spring framework after the bean's dependencies are injected.
-     * It connects to the MQTT broker running at {@code tcp://localhost:1883}.
+     * It connects to the MQTT broker running at {@code tcp://mosquitto-broker:1883}.
      * <p>
      * A new client ID is generated for each connection using {@code MqttClient.generateClientId()}.
      *
@@ -33,9 +33,9 @@ public class MQTTPublisher {
     public void connect() throws MqttException {
         try{
             log.info("Trying to connect to MqttClient");
-            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), null);
+            client = new MqttClient("tcp://mosquitto-broker:1883", MqttClient.generateClientId(), null);
             client.connect();
-            log.info("Connected to MqttClient at tcp://localhost:1883");
+            log.info("Connected to MqttClient at tcp://mosquitto-broker:1883");
         }catch (MqttException e){
             log.error("Could not connect to MqttClient");
             throw new RuntimeException(e);
