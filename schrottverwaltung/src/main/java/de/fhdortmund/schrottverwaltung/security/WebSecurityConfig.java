@@ -30,7 +30,7 @@ public class WebSecurityConfig {
                 .headers(httpSecurityHeadersConfigurer ->
                         httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers(new AntPathRequestMatcher(customFilter.allowedRoute))
+                        authorizeRequests.requestMatchers(CustomFilter.ALLOWED_ROUTES)
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

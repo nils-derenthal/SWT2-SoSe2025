@@ -1,6 +1,6 @@
-<div class="frame">
+<div class="frame position-relative">
+    <img [ngSrc]="'/api/immobilien/bild/' + immobilie.id" alt="haus" fill class="haus-image" />
   <main>
-    <div class="bild"></div>
     <div>
       <p>{{ immobilie.bezeichnung }}</p>
       <p>{{ immobilie.adresse.strasse }} {{ immobilie.adresse.hausnummer }}</p>

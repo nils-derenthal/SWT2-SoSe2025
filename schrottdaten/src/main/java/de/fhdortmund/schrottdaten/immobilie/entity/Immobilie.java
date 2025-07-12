@@ -5,6 +5,7 @@ import de.fhdortmund.schrottdaten.immobilie.EigentumsForm;
 import de.fhdortmund.schrottdaten.immobilie.Gebaeudetyp;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 
 @Entity

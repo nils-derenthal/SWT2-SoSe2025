@@ -7,6 +7,7 @@ import de.fhdortmund.schrottverwaltung.immobilie.service.ImmobilienService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class ImmobilienController {
     @GetMapping("/all")
     public List<ImmobilieDTO> getAllImmobilien() {
         return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilien());
+    }
+
+    @GetMapping(value = "/bild/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getImmobilienImage(@PathVariable long id) {
+        return immobilienService.getImmobilieImage(id);
     }
 
     @GetMapping("/{id}")

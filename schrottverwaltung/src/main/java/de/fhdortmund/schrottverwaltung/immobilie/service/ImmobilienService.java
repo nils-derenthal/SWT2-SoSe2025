@@ -14,6 +14,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -97,6 +103,24 @@ public class ImmobilienService {
     public List<Immobilie> getImmobilien() { return proxyService.findAll(); }
 
     public List<Immobilie> getArchivedImmobilien(){ return proxyService.findAllByArchiviert();}
+
+    public byte[] getImmobilieImage(long id) {
+        var x = immobilienRepo.getReferenceById(id).getBild();
+        System.out.println(x.length);
+
+
+        try {
+            BufferedImage img = ImageIO.read(new ByteArrayInputStream(x));
+
+            System.out.println(img);
+
+            ImageIO.write(img, "png", new File("foo.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return x;
+    }
 
     public Immobilie getImmobilieById(Long id) { return proxyService.getImmobilieById(id); }
 

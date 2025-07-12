@@ -69,9 +69,11 @@ public class MQTTPublisher {
             if(data.getClass().equals(ImmobilienMessage.class)) topic = "immobilie";
 
             ObjectMapper mapper = new ObjectMapper();
-            String dataString = mapper.writeValueAsString(data);
-            MqttMessage message = new MqttMessage();
-            message.setPayload(dataString.getBytes());
+            var dataBytes = mapper.writeValueAsBytes(data);
+
+            //System.out.println(new String(dataBytes));
+
+            MqttMessage message = new MqttMessage(dataBytes);
             message.setQos(1);
 
             client.setCallback(new MQTTCallback());
