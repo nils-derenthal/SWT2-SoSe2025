@@ -21,6 +21,10 @@ export class ImmobilienService {
     return this.http.get<ImmobilieDTO[]>('/api/immobilien/all');
   }
 
+  getArchivedImmobilien():Observable<ImmobilieDTO[]>{
+    return this.http.get<ImmobilieDTO[]>('/api/immobilien/archived');
+  }
+
   getImmobilieById(id: number): Observable<ImmobilieDTO> {
     return this.http.get<ImmobilieDTO>(`/api/immobilien/${id}`);
   }
