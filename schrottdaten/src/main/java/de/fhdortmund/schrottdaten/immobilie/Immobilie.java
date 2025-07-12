@@ -2,10 +2,7 @@ package de.fhdortmund.schrottdaten.immobilie;
 
 import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
@@ -14,7 +11,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Immobilie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "immobilie_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "adresse_id")
@@ -56,12 +58,4 @@ public class Immobilie {
 
     @Column(name = "bild")
     private String bild;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "immobilie_id")
-    private Long id;
-
-
-
 }

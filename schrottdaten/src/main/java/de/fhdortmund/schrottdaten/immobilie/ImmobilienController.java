@@ -14,23 +14,24 @@ public class ImmobilienController {
     private final MQTTPublisher publisher;
 
     @PutMapping()
-    public void testMqttMitarbeiterHinzufuegen(){
-         Immobilie immo = new Immobilie(new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null),
-                            "Musterimmobilie",
-                            "MusterZustand",
-                            new Koordinaten(100.0, 100.0, null),
-                            "Mustergemarkung",
-                            "Musterflur",
-                            "Musterflurstueck",
-                            5,
-                            Gebaeudetyp.WOHNHAUS,
-                            EigentumsForm.VOLLEIGENTUM,
-                            new Eigentuemer(null, "Max", "Mustermann", new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null)),
-                 "",
-                 null);
+    public void testMqttMitarbeiterHinzufuegen() {
+        var adresse = new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null);
+        Immobilie immo = Immobilie.builder()
+                .id(null)
+                .adresse(adresse)
+                .bezeichnung("Musterimmobilie")
+                .zustand("MusterZustand")
+                .koordinaten(new Koordinaten(100.0, 100.0, null))
+                .gemarkung("Mustergemarkung")
+                .flur("Musterflur")
+                .flurstueck("Musterflurstueck")
+                .quadratMeter(5)
+                .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
+                .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
+                .eigentuemer(new Eigentuemer(null, "Max", "Mustermann", adresse))
+                .bild("")
+                .build();
 
-         publisher.publishMessage(immo);
+        publisher.publishMessage(immo);
     }
-
-
 }
