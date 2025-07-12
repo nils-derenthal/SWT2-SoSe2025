@@ -5,6 +5,7 @@ import de.fhdortmund.schrottdaten.immobilie.Immobilie;
 import de.fhdortmund.schrottdaten.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -12,12 +13,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
@@ -28,6 +26,7 @@ public class SyncService {
     private final ImmobilienRepo immobilienRepo;
 
     private final ResourceLoader resourceLoader;
+    private final EntityManager em;
 
     /**
      * Automatically executed after the application starts.
@@ -55,15 +54,16 @@ public class SyncService {
         var resolver = new PathMatchingResourcePatternResolver(classloader);
         var resources = resolver.getResources("classpath:houses/*");
 
+        AtomicInteger num = new AtomicInteger();
+
         immobilien.forEach(im -> {
             if (im.getBild() == null) {
                 try {
-                    im.setBild(getRandom(resources));
+                    im.setBild(resources[num.getAndIncrement() % resources.length].getContentAsByteArray());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-            System.out.println(new String(im.getBild()));
         });
         return immobilienRepo.saveAll(immobilien);
     }

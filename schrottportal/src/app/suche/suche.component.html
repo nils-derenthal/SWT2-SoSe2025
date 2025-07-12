@@ -1,16 +1,18 @@
-<div class="d-flex flex-column gap-2">
-  <form>
-    <label for="search" class="form-label">Suche</label>
-    <input
-      type="text"
-      class="form-control"
-      id="search"
-      name="search"
-      aria-describedby="Suche"
-      [(ngModel)]="search"
-    />
-  </form>
-  @for (immobilie of immobilien$ | async; track $index) {
-    <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
-  }
+<div class="d-flex flex-column gap-2 h-100">
+    <form>
+        <label for="search" class="form-label">Suche</label>
+        <input
+                type="text"
+                class="form-control"
+                id="search"
+                name="search"
+                aria-describedby="Suche"
+                [(ngModel)]="search"
+        />
+    </form>
+    <div class="list h-100 overflow-y-auto p-2">
+        @for (immobilie of immobilien$ | async; track $index) {
+            <app-immo-uebersichtskarte [immobilie]="immobilie"></app-immo-uebersichtskarte>
+        }
+    </div>
 </div>
