@@ -1,10 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { map, switchMap } from 'rxjs';
-import { ImmobilienService } from '../services/immobilien.service';
-import { AsyncPipe, NgClass } from '@angular/common';
-import { AmpelSliderComponent } from './ampel-slider/ampel-slider.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { SingleImmoMapComponent } from './single-immo-map/single-immo-map.component';
+import {Component, inject, OnInit} from '@angular/core';
+import {map, shareReplay, switchMap} from 'rxjs';
+import {ImmobilienService} from '../services/immobilien.service';
+import {AsyncPipe, NgClass} from '@angular/common';
+import {AmpelSliderComponent} from './ampel-slider/ampel-slider.component';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {SingleImmoMapComponent} from './single-immo-map/single-immo-map.component';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ImmoStatus} from '../models/immoStatus.model';
+
 
 @Component({
   selector: 'app-detail-ansicht',
@@ -13,6 +16,7 @@ import { SingleImmoMapComponent } from './single-immo-map/single-immo-map.compon
     NgClass,
     AmpelSliderComponent,
     RouterLink,
+    ReactiveFormsModule,
     SingleImmoMapComponent,
   ],
   templateUrl: './detail-ansicht.component.html',
@@ -21,10 +25,12 @@ import { SingleImmoMapComponent } from './single-immo-map/single-immo-map.compon
 export class DetailAnsichtComponent implements OnInit {
   router = inject(ActivatedRoute);
   immoService = inject(ImmobilienService);
+  fb = inject(FormBuilder)
 
   immobilie$ = this.router.params.pipe(
     map(params => (params as any)['id'] as number),
     switchMap(id => this.immoService.getImmobilieById(id)),
+    shareReplay({bufferSize:1, refCount: true})
   );
 
   value: string | undefined;
@@ -42,6 +48,11 @@ export class DetailAnsichtComponent implements OnInit {
     'ERWERB',
     'GELOEST',
   ];
+
+  form :FormGroup = this.fb.group({
+    status: [this.possibleStatus[0], Validators.required],
+    description: ['', [Validators.required, Validators.minLength(3)]]
+  });
 
   ngOnInit(): void {
     this.value = '0';
@@ -68,4 +79,25 @@ export class DetailAnsichtComponent implements OnInit {
         break;
     }
   }
+
+  addStatus() {
+    this.immobilie$.subscribe(immo=>{
+      const status:ImmoStatus = {
+        id: null,
+        status: this.form.get('status')!.value,
+        beschreibung: this.form.get('description')!.value,
+        immobilieId: immo.id
+      }
+
+      this.immoService.addImmoStatus(status).subscribe()
+    })
+
+
+  }
+
+  setStatusActive(statusId: number) {
+    this.immobilie$.subscribe(immo=>{
+      this.immoService.setStatusActive(statusId!, immo.id).subscribe();
+    })
+    }
 }

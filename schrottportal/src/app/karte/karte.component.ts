@@ -6,8 +6,8 @@ import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { SucheComponent } from '../suche/suche.component';
 import { ImmobilieDTO } from '../models/immobilie.model';
-import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
 import { herneZentrum, makeMarker, osm, wikiM } from '../shared/cards-data';
+import {ImmoUebersichtskarteComponent} from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
 
 @Component({
   selector: 'app-karte',
