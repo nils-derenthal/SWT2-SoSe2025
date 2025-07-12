@@ -1,6 +1,9 @@
 package de.fhdortmund.schrottdaten.immobilie;
 
-import de.fhdortmund.schrottdaten.eigentuemer.Eigentuemer;
+import de.fhdortmund.schrottdaten.eigentuemer.entity.Eigentuemer;
+import de.fhdortmund.schrottdaten.immobilie.entity.Adresse;
+import de.fhdortmund.schrottdaten.immobilie.entity.Immobilie;
+import de.fhdortmund.schrottdaten.immobilie.entity.Koordinaten;
 import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
