@@ -1,10 +1,8 @@
-@import "../../variables";
+@use "../../variables";
 
 .top-flex {
   display: flex;
   flex-direction: column;
-  margin-left: 5%;
-  margin-right: 5%;
   margin-top: 1%;
 }
 
@@ -45,7 +43,6 @@
 
 .map-container {
   align-self: center;
-  background-color: $herne-green;
   width: 100%;
   height: 15rem;
 }
@@ -61,7 +58,7 @@
 .input-label {
   align-self: center;
   background-color: gray;
-  color: $herne-text-white;
+  color: variables.$herne-text-white;
   border-radius: 15%;
   margin-right: 0.5%;
 }

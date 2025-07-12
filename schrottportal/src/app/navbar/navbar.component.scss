@@ -1,15 +1,15 @@
-@import "../../variables.scss";
+@use "../../variables";
 
 .nav-item > .nav-link:hover {
-  color: $herne-yellow;
+  color: variables.$herne-yellow;
 }
 
 .nav-button {
-  color: $herne-text-white;
+  color: variables.$herne-text-white;
   text-decoration: none;
 
   :hover,
   :focus {
-    color: $herne-yellow;
+    color: variables.$herne-yellow;
   }
 }
