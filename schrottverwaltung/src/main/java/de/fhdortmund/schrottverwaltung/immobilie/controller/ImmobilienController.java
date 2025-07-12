@@ -1,5 +1,6 @@
 package de.fhdortmund.schrottverwaltung.immobilie.controller;
 
+import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.service.ImmobilienService;
@@ -20,9 +21,8 @@ public class ImmobilienController {
     private final ImmobilienMapper immobilienMapper;
 
     @GetMapping
-    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search) {
-        var a = immobilienService.getImmobilienBy(search);
-        return immobilienMapper.toimmobilieDTO(a);
+    public List<ImmobilieDTO> getImmobilienBy(@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "") ImmoStatusEnum statusFilter) {
+        return immobilienMapper.toimmobilieDTO(immobilienService.getImmobilienBy(search, statusFilter));
     }
 
     @GetMapping("/all")
