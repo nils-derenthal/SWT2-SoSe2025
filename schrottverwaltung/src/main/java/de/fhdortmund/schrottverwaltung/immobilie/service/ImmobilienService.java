@@ -7,7 +7,6 @@ import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
-import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.KoordinatenRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import jakarta.transaction.Transactional;
