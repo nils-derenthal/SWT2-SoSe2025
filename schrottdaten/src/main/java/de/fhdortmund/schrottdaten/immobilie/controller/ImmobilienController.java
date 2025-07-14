@@ -48,7 +48,7 @@ public class ImmobilienController {
                  .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
                  .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
                  .eigentuemer(eigentuemer)
-                 .bild("")
+                 .bild(new byte[0])
                  .build();
          var immobilie =  immobilienRepo.save(immo);
          publisher.publishMessage(new ImmobilienMessage(Action.ADD, immobilie));

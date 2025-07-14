@@ -1,7 +1,7 @@
 package de.fhdortmund.schrottdaten;
 
 import de.fhdortmund.schrottdaten.eigentuemer.repo.EigentuemerRepo;
-import de.fhdortmund.schrottdaten.immobilie.Immobilie;
+import de.fhdortmund.schrottdaten.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottdaten.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottdaten.mqtt.MQTTPublisher;
 import de.fhdortmund.schrottdaten.mqtt.messages.Action;
