@@ -17,7 +17,6 @@ import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmoStatusMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
-import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienStatusRepo;
@@ -45,14 +44,10 @@ public class ImmobilienService {
     private final ImmobilienStatusRepo immobilienStatusRepo;
     private final EigentuemerRepo eigentuemerRepo;
     private final BewertungMapper bewertungMapper;
-    private final BewertungsRepo bewertungsRepo;
-    private final KriteriumsRepo kriteriumsRepo;
     private final ImmobilienMapper immobilienMapper;
     private final AdressenRepo adressenRepo;
     private final KoordinatenRepo koordinatenRepo;
-    private final ImmobilienMapper immobilienMapper;
     private final ImmoStatusMapper immoStatusMapper;
-    private final EigentuemerRepo eigentuemerRepo;
     private final ProxyService proxyService;
     private final ImmobilienRepo immobilienRepo;
 
@@ -238,34 +233,10 @@ public class ImmobilienService {
      *
      * @param immobilieReceivedDTO the DTO object containing the updated property data
      */
-    @Transactional
-    public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){
-        if(immobilienRepo.existsById(immobilieReceivedDTO.id())){
-            immobilienRepo.save(mapDtoToEntity(immobilieReceivedDTO));
-            log.info("Immobilie with id:{} has been updated", immobilieReceivedDTO.id());
-        }else{
-            log.warn("Immobilie with Id:{} does not exist and cannot be updated", immobilieReceivedDTO.id());
-        }
-    }
     public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){ proxyService.updateImmobilie(mapDtoToEntity(immobilieReceivedDTO));}
 
-    /**
-     * Deletes an existing {@link Immobilie} by its ID.
-     * <p>
-     * If the property with the given ID exists, it will be deleted from the database.
-     * If the property does not exist, a warning will be logged and no deletion will be performed.
-     *
-     * @param id the ID of the property to be deleted
-     */
-    @Transactional
-    public void deleteImmobilie(Long id){
-        if(immobilienRepo.existsById(id)){
-            immobilienRepo.deleteById(id);
-            log.info("Immobilie with id:{} has been deleted", id);
-        }else{
-            log.warn("Immobilie with Id:{} does not exist and cannot be deleted", id);
-        }
-    }
+
+
 
     public void setAdresse(long id, AdresseDTO adress) {
         Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
@@ -287,5 +258,14 @@ public class ImmobilienService {
         immobilie.setZustand(zustand);
         immobilienRepo.save(immobilie);
     }
+
+    /**
+     * Deletes an existing {@link Immobilie} by its ID.
+     * <p>
+     * If the property with the given ID exists, it will be deleted from the database.
+     * If the property does not exist, a warning will be logged and no deletion will be performed.
+     *
+     * @param id the ID of the property to be deleted
+     */
     public void deleteImmobilie(Long id){ proxyService.deleteImmobilie(id); }
 }
