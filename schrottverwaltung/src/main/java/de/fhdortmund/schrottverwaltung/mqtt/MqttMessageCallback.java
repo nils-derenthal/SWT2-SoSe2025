@@ -1,18 +1,21 @@
 package de.fhdortmund.schrottverwaltung.mqtt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.Arrays;
 import java.util.Map;
 
 @Slf4j
-public class MQTTCallBack implements MqttCallback {
-    Map<String, MQTTMessageProcessor> dispatchMap;
-    public MQTTCallBack(Map<String, MQTTMessageProcessor> map){
-        this.dispatchMap = map;
+public class MqttMessageCallback implements MqttCallback {
+    private final Map<String, MqttMessageStrategy<?>> strategies;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public MqttMessageCallback(Map<String, MqttMessageStrategy<?>> strategies){
+        this.strategies = strategies;
     }
 
     public void connectionLost(Throwable throwable) {
@@ -28,6 +31,12 @@ public class MQTTCallBack implements MqttCallback {
 
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
         log.info("Message received with topic: " + topic);
-        dispatchMap.get(topic).processMessage(topic, mqttMessage);
+        process(strategies.get(topic), mqttMessage.getPayload());
+    }
+
+    private <T> void process(MqttMessageStrategy<T> processor, byte[] message) throws Exception {
+        processor.processMessage(
+                objectMapper.readValue(message, processor.dtoClass())
+        );
     }
 }
