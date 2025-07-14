@@ -2,6 +2,7 @@ package de.fhdortmund.schrottverwaltung.immobilie.controller;
 
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.bewertung.dto.BewertungDTO;
+import de.fhdortmund.schrottverwaltung.immobilie.dto.AdresseDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoInfoDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoStatusDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieDTO;
@@ -35,7 +36,6 @@ public class ImmobilienController {
     @PostMapping("/{id}/unarchive")
     private void unArchive(@PathVariable long id) {
         immobilienService.setArchiviert(id, false);
-
     }
 
     @PostMapping("/{id}/bild")
@@ -91,5 +91,15 @@ public class ImmobilienController {
     @PostMapping("/{id}/status/aktiv/{status}")
     public void activeStatus(@PathVariable long status, @PathVariable long id) {
         immobilienService.setActiveStatus(id, status);
+    }
+
+    @PostMapping("/{id}/adress")
+    public void setAdress(@PathVariable long id, @RequestBody AdresseDTO adress) {
+        immobilienService.setAdresse(id,adress);
+    }
+
+    @PostMapping("/{id}/zustand")
+    public void setZustand(@PathVariable long id, @RequestBody String zustand) {
+        immobilienService.setZustand(id,zustand);
     }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ImmobilieDTO } from '../models/immobilie.model';
 import {ImmoStatus} from '../models/immoStatus.model';
+import { Adresse } from '../models/adresse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,20 @@ export class ImmobilienService {
 
   setStatusActive(statusId: number, immoId: number) {
     return this.http.post(`/api/immobilien/${statusId}/status/aktiv/${immoId}`, {} );
+  }
+
+  archive(id: number, value: boolean) {
+    if(value)
+      return this.http.post(`/api/immobilien/${id}/archive`, {} );
+    else
+      return this.http.post(`/api/immobilien/${id}/unarchive`, {} );
+  }
+
+  setZustand(id: number, state: string) {
+      return this.http.post<void>(`/api/immobilien/${id}/zustand`, state);
+  }
+
+  setAdresse(id: number, adress: Adresse) {
+    return this.http.post<void>(`/api/immobilien/${id}/adress`, adress);
   }
 }

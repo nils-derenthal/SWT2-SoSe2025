@@ -75,7 +75,7 @@ public class ImmobilienController {
             immo.setBezeichnung(updatedBezeichnung);
             immo.setFlur(updatedFlur);
             return immobilienRepo.save(immo);
-            }).orElseThrow(() -> new EntityNotFoundException("Immobilie mit ID " + id + " nicht gefunden"));;
+            }).orElseThrow(() -> new EntityNotFoundException("Immobilie mit ID " + id + " nicht gefunden"));
 
         publisher.publishMessage(new ImmobilienMessage(Action.UPDATE, immobilie));
     }
@@ -85,6 +85,28 @@ public class ImmobilienController {
         Immobilie immobilie = immobilienRepo.findById(1L).orElseThrow();
         immobilienRepo.deleteById(1L);
         publisher.publishMessage(new ImmobilienMessage(Action.DELETE, immobilie));
+    }
+
+    @PutMapping()
+    public void testMqttMitarbeiterHinzufuegen() {
+        var adresse = new Adresse("Musterstraße", 4, "", 44555, "Musterort", "Musterbezirk", null);
+        Immobilie immo = Immobilie.builder()
+                .id(null)
+                .adresse(adresse)
+                .bezeichnung("Musterimmobilie")
+                .zustand("MusterZustand")
+                .koordinaten(new Koordinaten(100.0, 100.0, null))
+                .gemarkung("Mustergemarkung")
+                .flur("Musterflur")
+                .flurstueck("Musterflurstueck")
+                .quadratMeter(5)
+                .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
+                .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
+                .eigentuemer(new Eigentuemer(null, "Max", "Mustermann", adresse))
+                .bild("")
+                .build();
+
+        publisher.publishMessage(immo);
     }
 
 

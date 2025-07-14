@@ -6,6 +6,7 @@ import de.fhdortmund.schrottverwaltung.bewertung.mapper.BewertungMapper;
 import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
+import de.fhdortmund.schrottverwaltung.immobilie.dto.AdresseDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoInfoDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoStatusDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
@@ -248,5 +249,43 @@ public class ImmobilienService {
     }
     public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){ proxyService.updateImmobilie(mapDtoToEntity(immobilieReceivedDTO));}
 
+    /**
+     * Deletes an existing {@link Immobilie} by its ID.
+     * <p>
+     * If the property with the given ID exists, it will be deleted from the database.
+     * If the property does not exist, a warning will be logged and no deletion will be performed.
+     *
+     * @param id the ID of the property to be deleted
+     */
+    @Transactional
+    public void deleteImmobilie(Long id){
+        if(immobilienRepo.existsById(id)){
+            immobilienRepo.deleteById(id);
+            log.info("Immobilie with id:{} has been deleted", id);
+        }else{
+            log.warn("Immobilie with Id:{} does not exist and cannot be deleted", id);
+        }
+    }
+
+    public void setAdresse(long id, AdresseDTO adress) {
+        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
+        if(maybeImmobilie.isEmpty())
+            return;
+        Immobilie immobilie = maybeImmobilie.get();
+        Adresse adresse =immobilie.getAdresse();
+        adresse.setStrasse(adress.strasse());
+        adresse.setHausnummer(adress.hausnummer());
+        immobilie.setAdresse(adresse);
+        immobilienRepo.save(immobilie);
+    }
+
+    public void setZustand(long id, String zustand) {
+        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
+        if(maybeImmobilie.isEmpty())
+            return;
+        Immobilie immobilie = maybeImmobilie.get();
+        immobilie.setZustand(zustand);
+        immobilienRepo.save(immobilie);
+    }
     public void deleteImmobilie(Long id){ proxyService.deleteImmobilie(id); }
 }

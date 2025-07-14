@@ -1,5 +1,10 @@
 @if (immobilie$|async; as immobilie) {
-  <div class="top-flex">
+  @if (immobilie.archiviert) {
+    <div class="container red d-flex justify-content-center align-items-center">
+      <h3 style="color: white;">ARCHIVIERT</h3>
+    </div>
+  }
+  <form class="top-flex" [formGroup]="immoForm">
     <div class="head-flex">
       <a [routerLink]="['/uebersicht']" class="back-button">
         <button type="button" class="btn btn-primary bi-arrow-left"></button>
@@ -8,40 +13,64 @@
         <app-ampel-slider></app-ampel-slider>
       </div>
     </div>
+    <h4>{{immobilie.bezeichnung}}</h4>
     <div class="mid-flex">
-    <!--TODO Bild aus dem backend setzen (existiert noch nicht)-->
+      <!--TODO Bild aus dem backend setzen (existiert noch nicht)-->
       <img src="/Herne-Logo_negativ.png" alt="Stadtlogo Herne" class="img">
       <div class="text-input-group-container">
-        <input type="text" class="form-control text-input"
-               [value]="immobilie.adresse.strasse + ' ' + immobilie.adresse.hausnummer">
-        <input type="text" class="form-control text-input description-text" [value]="immobilie.zustand">
+        <div class="form-floating">
+          <label for="description-input">Zustand</label>
+          <input type="text" class="form-control text-input description-text"
+                 id="description-input" formControlName="state">
+        </div>
+        <div class="form-floating">
+          <label for="adresse-input">Adresse</label>
+          <input type="text" class="form-control text-input description-text"
+                 id="adresse-input" formControlName="adress">
+        </div>
       </div>
     </div>
     <div class="map-container">
       <app-single-immo-map [immobilie]="immobilie"></app-single-immo-map>
     </div>
-  </div>
+  </form>
   <div class="bottom-flex">
     <h6 class="header">Bearbeitungsvorgang</h6>
     <hr>
-    <!--TODO Muss im Ticket zur Bearbeitung funktional gemacht werden (Status soll erst von uns gesetzt werden), nur zu Orientierung !-->
-    <form class="input-group pb-3" [formGroup]="form">
+    <form class="input-group pb-3" [formGroup]="statusForm">
       <select class="form-select" id="inputGroupSelect01" style="max-width: 25%" formControlName="status">
         @for (status of possibleStatus; track status) {
-          <option selected>{{ status }}</option>
+          <option [selected]="$index === 0">{{ status }}</option>
         }
       </select>
-      <input type="text" class="form-control" formControlName="description">
+      <input type="text" class="form-control" placeholder="Beschreibung" formControlName="description">
       <button type="button" class="btn btn-outline-primary" (click)="addStatus()">Status hinzufügen</button>
     </form>
     @for (status of immobilie.immoStati; track status.id) {
       <div class="input-group text-input pt-1">
-        <label class="input-label" style="min-width: 10%" [for]="status.id" [ngClass]="color">{{ status.status }}</label>
+        <label style="min-width:15%" [for]="status.id"
+               [ngClass]="color" class="input-group-text">
+          @if (immobilie.aktuellerStatusId === status.id) {
+            <strong> {{ status.status }}</strong>
+          } @else {
+            {{ status.status }}
+          }
+        </label>
         <input type="text" [id]="status.id" [value]="status.beschreibung" class="form-control">
         <button class="btn btn-primary" (click)="setStatusActive(status.id!)">Aktiv setzen</button>
       </div>
     }
   </div>
+  @if (immobilie.archiviert) {
+    <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id, false)">De-Archivieren</button>
+  } @else {
+    <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id,true)">Archivieren</button>
+  }
+  <button class="btn btn-primary mb-3 ms-3" (click)="onSubmit(immobilie.id)"
+          [disabled]="!(immoForm.touched || immoForm.dirty)" >Änderungen
+    Speichern
+  </button>
+
 } @else {
   <div class="d-flex h-100 w-100 justify-content-center align-content-center">
     <div class="spinner-border text-primary" role="status">
