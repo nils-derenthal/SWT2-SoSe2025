@@ -1,8 +1,8 @@
 package de.fhdortmund.schrottverwaltung.mqtt;
 
-import de.fhdortmund.schrottverwaltung.eigentuemer.EigentuemerMessageProcessor;
+import de.fhdortmund.schrottverwaltung.eigentuemer.EigentuemerMessageStrategy;
 import de.fhdortmund.schrottverwaltung.eigentuemer.service.EigentuemerService;
-import de.fhdortmund.schrottverwaltung.immobilie.ImmobilienMessageProcessor;
+import de.fhdortmund.schrottverwaltung.immobilie.ImmobilienMessageStrategy;
 import de.fhdortmund.schrottverwaltung.immobilie.service.ImmobilienService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -12,17 +12,17 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class MQTTSubscriber {
-    MqttClient client;
     private final ImmobilienService immobilienService;
     private final EigentuemerService eigentuemerService;
-    Map<String, MQTTMessageProcessor> dispatchMap;
+
+    private final static String EIGENTUEMER_TOPIC = "eigentuemer";
+    private final static String IMMOBILIEN_TOPIC = "immobilie";
 
     /**
      * Initializes and connects an MQTT client on application startup.
@@ -40,27 +40,34 @@ public class MQTTSubscriber {
      */
     @PostConstruct
     public void connect() {
-        try{
-            log.info("Trying to connect to MqttClient");
-            client = new MqttClient("tcp://mosquitto-broker:1883", MqttClient.generateClientId(), null);
+        log.info("Trying to connect to MqttClient");
 
-            dispatchMap = new HashMap<>();
-            dispatchMap.put("eigentuemer", new EigentuemerMessageProcessor(eigentuemerService));
-            dispatchMap.put("immobilie", new ImmobilienMessageProcessor(immobilienService));
+        final Map<String, MqttMessageStrategy<?>> messageStrategies = Map.of(
+                EIGENTUEMER_TOPIC, new EigentuemerMessageStrategy(eigentuemerService),
+                IMMOBILIEN_TOPIC, new ImmobilienMessageStrategy(immobilienService)
+        );
+
+        final String url = "tcp://mosquitto-broker:1883";
+
+        try {
+            MqttClient client = new MqttClient(url, MqttClient.generateClientId(), null);
+
             MqttConnectOptions options = new MqttConnectOptions();
             options.setKeepAliveInterval(60);
             options.setAutomaticReconnect(true);
             options.setConnectionTimeout(10);
             options.setCleanSession(false);
 
-            client.setCallback(new MQTTCallBack(dispatchMap));
+            client.setCallback(new MqttMessageCallback(messageStrategies));
 
-            client.connect();
-            client.subscribe("immobilie", 1);
-            client.subscribe("eigentuemer",1);
+            client.connect(options);
+
             log.info("Connected to MqttClient at tcp://mosquitto-broker:1883");
 
-        }catch (MqttException e){
+            client.subscribe(EIGENTUEMER_TOPIC, 1);
+            client.subscribe(IMMOBILIEN_TOPIC, 1);
+
+        } catch (MqttException e) {
             log.error("Could not connect to MqttClient");
             throw new RuntimeException(e);
         }

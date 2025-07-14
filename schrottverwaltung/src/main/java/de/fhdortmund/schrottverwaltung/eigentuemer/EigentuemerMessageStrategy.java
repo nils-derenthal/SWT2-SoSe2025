@@ -1,16 +1,19 @@
 package de.fhdortmund.schrottverwaltung.eigentuemer;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fhdortmund.schrottverwaltung.eigentuemer.dto.EigentuemerReceivedDTO;
+import de.fhdortmund.schrottverwaltung.eigentuemer.dto.EigentuemerActionDTO;
 import de.fhdortmund.schrottverwaltung.eigentuemer.service.EigentuemerService;
-import de.fhdortmund.schrottverwaltung.mqtt.MQTTMessageProcessor;
+import de.fhdortmund.schrottverwaltung.mqtt.MqttMessageStrategy;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 @RequiredArgsConstructor
-public class EigentuemerMessageProcessor implements MQTTMessageProcessor {
+public class EigentuemerMessageStrategy implements MqttMessageStrategy<EigentuemerActionDTO> {
     private final EigentuemerService eigentuemerService;
+
+    @Override
+    public Class<EigentuemerActionDTO> dtoClass() {
+        return EigentuemerActionDTO.class;
+    }
 
     /**
      * Processes an incoming MQTT message for the "eigentuemer" topic.
@@ -23,14 +26,10 @@ public class EigentuemerMessageProcessor implements MQTTMessageProcessor {
      * @throws Exception if the payload cannot be deserialized or service operation fails
      */
     @Override
-    public void processMessage(String topic, MqttMessage message) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(new String(message.getPayload()));
-        
-        String action = jsonNode.get("action").asText();
-        EigentuemerReceivedDTO eigentuemer = objectMapper.treeToValue(jsonNode.get("eigentuemer"), EigentuemerReceivedDTO.class);
-        
-        switch (action) {
+    public void processMessage(EigentuemerActionDTO dto) throws Exception {
+        var eigentuemer = dto.eigentuemer();
+
+        switch (dto.action()) {
             case "ADD" -> eigentuemerService.saveEigentuemer(eigentuemer);
             case "UPDATE" -> eigentuemerService.updateEigentuemer(eigentuemer);
             case "DELETE" -> eigentuemerService.deleteEigentuemer(eigentuemer.id());
