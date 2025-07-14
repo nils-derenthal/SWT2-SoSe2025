@@ -21,4 +21,9 @@ export class NavbarComponent {
     }
     return '';
   }
+  
+  logout(): void {
+    localStorage.removeItem(AUTH_TOKEN);
+    this.authService.router.navigate(['/login']);
+  }
 }
