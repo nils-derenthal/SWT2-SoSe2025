@@ -1,10 +1,11 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {combineLatest, map, shareReplay, switchMap} from 'rxjs';
+import {Component, inject} from '@angular/core';
+import {combineLatest, map, Observable, shareReplay, switchMap} from 'rxjs';
 import {ImmobilienService} from '../services/immobilien.service';
 import {AsyncPipe, NgClass} from '@angular/common';
 import {AmpelSliderComponent} from './ampel-slider/ampel-slider.component';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {SingleImmoMapComponent} from './single-immo-map/single-immo-map.component';
+import {ImmobilieDTO} from '../models/immobilie.model';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ImmoStatus} from '../models/immoStatus.model';
 import {Adresse} from '../models/adresse.model';
@@ -22,13 +23,16 @@ import {Adresse} from '../models/adresse.model';
   ],
   templateUrl: './detail-ansicht.component.html',
   styleUrl: './detail-ansicht.component.scss',
+  standalone: true
 })
-export class DetailAnsichtComponent implements OnInit {
+export class DetailAnsichtComponent {
   router = inject(ActivatedRoute);
   immoService = inject(ImmobilienService);
   fb = inject(FormBuilder)
 
-  immobilie$ = this.router.params.pipe(
+
+
+  immobilie$: Observable<ImmobilieDTO> = this.router.params.pipe(
     map(params => (params as any)['id'] as number),
     switchMap(id => this.immoService.getImmobilieById(id)),
     shareReplay({bufferSize: 1, refCount: true})
@@ -59,39 +63,6 @@ export class DetailAnsichtComponent implements OnInit {
     adress: ['', [Validators.required]],
     state: ['', [Validators.required]],
   })
-
-  ngOnInit(): void {
-    this.immobilie$.subscribe(immo => {
-      this.immoForm.patchValue({
-        adress: `${immo.adresse.strasse} ${immo.adresse.hausnummer}`,
-        state: immo.zustand
-      })
-    })
-
-    this.value = '0';
-
-    switch (this.value) {
-      case '0':
-        this.color = 'red';
-        break;
-
-      case '1':
-        this.color = 'orange';
-        break;
-
-      case '2':
-        this.color = 'yellow';
-        break;
-
-      case '3':
-        this.color = 'green';
-        break;
-
-      case '4':
-        this.color = 'blue';
-        break;
-    }
-  }
 
   addStatus() {
     this.immobilie$.pipe(

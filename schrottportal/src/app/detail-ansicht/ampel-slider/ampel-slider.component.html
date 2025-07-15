@@ -1,11 +1,15 @@
-<main [ngClass]="color">
-  <label for="customRange2" class="form-label">Ampel Slider</label>
-  <input
-    type="range"
-    class="form-range"
-    min="0"
-    max="9"
-    id="customRange2"
-    (change)="onSlideChange($event)"
-  />
+<main>
+  <h5>Durchlaufene Immobilienstati</h5>
+  <div class="frame">
+    @if (immobilie) {
+      @for (state of immobilie.immoStati; track $index) {
+        @if (immobilie.aktuellerStatusId === state.id) {
+          <div class="active">{{state.status}}</div>
+        } @else {
+          <div class="chip">{{state.status}}</div>
+        }
+      }
+    }
+  </div>
 </main>
+

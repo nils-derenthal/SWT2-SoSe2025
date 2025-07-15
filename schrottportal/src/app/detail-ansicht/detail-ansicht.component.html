@@ -1,4 +1,4 @@
-@if (immobilie$|async; as immobilie) {
+@if ((immobilie$|async); as immobilie) {
   @if (immobilie.archiviert) {
     <div class="container red d-flex justify-content-center align-items-center">
       <h3 style="color: white;">ARCHIVIERT</h3>
@@ -10,7 +10,7 @@
         <button type="button" class="btn btn-primary bi-arrow-left"></button>
       </a>
       <div class="ampel-container">
-        <app-ampel-slider></app-ampel-slider>
+        <app-ampel-slider [states]="possibleStatus" [immobilie]="immobilie"></app-ampel-slider>
       </div>
     </div>
     <h4>{{ immobilie.bezeichnung }}</h4>
