@@ -58,21 +58,6 @@ public class EigentuemerService {
         publisher.publishMessage(new EigentuemerMessage(Action.UPDATE, eigentuemer));
     }
 
-    /**
-     * Deletes a Eigentuemer with a predefined ID and publishes a delete message.
-     * <p>
-     * This method retrieves the Eigentuemer with ID {@code 1}. If the entity exists,
-     * it is deleted from the repository, and an {@link EigentuemerMessage} with the action
-     * {@code DELETE} is published to notify other components. If no such entity is found,
-     * a {@link java.util.NoSuchElementException} will be thrown.
-     * </p>
-     */
-    public void dummyDelete(){
-        Eigentuemer eigentuemer = eigentuemerRepo.findById(1L).orElseThrow();
-        eigentuemerRepo.deleteById(1L);
-        publisher.publishMessage(new EigentuemerMessage(Action.DELETE, eigentuemer));
-    }
-
     public Eigentuemer save(Eigentuemer eigentuemer){
         return eigentuemerRepo.save(eigentuemer);
     }

@@ -22,9 +22,4 @@ public class EigentuemerController {
     public void testMqttEigentuemerUpdaten(){
         eigentuemerService.dummyUpdate();
     }
-
-    @DeleteMapping("/delete")
-    public void testMqttEigentuemerLoeschen(){
-        eigentuemerService.dummyDelete();
-    }
 }
