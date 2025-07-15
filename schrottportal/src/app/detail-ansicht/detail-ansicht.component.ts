@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {combineLatest, map, Observable, shareReplay, switchMap} from 'rxjs';
+import {combineLatest, map, Observable, shareReplay, switchMap, tap} from 'rxjs';
 import {ImmobilienService} from '../services/immobilien.service';
 import {AsyncPipe, NgClass} from '@angular/common';
 import {AmpelSliderComponent} from './ampel-slider/ampel-slider.component';
@@ -35,6 +35,7 @@ export class DetailAnsichtComponent {
   immobilie$: Observable<ImmobilieDTO> = this.router.params.pipe(
     map(params => (params as any)['id'] as number),
     switchMap(id => this.immoService.getImmobilieById(id)),
+    tap(x => this.immoForm.patchValue({adress: `${x.adresse.strasse} ${x.adresse.hausnummer}`, state: x.zustand})),
     shareReplay({bufferSize: 1, refCount: true})
   );
 
