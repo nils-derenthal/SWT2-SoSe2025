@@ -26,11 +26,10 @@ public class MQTTPublisher {
      * <p>
      * A new client ID is generated for each connection using {@code MqttClient.generateClientId()}.
      *
-     * @throws MqttException    if the client cannot connect to the MQTT broker
      * @throws RuntimeException if a connection failure occurs and needs to be escalated
      */
     @PostConstruct
-    public void connect() throws MqttException {
+    public void connect() {
         try {
             log.info("Trying to connect to MqttClient");
             client = new MqttClient("tcp://mosquitto-broker:1883", MqttClient.generateClientId(), null);

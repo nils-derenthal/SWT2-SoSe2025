@@ -8,7 +8,6 @@ import de.fhdortmund.schrottdaten.mqtt.messages.Action;
 import de.fhdortmund.schrottdaten.mqtt.messages.EigentuemerMessage;
 import de.fhdortmund.schrottdaten.mqtt.messages.ImmobilienMessage;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
