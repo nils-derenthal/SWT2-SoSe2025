@@ -86,3 +86,18 @@
 .ampel-container {
   width: 100%;
 }
+
+.haus-image {
+  border-radius: inherit;
+  background: grey;
+
+
+  grid-area: img;
+
+  display: block;
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  margin-right: 1vh;
+}
