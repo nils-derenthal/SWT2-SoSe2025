@@ -12,4 +12,4 @@ ENTRYPOINT [ "" ]
 FROM eclipse-temurin:21-jdk-alpine
 ARG BUILD_HOME
 COPY --from=build $BUILD_HOME/build/libs/schrottverwaltung-0.0.1.jar schrottverwaltung.jar
-ENTRYPOINT ["java", "-jar", "schrottverwaltung.jar", "request-debug"]
+ENTRYPOINT ["java", "-jar", "schrottverwaltung.jar"]
