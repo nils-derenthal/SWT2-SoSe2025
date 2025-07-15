@@ -15,8 +15,7 @@
     </div>
     <h4>{{ immobilie.bezeichnung }}</h4>
     <div class="mid-flex">
-      <!--TODO Bild aus dem backend setzen (existiert noch nicht)-->
-      <img src="/Herne-Logo_negativ.png" alt="Stadtlogo Herne" class="img">
+      <img [src]="'/api/immobilien/bild/' + immobilie.id" alt="haus" class="haus-image">
       <div class="text-input-group-container">
         <div class="form-floating">
           <label for="description-input">Zustand</label>
