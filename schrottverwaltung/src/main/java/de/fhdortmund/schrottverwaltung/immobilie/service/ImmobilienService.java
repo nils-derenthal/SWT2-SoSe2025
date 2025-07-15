@@ -32,7 +32,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class ImmobilienService {
-    private final ImmobilienRepo immobilienRepo;
     private final ImmobilienStatusRepo immobilienStatusRepo;
     private final EigentuemerRepo eigentuemerRepo;
     private final BewertungMapper bewertungMapper;
@@ -114,74 +113,67 @@ public class ImmobilienService {
     public List<Immobilie> getArchivedImmobilien(){ return proxyService.findAllByArchiviert();}
 
     public byte[] getImmobilieImage(long id) {
-        return immobilienRepo.getReferenceById(id).getBild();
+        return proxyService.getReferenceById(id).getBild();
     }
 
     public Immobilie getImmobilieById(Long id) { return proxyService.getImmobilieById(id); }
 
     public void setArchiviert(long id, boolean status){
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         immobilie.setArchiviert(status);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     public void setStatus(long id, Long statusId) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         immobilie.setAktuellerStatusId(statusId.intValue());
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     public void setEigentuemer(long id, Long eigentuemerId) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
+        Immobilie immobilie = proxyService.getImmobilieById(id);
         Optional<Eigentuemer> maybeEigentuemer = eigentuemerRepo.findById(eigentuemerId);
-        if(maybeImmobilie.isEmpty()||maybeEigentuemer.isEmpty())
+        if(immobilie == null ||maybeEigentuemer.isEmpty())
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         Eigentuemer eigentuemer = maybeEigentuemer.get();
         immobilie.setEigentuemer(eigentuemer);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     public void addBewertung(long id, BewertungDTO bewertung) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         List<Bewertung> bewertungen = immobilie.getBewertungen();
         Bewertung neueBewertung  = bewertungMapper.toBewertung(bewertung);
         bewertungen.add(neueBewertung);
         immobilie.setBewertungen(bewertungen);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     @Transactional
     public void addStatus(long id, ImmoStatusDTO statusDto) {
         ImmoStatus status = immoStatusMapper.toEntity(statusDto);
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         status = immobilienStatusRepo.save(status);
         List<ImmoStatus> stati = immobilie.getImmoStati();
         stati.add(status);
         immobilie.setImmoStati(stati);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     public void setActiveStatus(Long luis, Long noel) {
-        log.info("id {}   status{}", luis, noel);
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(noel);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(noel);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         immobilie.setAktuellerStatusId(luis.intValue());
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     /**
@@ -195,24 +187,22 @@ public class ImmobilienService {
     public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){ proxyService.updateImmobilie(mapDtoToEntity(immobilieReceivedDTO));}
 
     public void setAdresse(long id, AdresseDTO adress) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie =  proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         Adresse adresse =immobilie.getAdresse();
         adresse.setStrasse(adress.strasse());
         adresse.setHausnummer(adress.hausnummer());
         immobilie.setAdresse(adresse);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     public void setZustand(long id, String zustand) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
+        Immobilie immobilie = proxyService.getImmobilieById(id);
+        if(immobilie == null)
             return;
-        Immobilie immobilie = maybeImmobilie.get();
         immobilie.setZustand(zustand);
-        immobilienRepo.save(immobilie);
+        proxyService.updateImmobilie(immobilie);
     }
 
     /**

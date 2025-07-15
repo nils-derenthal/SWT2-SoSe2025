@@ -2,7 +2,6 @@ package de.fhdortmund.schrottdaten.eigentuemer.controller;
 
 import de.fhdortmund.schrottdaten.eigentuemer.service.EigentuemerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -87,4 +87,8 @@ public class ProxyService {
             log.warn("Immobilie with Id:{} does not exist and cannot be deleted", id);
         }
     }
+
+    public Immobilie getReferenceById(Long id){
+        return immobilienRepo.getReferenceById(id);
+    }
 }
