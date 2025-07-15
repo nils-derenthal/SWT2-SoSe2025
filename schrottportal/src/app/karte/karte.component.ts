@@ -1,13 +1,13 @@
-import {Component, ElementRef, inject, signal, viewChild} from '@angular/core';
-import { LeafletModule } from '@bluehalo/ngx-leaflet';
-import { latLng } from 'leaflet';
-import {BehaviorSubject, map, tap} from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { Router } from '@angular/router';
-import { SucheComponent } from '../suche/suche.component';
-import { ImmobilieDTO } from '../models/immobilie.model';
-import { herneZentrum, makeMarker, osm, wikiM } from '../shared/cards-data';
+import {Component, inject, signal} from '@angular/core';
+import {LeafletModule} from '@bluehalo/ngx-leaflet';
+import {latLng} from 'leaflet';
+import {BehaviorSubject, map} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {SucheComponent} from '../suche/suche.component';
+import {ImmobilieDTO} from '../models/immobilie.model';
 import {ImmoUebersichtskarteComponent} from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import {herneZentrum, makeMarker, osm, wikiM} from '../shared/cards-data';
 
 @Component({
   selector: 'app-karte',
@@ -67,6 +67,6 @@ export class KarteComponent {
   };
 
   routeToImmobilie(i: ImmobilieDTO): void {
-    this.router.navigateByUrl('immobilie/' + i.id);
+    this.router.navigateByUrl('detail-ansicht/' + i.id);
   }
 }

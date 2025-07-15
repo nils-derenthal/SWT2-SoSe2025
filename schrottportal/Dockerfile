@@ -10,6 +10,8 @@ RUN npm run build
 
 FROM nginx:alpine
 ARG BUILD_DIR
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build $BUILD_DIR/dist/schrottportal /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 4200
+ENTRYPOINT ["nginx", "-c", "/etc/nginx/nginx.conf"]
+CMD ["-g", "daemon off;"]
