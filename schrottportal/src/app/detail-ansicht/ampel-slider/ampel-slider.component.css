@@ -9,12 +9,12 @@ main {
    margin: 1vh;
  }
 
-.lol {
+.frame {
   display: flex;
   justify-content: space-between;
 }
 
-.hihi {
+.chip {
   padding: 5px;
   border: solid green 1px;
   border-radius: 5px;
