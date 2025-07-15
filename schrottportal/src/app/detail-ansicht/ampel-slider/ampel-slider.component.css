@@ -1,5 +1,5 @@
 main {
-  border: solid black 1px;
+  border: solid green 2px;
   border-radius: 1rem;
   padding: 2%;
   background-color: white;
@@ -16,7 +16,7 @@ main {
 
 .hihi {
   padding: 5px;
-  border: solid black 1px;
+  border: solid green 1px;
   border-radius: 5px;
 }
 
@@ -25,4 +25,6 @@ main {
   border: solid green 1px;
   border-radius: 5px;
   box-shadow: 5px 7px 20px 1px rgba(0,0,0,0.26);
+  background-color: green;
+  color: white;
 }

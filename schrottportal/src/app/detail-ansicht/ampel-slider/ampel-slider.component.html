@@ -1,12 +1,12 @@
 <main>
-  <h5>Immobilienstatus</h5>
+  <h5>durchlaufene Immobilienstati</h5>
   <div class="lol">
     @if (immobilie) {
       @for (state of immobilie.immoStati; track $index) {
         @if (immobilie.aktuellerStatusId === state.id) {
-          <div class="active">{{state}}</div>
+          <div class="active">{{state.status}}</div>
         } @else {
-          <div class="hihi">{{state}}</div>
+          <div class="hihi">{{state.status}}</div>
         }
       }
     }
