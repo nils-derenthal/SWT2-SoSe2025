@@ -1,10 +1,18 @@
-import {catchError, EMPTY, Observable, tap, throwError} from "rxjs";
-import {HttpErrorResponse, HttpEvent, HttpEventType, HttpHandlerFn, HttpRequest} from "@angular/common/http";
-import {inject} from "@angular/core";
-import {Router} from "@angular/router";
-import {AUTH_TOKEN} from "./auth.service";
+import { catchError, EMPTY, Observable, throwError } from 'rxjs';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandlerFn,
+  HttpRequest,
+} from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AUTH_TOKEN } from './auth.service';
 
-export function auth(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+export function auth(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
   // ignore /signup
   if (req.url.endsWith('/user/register')) return next(req);
 
@@ -18,13 +26,15 @@ export function auth(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable
   }
 
   return next(
-    req.clone({ headers: req.headers.append('Authorization', `Basic ${value}`) })).pipe(
+    req.clone({
+      headers: req.headers.append('Authorization', `Basic ${value}`),
+    }),
+  ).pipe(
     catchError(x => {
       if (x instanceof HttpErrorResponse && x.status === 403) {
-       redirect().then()
+        redirect().then();
       }
       return throwError(() => x);
-    })
+    }),
   );
 }
-
