@@ -71,8 +71,6 @@ public class MQTTPublisher {
             ObjectMapper mapper = new ObjectMapper();
             var dataBytes = mapper.writeValueAsBytes(data);
 
-            //System.out.println(new String(dataBytes));
-
             MqttMessage message = new MqttMessage(dataBytes);
             message.setQos(1);
 

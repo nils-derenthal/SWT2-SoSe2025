@@ -29,7 +29,6 @@ public class SyncService {
     private final ImmobilienRepo immobilienRepo;
 
     private final ResourceLoader resourceLoader;
-    private final EntityManager em;
 
     /**
      * Automatically executed after the application starts.
