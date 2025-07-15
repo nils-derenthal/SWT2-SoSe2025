@@ -39,12 +39,13 @@ public class MitarbeiterService implements UserDetailsService {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
-        Mitarbeiter mitarbeiter = new Mitarbeiter(createUser.firstname(),
-                createUser.lastname(),
-                encoder.encrypt(createUser.password()),
-                createUser.email(),
-                null,
-                null);
+        Mitarbeiter mitarbeiter = Mitarbeiter
+                .builder()
+                .setVorname(createUser.firstname())
+                .setNachname(createUser.lastname())
+                .setPasswort(encoder.encrypt(createUser.password()))
+                .setMail(createUser.email())
+                .build();
         repo.save(mitarbeiter);
     }
 }
