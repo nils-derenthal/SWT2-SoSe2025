@@ -5,28 +5,24 @@ main {
   background-color: white;
   transition: background-color 0.2s;
 }
+ button {
+   margin: 1vh;
+ }
 
-.red {
-  background-color: lightcoral;
-}
-
-.orange {
-  background-color: lightsalmon;
-}
-
-.yellow {
-  background-color: rgb(255, 251, 104, 0.8);
-}
-
-.green {
-  background-color: lightgreen;
-}
-
-.blue {
-  background-color: lightskyblue;
-}
-
-.abschnitte {
+.lol {
   display: flex;
   justify-content: space-between;
+}
+
+.hihi {
+  padding: 5px;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+.active {
+  padding: 5px;
+  border: solid green 1px;
+  border-radius: 5px;
+  box-shadow: 5px 7px 20px 1px rgba(0,0,0,0.26);
 }

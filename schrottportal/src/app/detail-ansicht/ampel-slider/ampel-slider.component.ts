@@ -1,40 +1,16 @@
-import { Component } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {Component, Input} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ImmobilieDTO} from '../../models/immobilie.model';
 
 @Component({
   selector: 'app-ampel-slider',
-  imports: [NgClass, FormsModule],
+  imports: [FormsModule],
   templateUrl: './ampel-slider.component.html',
   styleUrl: './ampel-slider.component.css',
 })
 export class AmpelSliderComponent {
-  value: string | undefined;
-  color: string | undefined;
 
-  onSlideChange(event: any) {
-    this.value = event.target.value;
+  @Input() states!: string[];
+  @Input() immobilie!: ImmobilieDTO;
 
-    switch (this.value) {
-      case '0':
-        this.color = 'red';
-        break;
-
-      case '1':
-        this.color = 'orange';
-        break;
-
-      case '2':
-        this.color = 'yellow';
-        break;
-
-      case '3':
-        this.color = 'green';
-        break;
-
-      case '4':
-        this.color = 'blue';
-        break;
-    }
-  }
 }

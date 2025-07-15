@@ -1,11 +1,11 @@
-@if (immobilie$|async; as immobilie) {
+@if ((immobilie$|async); as immobilie) {
   <div class="top-flex">
     <div class="head-flex">
       <a [routerLink]="['/uebersicht']" class="back-button">
         <button type="button" class="btn btn-primary bi-arrow-left"></button>
       </a>
       <div class="ampel-container">
-        <app-ampel-slider></app-ampel-slider>
+        <app-ampel-slider [states]="possibleStatus" [immobilie]="immobilie"></app-ampel-slider>
       </div>
     </div>
     <div class="mid-flex">
