@@ -4,7 +4,7 @@
       <h3 style="color: white;">ARCHIVIERT</h3>
     </div>
   }
-  <form class="top-flex" [formGroup]="immoForm">
+  <form class="top-flex" [formGroup]="immoForm" (ngSubmit)="onSubmit(immobilie.id)">
     <div class="head-flex">
       <a [routerLink]="['/uebersicht']" class="back-button">
         <button type="button" class="btn btn-primary bi-arrow-left"></button>
@@ -13,7 +13,7 @@
         <app-ampel-slider></app-ampel-slider>
       </div>
     </div>
-    <h4>{{immobilie.bezeichnung}}</h4>
+    <h4>{{ immobilie.bezeichnung }}</h4>
     <div class="mid-flex">
       <!--TODO Bild aus dem backend setzen (existiert noch nicht)-->
       <img src="/Herne-Logo_negativ.png" alt="Stadtlogo Herne" class="img">
@@ -30,6 +30,19 @@
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-end align-items-end">
+      @if (immobilie.archiviert) {
+        <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id, false)">De-Archivieren</button>
+      } @else {
+        <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id,true)">Archivieren</button>
+      }
+
+      <button class="btn btn-primary mb-3 ms-3" type="submit"
+              [disabled]="!(immoForm.touched || immoForm.dirty)">Änderungen
+        Speichern
+      </button>
+    </div>
+
     <div class="map-container">
       <app-single-immo-map [immobilie]="immobilie"></app-single-immo-map>
     </div>
@@ -61,15 +74,7 @@
       </div>
     }
   </div>
-  @if (immobilie.archiviert) {
-    <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id, false)">De-Archivieren</button>
-  } @else {
-    <button class="btn btn-outline-primary mb-3" (click)="archive(immobilie.id,true)">Archivieren</button>
-  }
-  <button class="btn btn-primary mb-3 ms-3" (click)="onSubmit(immobilie.id)"
-          [disabled]="!(immoForm.touched || immoForm.dirty)" >Änderungen
-    Speichern
-  </button>
+
 
 } @else {
   <div class="d-flex h-100 w-100 justify-content-center align-content-center">
