@@ -13,10 +13,14 @@ import de.fhdortmund.schrottdaten.mqtt.messages.Action;
 import de.fhdortmund.schrottdaten.mqtt.messages.ImmobilienMessage;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/immobilien")
@@ -28,14 +32,21 @@ public class ImmobilienController {
     private final EigentuemerRepo eigentuemerRepo;
     private final KoordinatenRepo koordinatenRepo;
 
+    private final ResourceLoader resourceLoader;
+
     @PutMapping("/hinzufuegen")
-    public void testMqttImmobilieHinzufuegen(){
+    public void testMqttImmobilieHinzufuegen() throws IOException {
          Adresse immobilienAdresse = adressenRepo.save(new Adresse("Mont-Cenis-Straße", 99, "", 44627, "Herne", "Musterbezirk", null));
          Adresse eigentuemerAdresse = adressenRepo.save(new Adresse("Einbahnstraße", 5, "", 44555, "München", "Musterbezirk", null));
          Eigentuemer eigentuemer = eigentuemerRepo.save(new Eigentuemer(null, "Max", "Mustermann", eigentuemerAdresse));
          Koordinaten koordinaten = koordinatenRepo.save(new Koordinaten(7.2366656450864895, 51.541236685163334, null));
 
-         Immobilie immo = Immobilie.builder()
+        var classloader = resourceLoader.getClassLoader();
+
+        var resolver = new PathMatchingResourcePatternResolver(classloader);
+        var resources = resolver.getResources("classpath:houses/*");
+
+        Immobilie immo = Immobilie.builder()
                  .id(null)
                  .adresse(immobilienAdresse)
                  .bezeichnung("Musterimmobilie")
@@ -48,7 +59,7 @@ public class ImmobilienController {
                  .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
                  .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
                  .eigentuemer(eigentuemer)
-                 .bild("")
+                 .bild(resources[(int) (Math.random() * resources.length)].getContentAsByteArray())
                  .build();
          var immobilie =  immobilienRepo.save(immo);
          publisher.publishMessage(new ImmobilienMessage(Action.ADD, immobilie));

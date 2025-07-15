@@ -70,6 +70,6 @@ public class Immobilie {
 
     private Integer aktuellerStatusId;
 
-    @Column(name="bild", columnDefinition = "TEXT")
-    private String bildBase64;
+    @Column(name="bild")
+    private byte[] bild;
 }

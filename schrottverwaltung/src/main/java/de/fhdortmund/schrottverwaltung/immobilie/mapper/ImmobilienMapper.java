@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = KoordinatenMapper.class)
 public interface ImmobilienMapper {
-
+    @Mapping(target = "bild", ignore = true)
     List<ImmobilieDTO> toimmobilieDTO(List<Immobilie> immobilien);
 
     ImmobilieDTO toimmobilieDTO(Immobilie immobilie);
@@ -20,6 +20,5 @@ public interface ImmobilienMapper {
     @Mapping(target = "bewertungen", ignore = true)
     @Mapping(target = "immoStati", ignore = true)
     @Mapping(source = "gebaeudeTyp", target = "gebaeudetyp")
-    @Mapping(source = "bild", target = "bildBase64")
     Immobilie toEntity(ImmobilieReceivedDTO dto);
 }

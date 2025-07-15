@@ -7,6 +7,7 @@ import de.fhdortmund.schrottverwaltung.immobilie.entity.Koordinaten;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Immobilie;
+import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.KoordinatenRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -26,6 +33,7 @@ public class ImmobilienService {
     private final KoordinatenRepo koordinatenRepo;
     private final EigentuemerRepo eigentuemerRepo;
     private final ProxyService proxyService;
+    private final ImmobilienRepo immobilienRepo;
 
     public void saveImmobilie(ImmobilieReceivedDTO immobilie){ proxyService.saveImmobilie(mapDtoToEntity(immobilie)); }
 
@@ -97,6 +105,10 @@ public class ImmobilienService {
     public List<Immobilie> getImmobilien() { return proxyService.findAll(); }
 
     public List<Immobilie> getArchivedImmobilien(){ return proxyService.findAllByArchiviert();}
+
+    public byte[] getImmobilieImage(long id) {
+        return immobilienRepo.getReferenceById(id).getBild();
+    }
 
     public Immobilie getImmobilieById(Long id) { return proxyService.getImmobilieById(id); }
 

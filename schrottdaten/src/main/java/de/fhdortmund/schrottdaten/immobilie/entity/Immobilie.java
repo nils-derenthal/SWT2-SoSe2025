@@ -5,6 +5,7 @@ import de.fhdortmund.schrottdaten.immobilie.EigentumsForm;
 import de.fhdortmund.schrottdaten.immobilie.Gebaeudetyp;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 
 @Entity
@@ -59,5 +60,5 @@ public class Immobilie {
     private Eigentuemer eigentuemer;
 
     @Column(name = "bild", columnDefinition = "TEXT")
-    private String bild;
+    private byte[] bild;
 }

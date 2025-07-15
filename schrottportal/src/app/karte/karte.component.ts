@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import {Component, ElementRef, inject, signal, viewChild} from '@angular/core';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { latLng } from 'leaflet';
-import { BehaviorSubject, map } from 'rxjs';
+import {BehaviorSubject, map, tap} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { SucheComponent } from '../suche/suche.component';
@@ -25,6 +25,8 @@ import { herneZentrum, makeMarker, osm, wikiM } from '../shared/cards-data';
 export class KarteComponent {
   router = inject(Router);
 
+  hoveredCard = signal<ImmobilieDTO | undefined>(undefined);
+
   immobilien$ = new BehaviorSubject<ImmobilieDTO[] | undefined>(undefined);
   chosenImmobilie = signal<ImmobilieDTO | undefined>(undefined);
 
@@ -39,7 +41,13 @@ export class KarteComponent {
         m.on('mouseover', () => {
           this.chosenImmobilie.set(i);
         });
-        return m;
+        m.on('mouseout', () => {
+         this.chosenImmobilie.set(undefined)
+        })
+        return {
+          marker: m,
+          entity: i,
+        };
       });
     }),
   );
@@ -54,7 +62,7 @@ export class KarteComponent {
 
   options = {
     layers: [osm],
-    zoom: 13,
+    zoom: 12,
     center: latLng(herneZentrum.xKoordinate, herneZentrum.yKoordinate),
   };
 

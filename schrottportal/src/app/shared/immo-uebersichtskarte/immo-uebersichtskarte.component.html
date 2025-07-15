@@ -1,15 +1,11 @@
-<div class="frame">
-  <main>
-    <div class="bild"></div>
-    <div>
-      <p>{{ immobilie.bezeichnung }}</p>
-      <p>{{ immobilie.adresse.strasse }} {{ immobilie.adresse.hausnummer }}</p>
-      <p>{{ immobilie.quadratMeter }} m²</p>
+<div class="foo mb-1" [routerLink]="['/detail-ansicht', immobilie.id]">
+    <img [src]="'/api/immobilien/bild/' + immobilie.id" alt="haus" class="haus-image"/>
+
+    <div class="text">
+        <div class="card-body m-3">
+            <h3>{{ immobilie.bezeichnung }}</h3>
+            <p>{{ immobilie.adresse.strasse }} {{ immobilie.adresse.hausnummer }}</p>
+            <p>{{ immobilie.quadratMeter }}m²</p>
+        </div>
     </div>
-  </main>
-  <footer>
-    <a [routerLink]="['/detail-ansicht', immobilie.id]">
-      <button class="btn btn-primary">Details</button>
-    </a>
-  </footer>
 </div>

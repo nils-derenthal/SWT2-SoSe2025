@@ -12,7 +12,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -25,12 +29,16 @@ import java.util.Base64;
 public class CustomFilter extends OncePerRequestFilter {
     private final MitarbeiterService mitarbeiterService;
     private final Encoder encoder;
-    public String allowedRoute = "/user/register";
+
+    public static RequestMatcher ALLOWED_ROUTES = new OrRequestMatcher(
+            new AntPathRequestMatcher("/user/register"),
+            new AntPathRequestMatcher("/immobilien/bild/*")
+    );
 
     @Override
     public void doFilterInternal(@NonNull HttpServletRequest servletRequest, @NonNull HttpServletResponse servletResponse, @NonNull FilterChain filterChain) throws IOException, ServletException {
         // Filter out allowed route
-        if(String.valueOf(servletRequest.getRequestURL()).endsWith(allowedRoute)) {
+        if (ALLOWED_ROUTES.matches(servletRequest)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
