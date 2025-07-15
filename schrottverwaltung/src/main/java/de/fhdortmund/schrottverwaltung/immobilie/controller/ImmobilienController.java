@@ -38,19 +38,9 @@ public class ImmobilienController {
         immobilienService.setArchiviert(id, false);
     }
 
-    @PostMapping("/{id}/bild")
-    private void setBild(@PathVariable long id, @RequestBody String bild) {
-        immobilienService.setBild(id, bild);
-    }
-
     @PostMapping("/{id}/status/{statusId}")
     private void setStatus(@PathVariable long id, @PathVariable Long statusId) {
         immobilienService.setStatus(id, statusId);
-    }
-
-    @PostMapping("/{id}/info")
-    private void setInfo(@PathVariable long id, @RequestBody ImmoInfoDTO info) {
-        immobilienService.setInfo(id, info);
     }
 
     @PostMapping("/{id}/eigentuemer/{eigentuemerId}")

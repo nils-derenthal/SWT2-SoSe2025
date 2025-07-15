@@ -7,7 +7,6 @@ import de.fhdortmund.schrottverwaltung.eigentuemer.Repository.EigentuemerRepo;
 import de.fhdortmund.schrottverwaltung.eigentuemer.entity.Eigentuemer;
 import de.fhdortmund.schrottverwaltung.immobilie.ImmoStatusEnum;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.AdresseDTO;
-import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoInfoDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmoStatusDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.dto.ImmobilieReceivedDTO;
 import de.fhdortmund.schrottverwaltung.immobilie.entity.Adresse;
@@ -18,7 +17,6 @@ import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmoStatusMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.mapper.ImmobilienMapper;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.AdressenRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
-import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.ImmobilienStatusRepo;
 import de.fhdortmund.schrottverwaltung.immobilie.repo.KoordinatenRepo;
 import jakarta.transaction.Transactional;
@@ -26,12 +24,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +41,6 @@ public class ImmobilienService {
     private final KoordinatenRepo koordinatenRepo;
     private final ImmoStatusMapper immoStatusMapper;
     private final ProxyService proxyService;
-    private final ImmobilienRepo immobilienRepo;
 
     public void saveImmobilie(ImmobilieReceivedDTO immobilie){ proxyService.saveImmobilie(mapDtoToEntity(immobilie)); }
 
@@ -137,44 +128,12 @@ public class ImmobilienService {
         immobilienRepo.save(immobilie);
     }
 
-    public void setBild(long id, String bild) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        if(maybeImmobilie.isEmpty())
-            return;
-        Immobilie immobilie = maybeImmobilie.get();
-        immobilie.setBildBase64(bild);
-        immobilienRepo.save(immobilie);
-    }
-
     public void setStatus(long id, Long statusId) {
         Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
         if(maybeImmobilie.isEmpty())
             return;
         Immobilie immobilie = maybeImmobilie.get();
         immobilie.setAktuellerStatusId(statusId.intValue());
-        immobilienRepo.save(immobilie);
-    }
-
-    public void setInfo(long id, ImmoInfoDTO info) {
-        Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);
-        Optional<Adresse> maybeAdresse = adressenRepo.findById(info.adresse());
-        Optional<Koordinaten> maybeKoordinaten = koordinatenRepo.findById(info.koordinaten());
-
-        if(maybeImmobilie.isEmpty()|| maybeAdresse.isEmpty()|| maybeKoordinaten.isEmpty())
-            return;
-        Immobilie immobilie = maybeImmobilie.get();
-        Adresse adresse = maybeAdresse.get();
-        Koordinaten koordinaten = maybeKoordinaten.get();
-
-
-        immobilie.setAdresse(adresse);
-        immobilie.setKoordinaten(koordinaten);
-        immobilie.setGemarkung(info.gemarkung());
-        immobilie.setFlur(info.flur());
-        immobilie.setFlurstueck(info.flurstueck());
-        immobilie.setQuadratMeter(info.quadratmeter());
-        immobilie.setGebaeudetyp(info.gebaeudetyp());
-        immobilie.setEigentumsForm(info.eigentumsForm());
         immobilienRepo.save(immobilie);
     }
 
@@ -234,9 +193,6 @@ public class ImmobilienService {
      * @param immobilieReceivedDTO the DTO object containing the updated property data
      */
     public void updateImmobilie(ImmobilieReceivedDTO immobilieReceivedDTO){ proxyService.updateImmobilie(mapDtoToEntity(immobilieReceivedDTO));}
-
-
-
 
     public void setAdresse(long id, AdresseDTO adress) {
         Optional<Immobilie> maybeImmobilie = immobilienRepo.findById(id);

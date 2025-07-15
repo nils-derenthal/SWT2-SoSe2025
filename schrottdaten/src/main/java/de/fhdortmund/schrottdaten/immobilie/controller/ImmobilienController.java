@@ -103,7 +103,7 @@ public class ImmobilienController {
                 .gebaeudeTyp(Gebaeudetyp.WOHNHAUS)
                 .eigentumsForm(EigentumsForm.VOLLEIGENTUM)
                 .eigentuemer(new Eigentuemer(null, "Max", "Mustermann", adresse))
-                .bild("")
+                .bild(new byte[512])
                 .build();
 
         publisher.publishMessage(immo);

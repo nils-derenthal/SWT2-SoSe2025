@@ -11,8 +11,6 @@ import java.util.List;
 
 @Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = {KoordinatenMapper.class, ImmoStatusMapper.class})
 public interface ImmobilienMapper {
-    @Mapping(target = "bild", ignore = true)
-
     @Mapping(target = "eigentumsform", source = "eigentumsForm")
     ImmobilieDTO toDto(Immobilie immobilie);
 
@@ -22,7 +20,6 @@ public interface ImmobilienMapper {
     @Mapping(target = "bewertungen", ignore = true)
     @Mapping(target = "immoStati", ignore = true)
     @Mapping(source = "gebaeudeTyp", target = "gebaeudetyp")
-    @Mapping(source = "bild", target = "bildBase64")
     @Mapping(target = "aktuellerStatusId", ignore = true)
     Immobilie toEntity(ImmobilieReceivedDTO dto);
 }
