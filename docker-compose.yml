@@ -46,12 +46,12 @@ services:
       - ./mosquitto/log:/mosquitto/log
     restart: unless-stopped
 
-#  schrottportal:
-#      build: ./schrottportal
-#      container_name: schrottportal-frontend
-#      ports:
-#        - "4200:4200"
-#      restart: always
+  schrottportal:
+      build: ./schrottportal
+      container_name: schrottportal-frontend
+      ports:
+        - "4200:4200"
+      restart: always
 
   # Zweite PostgreSQL-DB für Schrottverwaltung
   postgres-schrottverwaltung:
