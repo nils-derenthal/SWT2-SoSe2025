@@ -9,6 +9,7 @@ import { ImmobilieDTO } from '../../models/immobilie.model';
   imports: [LeafletModule],
   templateUrl: './single-immo-map.component.html',
   styleUrl: './single-immo-map.component.scss',
+  standalone: true
 })
 export class SingleImmoMapComponent {
   immobilie = input.required<ImmobilieDTO>();

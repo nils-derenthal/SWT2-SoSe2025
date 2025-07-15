@@ -23,6 +23,7 @@ import {Adresse} from '../models/adresse.model';
   ],
   templateUrl: './detail-ansicht.component.html',
   styleUrl: './detail-ansicht.component.scss',
+  standalone: true
 })
 export class DetailAnsichtComponent {
   router = inject(ActivatedRoute);
