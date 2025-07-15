@@ -7,5 +7,10 @@
             <p>{{ immobilie.adresse.strasse }} {{ immobilie.adresse.hausnummer }}</p>
             <p>{{ immobilie.quadratMeter }}m²</p>
         </div>
+      @if (activeState !== '') {
+        <div> Aktueller Status: {{activeState | lowercase}}</div>
+      } @else {
+        <div style="color: orange"> Kein aktiver Status gesetzt</div>
+      }
     </div>
 </div>
