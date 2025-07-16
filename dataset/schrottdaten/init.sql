@@ -79,7 +79,7 @@ INSERT INTO immobilie (
     gebaeude_typ, eigentums_form,eigentuemer_id
 )
 VALUES
-    (1, 'Wohnhaus Invalidenstraße', false, 'gut', 1, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1),
+    (1, 'Wohnhaus Ligusterweg', false, 'gut', 1, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1),
     (2, 'Bürogebäude Marienplatz', false, 'renovierungsbedürftig', 2, 'München Zentrum', '8', '1234', 300, 'GEWERBE', 'TEILEIGENTUM', 2),
     (3, 'Ladenlokal Hohe Straße', true, 'abgerissen', 3, 'Köln Innenstadt', '3', '876', 85, 'WOHNHAUS', 'VOLLEIGENTUM', 3);
 
@@ -116,7 +116,7 @@ INSERT INTO immobilie (
     gebaeude_typ, eigentums_form, eigentuemer_id
 )
 VALUES
-    (1, 'Wohnhaus Invalidenstraße', false, 'gut', 4, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1),
+    (1, 'Wohnhaus Ligusterweg', false, 'gut', 4, 'Berlin Mitte', '12', '345', 120, 'HOCHBUNKER', 'VOLLEIGENTUM', 1),
     (2, 'Bürogebäude Marienplatz', false, 'renovierungsbedürftig', 5, 'München Zentrum', '8', '1234', 300, 'HOCHBUNKER', 'TEILEIGENTUM', 2),
     (3, 'Ladenlokal Hohe Straße', true, 'abgerissen', 6, 'Köln Innenstadt', '3', '876', 85, 'WOHNHAUS', 'VOLLEIGENTUM', 3),
     (4, 'Wohnkomplex Kortumstraße', false, 'gut', 7, 'Bochum Mitte', '5', '678', 500, 'HOCHBUNKER', 'VOLLEIGENTUM', 4),
@@ -130,7 +130,7 @@ VALUES
 -- Additional addresses
 INSERT INTO adresse (plz, strasse, ort, hausnummer, hausnummer_zusatz, stadtbezirk)
 VALUES
-    (10115, 'Invalidenstraße', 'Berlin', 50, '', 'Mitte'),
+    (10115, 'Ligusterweg', 'Berlin', 50, '', 'Mitte'),
     (20095, 'Mönckebergstraße', 'Hamburg', 1, '', 'Altstadt'),
     (04109, 'Petersstraße', 'Leipzig', 20, '', 'Zentrum'),
     (80331, 'Marienplatz', 'München', 8, '', 'Altstadt-Lehel'),
@@ -190,7 +190,7 @@ INSERT INTO immobilie (
     gebaeude_typ, eigentums_form, eigentuemer_id
 )
 VALUES
-    (7, 'Wohnhaus Invalidenstraße', false, 'gut', 10, 'Berlin Mitte', '12', '345', 120, 'WOHNHAUS', 'VOLLEIGENTUM', 7),
+    (7, 'Wohnhaus Ligusterweg', false, 'gut', 10, 'Berlin Mitte', '12', '345', 120, 'WOHNHAUS', 'VOLLEIGENTUM', 7),
     (8, 'Bürogebäude Mönckebergstraße', false, 'renovierungsbedürftig', 11, 'Hamburg Altstadt', '8', '1234', 300, 'GEWERBE', 'TEILEIGENTUM', 8),
     (9, 'Ladenlokal Petersstraße', true, 'abgerissen', 12, 'Leipzig Zentrum', '3', '876', 85, 'WOHNHAUS', 'VOLLEIGENTUM', 9),
     (10, 'Wohnkomplex Marienplatz', false, 'gut', 13, 'München Altstadt', '5', '678', 500, 'WOHNHAUS', 'VOLLEIGENTUM', 10),
