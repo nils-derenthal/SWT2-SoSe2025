@@ -1,27 +1,12 @@
-import {
-  Component,
-  inject,
-  model,
-  OnInit,
-  output,
-  signal,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ImmobilienService } from '../services/immobilien.service';
-import { toObservable } from '@angular/core/rxjs-interop';
-import {
-  combineLatest,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  shareReplay,
-  startWith,
-  switchMap,
-} from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { ImmobilieDTO } from '../models/immobilie.model';
-import { ImmoUebersichtskarteComponent } from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
-import { ImmoStatusService } from '../services/immoStatus.service';
+import {Component, inject, model, OnInit, output, signal,} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ImmobilienService} from '../services/immobilien.service';
+import {toObservable} from '@angular/core/rxjs-interop';
+import {combineLatest, debounceTime, distinctUntilChanged, map, shareReplay, startWith, switchMap,} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
+import {ImmobilieDTO} from '../models/immobilie.model';
+import {ImmoUebersichtskarteComponent} from '../shared/immo-uebersichtskarte/immo-uebersichtskarte.component';
+import {ImmoStatusService} from '../services/immoStatus.service';
 
 @Component({
   selector: 'app-suche',
@@ -43,7 +28,10 @@ export class SucheComponent implements OnInit {
     toObservable(this.search),
     toObservable(this.aktiverFilter),
   ]).pipe(
-    filter(([search]) => search !== undefined),
+    map(([search, filter]):[string, string] => {
+      if (search === undefined) return ['', filter];
+      else return [search, filter];
+    }),
     distinctUntilChanged(),
     debounceTime(300),
     startWith<[string, string]>(['', '']),
