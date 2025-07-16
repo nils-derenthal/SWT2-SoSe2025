@@ -22,7 +22,9 @@ public class Mitarbeiter {
 
     private String mail;
 
-    private Long fachbereichNr;
+    @ManyToOne
+    @JoinColumn(name = "fachbereich_id")
+    private Fachbereich fachbereich;
 
 
     public static class MitarbeiterBuilder {
@@ -31,7 +33,7 @@ public class Mitarbeiter {
         private String nachname;
         private String passwort;
         private String mail;
-        private Long fachbereichNr;
+        private Fachbereich fachbereich;
 
         public MitarbeiterBuilder setId(Long id) {
             this.id = id;
@@ -58,13 +60,13 @@ public class Mitarbeiter {
             return this;
         }
 
-        public MitarbeiterBuilder setFachbereichNr(Long fachbereichNr) {
-            this.fachbereichNr = fachbereichNr;
+        public MitarbeiterBuilder setFachbereich(Fachbereich fachbereich) {
+            this.fachbereich = fachbereich;
             return this;
         }
 
         public Mitarbeiter build() {
-            return new Mitarbeiter(id, vorname, nachname, passwort, mail, fachbereichNr);
+            return new Mitarbeiter(id, vorname, nachname, passwort, mail, fachbereich);
         }
     }
 

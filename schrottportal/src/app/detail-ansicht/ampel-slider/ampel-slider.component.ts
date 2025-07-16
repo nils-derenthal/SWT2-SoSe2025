@@ -6,7 +6,7 @@ import {ImmobilieDTO} from '../../models/immobilie.model';
   selector: 'app-ampel-slider',
   imports: [FormsModule],
   templateUrl: './ampel-slider.component.html',
-  styleUrl: './ampel-slider.component.css',
+  styleUrl: './ampel-slider.component.scss',
   standalone: true
 })
 export class AmpelSliderComponent {

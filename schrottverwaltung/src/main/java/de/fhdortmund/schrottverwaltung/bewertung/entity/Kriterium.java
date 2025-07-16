@@ -1,7 +1,7 @@
 package de.fhdortmund.schrottverwaltung.bewertung.entity;
 
+import de.fhdortmund.schrottverwaltung.mitarbeiter.Fachbereich;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +22,10 @@ public class Kriterium {
 
     @Column(name = "max_gewichtung")
     private int maxGewichtung;
+
+    @ManyToOne
+    @JoinColumn(name = "fachbereich_id")
+    private Fachbereich fachbereich;
 
     public Kriterium(String bezeichnung, int maxGewichtung) {
         this.bezeichnung = bezeichnung;
